@@ -1,0 +1,48 @@
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { QuoteNote } from './QuoteNote';
+
+const meta = {
+  title: 'Example/QuoteNote',
+  component: QuoteNote,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    quote: {
+      control: { type: 'text' },
+    },
+    page: {
+      control: { type: 'number' },
+    },
+  },
+} satisfies Meta<typeof QuoteNote>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    quote:
+      "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+    page: 29,
+  },
+};
+
+export const Line1: Story = {
+  args: {
+    quote:
+      "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+    page: 29,
+    line: 1,
+  },
+};
+
+export const Line6: Story = {
+  args: {
+    quote:
+      "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+    page: 29,
+    line: 6,
+  },
+};

@@ -59,3 +59,10 @@ body {
   line-height: var(--tw-leading, var(--text-sm-line-height));
   font-family: Gowun Dodum, Arial, Helvetica, sans-serif;
 }
+
+.underline-dotted {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 10%;
+  text-decoration-color: rgba(132, 102, 102, 0.8);
+  text-underline-offset: 0.5em;
+}
