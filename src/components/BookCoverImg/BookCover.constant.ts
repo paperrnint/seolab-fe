@@ -1,6 +1,6 @@
 export const bookConfig = {
   sm: {
-    width: 60,
+    width: 68,
     spineClasses: 'after:left-[2px] after:w-1',
     rounded: 'rounded-sm',
   },
