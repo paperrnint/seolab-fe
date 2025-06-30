@@ -1,3 +1,5 @@
+import { variantColors, variantShapes } from './Button.constant';
+
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'accent';
@@ -6,18 +8,6 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({ children, variant = 'primary', leftIcon, rightIcon, ...props }: Props) => {
-  const variantColors = {
-    primary: 'bg-btn-primary text-text-btn',
-    secondary: 'border border-btn-primary text-primary',
-    accent: 'bg-btn-accent text-text-btn',
-  };
-
-  const variantShapes = {
-    primary: 'px-4 py-2 rounded-full',
-    secondary: 'px-4 py-2 rounded-full',
-    accent: 'w-full px-4 py-3 rounded-md',
-  };
-
   const baseClasses = 'flex gap-2 items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
   const shadowClass = variant === 'accent' ? 'shadow-default' : '';
 
