@@ -1,3 +1,4 @@
+import { BookCover } from '@/components/BookCoverImg/BookCover';
 import { Button } from '@/components/Button/Button';
 import { NavItem } from '@/components/NavItem/NavItem';
 import { FaArrowRight, FaBoxArchive, FaHouse, FaStar } from 'react-icons/fa6';
@@ -7,6 +8,9 @@ export default function Home() {
     <div className="p-2">
       <Button variant="primary">이어서 기록하기</Button>
       <Button variant="secondary">수정</Button>
+      <BookCover src="/images/bookcover.jpg" alt="여름어사전" />
+      <BookCover size="sm" src="/images/bookcover.jpg" alt="여름어사전" />
+      <BookCover size="lg" src="/images/bookcover.jpg" alt="여름어사전" />
       <div className="w-62 flex flex-col gap-1">
         <NavItem icon={<FaHouse className="text-secondary opacity-80" />}>홈</NavItem>
         <NavItem icon={<FaStar className="text-secondary opacity-80" />}>즐겨찾기</NavItem>
