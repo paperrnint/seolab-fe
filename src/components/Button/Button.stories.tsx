@@ -64,8 +64,8 @@ export const Accent: Story = {
 export const WithIcon: Story = {
   args: {
     variant: 'primary',
-    children: 'Accent Button With Icon',
-    leftIcon: iconMap.left,
-    rightIcon: iconMap.right,
+    children: 'Button With Icon',
+    leftIcon: 'right',
+    rightIcon: 'right',
   },
 };
