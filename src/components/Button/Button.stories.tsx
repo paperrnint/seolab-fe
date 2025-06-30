@@ -1,5 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 import { Button } from './Button';
+
+const iconMap = {
+  none: null,
+  left: <FaArrowLeft />,
+  right: <FaArrowRight />,
+};
 
 const meta = {
   title: 'Example/Button',
@@ -15,6 +22,16 @@ const meta = {
     },
     children: {
       control: { type: 'text' },
+    },
+    leftIcon: {
+      control: { type: 'select' },
+      options: Object.keys(iconMap),
+      mapping: iconMap,
+    },
+    rightIcon: {
+      control: { type: 'select' },
+      options: Object.keys(iconMap),
+      mapping: iconMap,
     },
     onClick: { action: 'clicked' },
   },
@@ -41,5 +58,14 @@ export const Accent: Story = {
   args: {
     variant: 'accent',
     children: 'Accent Button',
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Accent Button With Icon',
+    leftIcon: iconMap.left,
+    rightIcon: iconMap.right,
   },
 };

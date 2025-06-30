@@ -15,10 +15,10 @@ export const Button = ({ children, variant = 'primary', leftIcon, rightIcon, ...
   const variantShapes = {
     primary: 'px-4 py-2 rounded-full',
     secondary: 'px-4 py-2 rounded-full',
-    accent: 'w-full gap-2 px-4 py-3 rounded-md',
+    accent: 'w-full px-4 py-3 rounded-md',
   };
 
-  const baseClasses = 'flex items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
+  const baseClasses = 'flex gap-2 items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
   const shadowClass = variant === 'accent' ? 'shadow-default' : '';
 
   return (

@@ -14,7 +14,7 @@ export default function Home() {
         <NavItem>내 문장이 그렇게 이상한가요? · 김정선</NavItem>
         <NavItem>여름은 오래 그곳에 남아 · 마쓰이에 마사시</NavItem>
         <NavItem selected={true}>모순 · 양귀자</NavItem>
-        <Button variant="accent" rightIcon={<FaArrowRight className="opacity-100" />}>
+        <Button variant="accent" rightIcon={<FaArrowRight />}>
           새로운 책 기록하기
         </Button>
       </div>
