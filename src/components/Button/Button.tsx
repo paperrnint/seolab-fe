@@ -2,13 +2,13 @@ import { variantColors, variantShapes } from './Button.constant';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'accent';
+  variant?: 'primary' | 'secondary' | 'accent' | 'dropdown';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 }
 
 export const Button = ({ children, variant = 'primary', leftIcon, rightIcon, ...props }: Props) => {
-  const baseClasses = 'flex gap-2 items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
+  const baseClasses = 'flex gap-1 items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
   const shadowClass = variant === 'accent' ? 'shadow-default' : '';
 
   return (
