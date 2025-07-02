@@ -12,11 +12,12 @@ interface Props {
 export const DropdownRoot = ({ children, defaultOption = null }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultOption);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
-      if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -45,7 +46,9 @@ export const DropdownRoot = ({ children, defaultOption = null }: Props) => {
   };
   return (
     <DropdownContext.Provider value={{ isOpen, selectedOption, contentRef, onToggle, onClose, onSelect }}>
-      <div className="relative w-fit">{children}</div>
+      <div className="relative w-fit" ref={dropdownRef}>
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 };
