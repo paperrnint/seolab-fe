@@ -12,7 +12,7 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
   const [quote, setQuote] = useState('');
 
   const saveQuote = () => {
-    if (page.trim() || quote.trim()) return;
+    if (!page.trim() || !quote.trim()) return;
     onSubmit?.(page, quote);
     setPage('');
     setQuote('');
