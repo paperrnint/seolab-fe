@@ -61,6 +61,14 @@ export const Accent: Story = {
   },
 };
 
+export const Dropdown: Story = {
+  args: {
+    variant: 'dropdown',
+    children: 'Option',
+    rightIcon: 'right',
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     variant: 'primary',
