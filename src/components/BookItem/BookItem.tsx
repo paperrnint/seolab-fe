@@ -1,5 +1,5 @@
 import { Badge } from '../Badge/Badge';
-import { BookCover } from '../BookCoverImg/BookCover';
+import { BookCover } from '../BookCover/BookCover';
 
 interface Props {
   title: string;
@@ -13,9 +13,7 @@ interface Props {
 export const BookItem = ({ title, thumbnail, author, publisher, publishedDate, description, tags }: Props) => {
   return (
     <div className="flex gap-3.5 px-2 py-4 border-b border-border">
-      <div className="flex-shrink-0">
-        <BookCover src={thumbnail} size="sm" hasBorder />
-      </div>
+      <BookCover src={thumbnail} size="sm" hasBorder />
       <div className="flex flex-col gap-2 w-full">
         <div>
           <div className="flex flex-wrap items-center justify-between w-full mb-1">
