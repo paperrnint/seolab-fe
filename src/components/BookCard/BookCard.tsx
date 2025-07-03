@@ -1,5 +1,5 @@
 import { Badge } from '../Badge/Badge';
-import { BookCover } from '../BookCoverImg/BookCover';
+import { BookCover } from '../BookCover/BookCover';
 import { Card } from '../Card/Card';
 
 interface Props {
@@ -19,9 +19,7 @@ export const BookCard = ({ title, author, thumbnail, startAt, endAt, count, widt
   return (
     <Card style={{ width: `${minWidth}px`, minWidth: `${minWidth}px` }}>
       <div className="flex gap-4 w-full">
-        <div className="flex-shrink-0">
-          <BookCover src={thumbnail} size="sm" hasBorder isRounded />
-        </div>
+        <BookCover src={thumbnail} size="sm" hasBorder isRounded />
         <div className="flex flex-col justify-between flex-1">
           <div>
             <h3 className="text-sm line-clamp-2 leading-6 font-bold">{title}</h3>
