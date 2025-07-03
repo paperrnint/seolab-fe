@@ -40,3 +40,13 @@ export const Large: Story = {
     src: '/images/bookcover.jpg',
   },
 };
+
+export const ExtraSmallSquare: Story = {
+  args: {
+    size: 'lg',
+    src: '/images/bookcover.jpg',
+    hasBorder: true,
+    isRounded: true,
+    isSquare: true,
+  },
+};
