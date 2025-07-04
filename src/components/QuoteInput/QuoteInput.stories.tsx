@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaBoxArchive, FaHouse, FaStar } from 'react-icons/fa6';
 import { QuoteInput } from './QuoteInput';
 
