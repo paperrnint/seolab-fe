@@ -1,5 +1,5 @@
 import { DropdownOption } from '@/types';
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Dropdown } from './Dropdown';
 
 interface DropdownStoryArgs {
