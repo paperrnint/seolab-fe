@@ -43,7 +43,7 @@ export const Large: Story = {
 
 export const ExtraSmallSquare: Story = {
   args: {
-    size: 'lg',
+    size: 'xs',
     src: '/images/bookcover.jpg',
     hasBorder: true,
     isRounded: true,
