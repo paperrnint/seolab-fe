@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { FaBoxArchive, FaHouse, FaStar } from 'react-icons/fa6';
 import { QuoteText } from './QuoteText';
-
-const iconMap = {
-  none: null,
-  house: <FaHouse className="text-secondary opacity-80" />,
-  star: <FaStar className="text-secondary opacity-80" />,
-  archive: <FaBoxArchive className="text-secondary opacity-80" />,
-};
 
 const meta = {
   title: 'Example/QuoteText',
