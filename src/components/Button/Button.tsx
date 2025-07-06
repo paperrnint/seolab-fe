@@ -18,7 +18,8 @@ export const Button = ({
   rightIcon,
   ...props
 }: Props) => {
-  const baseClasses = 'flex gap-1 items-center text-sm font-bold cursor-pointer hover:opacity-90 transition-opacity';
+  const baseClasses =
+    'flex gap-1 items-center text-sm font-bold cursor-pointer flex-shrink-0 hover:opacity-90 transition-opacity';
   const shadowClass = variant === 'accent' ? 'shadow-default' : '';
   const fullClass = isFull ? 'w-full' : '';
   const centerClass = isCenter ? 'text-center' : 'text-left';
