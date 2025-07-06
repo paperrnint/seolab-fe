@@ -62,8 +62,8 @@ export const Default: Story = {
     <Login.Container>
       <Login.Header label="오늘 읽은 책, 어디서나 꺼내볼 수 있게" />
       <Login.Form>
-        <Input icon={<FaUser />} placeholder="이메일" />
-        <Input icon={<FaLock />} placeholder="비밀번호" />
+        <Input leftIcon={<FaUser />} placeholder="이메일" />
+        <Input leftIcon={<FaLock />} placeholder="비밀번호" />
         <Button isFull isCenter variant="big" style={{ fontSize: '16px' }}>
           로그인
         </Button>
