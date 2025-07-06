@@ -25,7 +25,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    icon: {
+    leftIcon: {
       control: { type: 'select' },
       options: Object.keys(iconMap),
       mapping: iconMap,
@@ -51,7 +51,7 @@ export const Default: Story = {
 
 export const WithIcon: Story = {
   args: {
-    icon: iconMap.email,
+    leftIcon: iconMap.email,
     placeholder: 'email',
   },
 };
