@@ -10,6 +10,7 @@
   --primary: #4b3535;
   --secondary: #846666;
   --subtle: #a79291;
+  --emp: #c96442;
   --text-muted: #979797;
   --text-btn: #ffffff;
 
@@ -35,6 +36,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-subtle: var(--subtle);
+  --color-emp: var(--emp);
   --color-text-muted: var(--text-muted);
   --color-text-btn: var(--text-btn);
 
