@@ -19,8 +19,8 @@ export default function LoginPage() {
             <Login.Container>
               <Login.Header label="오늘 읽은 책, 어디서나 꺼내볼 수 있게" />
               <Login.Form>
-                <Input icon={<FaUser />} placeholder="이메일" />
-                <Input icon={<FaLock />} placeholder="비밀번호" />
+                <Input leftIcon={<FaUser />} placeholder="이메일" />
+                <Input leftIcon={<FaLock />} placeholder="비밀번호" />
                 <Button isFull isCenter variant="big" style={{ fontSize: '16px' }}>
                   로그인
                 </Button>
@@ -28,7 +28,7 @@ export default function LoginPage() {
               <Login.Links>
                 <LoginLink href="/">이메일 찾기</LoginLink>
                 <LoginLink href="/">비밀번호 찾기</LoginLink>
-                <LoginLink href="/">회원가입</LoginLink>
+                <LoginLink href="/join">회원가입</LoginLink>
               </Login.Links>
               <Login.Social label="SNS 계정으로 시작하기">
                 <SocialButton provider="naver" />
