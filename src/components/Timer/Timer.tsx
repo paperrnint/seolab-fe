@@ -40,7 +40,7 @@ export const Timer = ({ second }: Props) => {
   }
 
   return (
-    <div className="text-emp">
+    <div className="text-emp px-2">
       <span>{m}</span>
       <span>:</span>
       <span>{s}</span>

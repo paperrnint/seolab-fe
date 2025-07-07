@@ -1,21 +1,10 @@
 import { Button } from '@/components/Button/Button';
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { FaLock, FaUser } from 'react-icons/fa6';
 import { JoinInput } from './JoinInput';
 
 const buttonMap = {
   none: null,
-  authButton: (
-    <Button variant="secondary" isCenter>
-      인증
-    </Button>
-  ),
-};
-
-const iconMap = {
-  none: null,
-  email: <FaUser />,
-  password: <FaLock />,
+  authButton: <Button variant="secondary">인증</Button>,
 };
 
 const validationsMap = {
@@ -43,15 +32,10 @@ const meta = {
     label: {
       control: 'text',
     },
-    button: {
+    rightComponent: {
       control: 'select',
       options: Object.keys(buttonMap),
       mapping: buttonMap,
-    },
-    rightIcon: {
-      control: 'select',
-      options: Object.keys(iconMap),
-      mapping: iconMap,
     },
     validations: {
       control: 'select',

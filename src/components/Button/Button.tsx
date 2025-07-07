@@ -1,36 +1,32 @@
-import { variantColors, variantShapes } from './Button.constant';
+import { aligns, colors, config, shapes, sizes, widths } from './Button.constant';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'accent' | 'dropdown' | 'big';
-  isFull?: boolean;
-  isCenter?: boolean;
+  variant?: 'primary' | 'secondary' | 'accent' | 'dropdown' | 'form' | 'inner';
+  disabled?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 }
 
-export const Button = ({
-  children,
-  variant = 'primary',
-  isFull = false,
-  isCenter = false,
-  leftIcon,
-  rightIcon,
-  ...props
-}: Props) => {
-  const baseClasses =
-    'flex gap-1 items-center text-sm font-bold cursor-pointer flex-shrink-0 hover:opacity-90 transition-opacity';
-  const shadowClass = variant === 'accent' ? 'shadow-default' : '';
-  const fullClass = isFull ? 'w-full' : '';
-  const centerClass = isCenter ? 'text-center' : 'text-left';
+export const Button = ({ children, variant = 'primary', disabled = false, leftIcon, rightIcon, ...props }: Props) => {
+  const { shape, width, align, color, size, type } = config[variant];
+  const baseClass = 'flex gap-1 items-center text-sm font-bold flex-shrink-0';
+  const validClass = disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer hover:opacity-90 transition-opacity';
 
   return (
     <button
-      className={`${baseClasses} ${variantColors[variant]} ${variantShapes[variant]} ${shadowClass} ${fullClass}`}
+      className={`
+        ${baseClass}
+        ${validClass}
+        ${shapes[shape]} ${widths[width]}
+        ${colors[color][type]} 
+        ${sizes[size]}
+      `}
+      disabled={disabled}
       {...props}
     >
       {leftIcon}
-      <div className={`flex-1 ${centerClass}`}>{children}</div>
+      <div className={`flex-1 ${aligns[align]}`}>{children}</div>
       {rightIcon}
     </button>
   );
