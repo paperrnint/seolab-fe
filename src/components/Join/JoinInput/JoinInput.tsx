@@ -8,8 +8,7 @@ interface Validation {
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  button?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  rightComponent?: React.ReactNode;
   required?: boolean;
   validations?: Validation[];
   isValid?: boolean; // 모든 validation 통과
@@ -17,8 +16,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const JoinInput = ({
   label,
-  button,
-  rightIcon,
+  rightComponent,
   required = false,
   validations,
   isValid = true,
@@ -34,8 +32,7 @@ export const JoinInput = ({
     <div>
       <label className={`block py-1 font-bold ${requiredClass}`}>{label}</label>
       <div className="flex gap-2">
-        <Input rightIcon={rightIcon} {...props} />
-        {button && button}
+        <Input rightIcon={rightComponent} {...props} />
       </div>
       <div className="flex gap-2 py-2 px-1">
         {validations?.map((validation, i) => (

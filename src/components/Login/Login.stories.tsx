@@ -64,7 +64,7 @@ export const Default: Story = {
       <Login.Form>
         <Input leftIcon={<FaUser />} placeholder="이메일" />
         <Input leftIcon={<FaLock />} placeholder="비밀번호" />
-        <Button isFull isCenter variant="big" style={{ fontSize: '16px' }}>
+        <Button variant="form" style={{ fontSize: '16px' }}>
           로그인
         </Button>
       </Login.Form>

@@ -21,9 +21,9 @@ export default function LoginPage() {
               <Login.Form>
                 <Input leftIcon={<FaUser />} placeholder="이메일" />
                 <Input leftIcon={<FaLock />} placeholder="비밀번호" />
-                <Button isFull isCenter variant="big" style={{ fontSize: '16px' }}>
-                  로그인
-                </Button>
+                <div>
+                  <Button variant="form">로그인</Button>
+                </div>
               </Login.Form>
               <Login.Links>
                 <LoginLink href="/">이메일 찾기</LoginLink>

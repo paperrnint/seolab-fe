@@ -18,7 +18,6 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'accent'],
     },
     children: {
       control: { type: 'text' },
@@ -75,5 +74,14 @@ export const WithIcon: Story = {
     children: 'Button With Icon',
     leftIcon: 'right',
     rightIcon: 'right',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Button Disabled',
+    rightIcon: 'right',
+    disabled: true,
   },
 };

@@ -31,7 +31,7 @@ export const StepPassword = () => {
         />
       </div>
       <div className="flex gap-2 mt-12">
-        <Button variant="big" isFull isCenter onClick={clickSubmit}>
+        <Button variant="form" disabled onClick={clickSubmit}>
           가입하기
         </Button>
       </div>

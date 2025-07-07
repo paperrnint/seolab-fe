@@ -31,8 +31,8 @@ export const StepEmail = ({ setStep }: Props) => {
           placeholder="이메일"
           required
           isValid={false}
-          button={
-            <Button variant="secondary" isCenter type="button" onClick={clickAuth}>
+          rightComponent={
+            <Button variant="inner" type="button" onClick={clickAuth}>
               인증
             </Button>
           }
@@ -40,13 +40,13 @@ export const StepEmail = ({ setStep }: Props) => {
         />
         <Join.Input
           placeholder="인증번호"
-          rightIcon={startTimer && <Timer second={180} />}
+          rightComponent={startTimer && <Timer second={180} />}
           isValid={false}
           validations={[{ label: '인증번호 확인', isValid: false }]}
         />
       </div>
       <div className="mt-12">
-        <Button variant="big" isFull isCenter onClick={clickNext}>
+        <Button variant="form" onClick={clickNext}>
           다음
         </Button>
       </div>

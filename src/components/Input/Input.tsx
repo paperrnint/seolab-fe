@@ -5,9 +5,9 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = ({ leftIcon, rightIcon, ...props }: Props) => {
   return (
-    <div className="flex gap-2 items-center flex-1 px-4 py-3 border border-border w-full rounded-md">
-      {leftIcon && <div className="text-subtle">{leftIcon}</div>}
-      <input className="flex-1 w-full outline-none text-base" {...props} />
+    <div className="flex items-center flex-1 px-2 py-2 border border-border w-full rounded-md">
+      {leftIcon && <div className="text-subtle pl-2">{leftIcon}</div>}
+      <input className="flex-1 w-full outline-none text-base px-2 py-1" {...props} />
       {rightIcon && <div>{rightIcon}</div>}
     </div>
   );

@@ -16,6 +16,7 @@
 
   --btn-primary: #4b3535;
   --btn-accent: #517295;
+  --btn-subtle: #f3f1f0;
 
   --badge-bg: #f2eede;
   --badge-text: #8d957e;
@@ -42,6 +43,7 @@
 
   --color-btn-primary: var(--btn-primary);
   --color-btn-accent: var(--btn-accent);
+  --color-btn-subtle: var(--btn-subtle);
 
   --color-badge-bg: var(--badge-bg);
   --color-badge-text: var(--badge-text);
