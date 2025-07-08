@@ -2,30 +2,39 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Button } from '@/components/Button/Button';
 import { Join } from '@/components/Join/Join';
-import { StepEmail } from '@/components/Join/StepEmail/StepEmail';
-import { StepPassword } from '@/components/Join/StepPassword/StepPassword';
 import { JoinFormData, joinSchema } from '@/lib/schemas/joinSchema';
-import { JoinStep } from '@/types';
+import { getJoinValidations } from '@/lib/validations/joinValidation';
 
-export default function JoinPage() {
-  const [step, setStep] = useState<JoinStep>('email');
+export default function JoinSimple() {
   const router = useRouter();
-  const description = `로그인에 사용할 ${step === 'email' ? '이메일을' : '비밀번호를'} 입력하세요`;
-
-  const form = useForm<JoinFormData>({
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { isValid, isSubmitting },
+  } = useForm<JoinFormData>({
     resolver: zodResolver(joinSchema),
     defaultValues: {
       email: '',
-      authCode: '',
       password: '',
       confirmPassword: '',
     },
     mode: 'onChange',
   });
+
+  const email = watch('email');
+  const password = watch('password');
+  const confirmPassword = watch('confirmPassword');
+
+  const emailVals = getJoinValidations('email', email);
+  const passwordVals = getJoinValidations('password', password);
+  const confirmPasswordVals = [
+    { label: '비밀번호와 일치', isValid: !!confirmPassword && confirmPassword === password },
+  ];
 
   const onSubmit = async (data: JoinFormData) => {
     try {
@@ -39,9 +48,39 @@ export default function JoinPage() {
 
   return (
     <Join.Container>
-      <Join.Header description={description} />
-      <Join.Form onSubmit={form.handleSubmit(onSubmit)}>
-        {step === 'email' ? <StepEmail setStep={setStep} form={form} /> : <StepPassword form={form} />}
+      <Join.Header description="로그인에 사용할 이메일과 비밀번호를 입력하세요" />
+      <Join.Form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <Join.Input
+            label="이메일"
+            placeholder="이메일"
+            required
+            type="email"
+            validations={emailVals}
+            {...register('email')}
+          />
+          <Join.Input
+            label="비밀번호"
+            placeholder="비밀번호"
+            required
+            type="password"
+            validations={passwordVals}
+            {...register('password')}
+          />
+          <Join.Input
+            label="비밀번호 확인"
+            placeholder="비밀번호 확인"
+            required
+            type="password"
+            validations={confirmPasswordVals}
+            {...register('confirmPassword')}
+          />
+        </div>
+        <div className="flex gap-2 mt-12">
+          <Button variant="form" disabled={!isValid || isSubmitting}>
+            가입하기
+          </Button>
+        </div>
       </Join.Form>
     </Join.Container>
   );
