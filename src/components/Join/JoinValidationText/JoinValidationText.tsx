@@ -1,11 +1,8 @@
 import { FaCheck } from 'react-icons/fa6';
 
-interface Props {
-  label: string;
-  isValid: boolean;
-}
+import { ValidationText } from '@/types';
 
-export const JoinValidationText = ({ label, isValid }: Props) => {
+export const JoinValidationText = ({ label, isValid }: ValidationText) => {
   const colorClasses = {
     valid: 'text-secondary',
     invalid: 'text-primary opacity-20',

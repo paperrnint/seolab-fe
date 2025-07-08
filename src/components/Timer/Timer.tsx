@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   second: number;
+  onTimerEnd?: () => void;
 }
 
-export const Timer = ({ second }: Props) => {
+export const Timer = ({ second, onTimerEnd }: Props) => {
   const [time, setTime] = useState(second);
   const timerId = useRef<NodeJS.Timeout>(null);
 
@@ -35,9 +36,11 @@ export const Timer = ({ second }: Props) => {
     };
   }, []);
 
-  if (time <= 0) {
-    return null;
-  }
+  useEffect(() => {
+    if (time === 0) {
+      onTimerEnd?.();
+    }
+  }, [time, onTimerEnd]);
 
   return (
     <div className="text-emp px-2">
