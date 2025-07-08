@@ -1,3 +1,10 @@
+'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { FaLock, FaUser } from 'react-icons/fa6';
+
 import { Button } from '@/components/Button/Button';
 import { Container } from '@/components/Container/Container';
 import { Input } from '@/components/Input/Input';
@@ -5,9 +12,33 @@ import { Login } from '@/components/Login/Login';
 import { LoginLink } from '@/components/Login/LoginLink/LoginLink';
 import { MainImage } from '@/components/MainImage/MainImage';
 import { SocialButton } from '@/components/SocialButton/SocialButton';
-import { FaLock, FaUser } from 'react-icons/fa6';
+import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, isValid },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    mode: 'onChange',
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      console.log('login data form:', data);
+      // @todo: login logic
+      router.push('/');
+    } catch (err) {
+      console.error('login error', err);
+    }
+  };
+
   return (
     <>
       <div className="min-h-dvh flex items-center justify-center">
@@ -18,11 +49,13 @@ export default function LoginPage() {
             {/* 모바일에서 그대로 보임 */}
             <Login.Container>
               <Login.Header label="오늘 읽은 책, 어디서나 꺼내볼 수 있게" />
-              <Login.Form>
-                <Input leftIcon={<FaUser />} placeholder="이메일" />
-                <Input leftIcon={<FaLock />} placeholder="비밀번호" />
+              <Login.Form onSubmit={handleSubmit(onSubmit)}>
+                <Input type="email" placeholder="이메일" leftIcon={<FaUser />} {...register('email')} />
+                <Input type="password" placeholder="비밀번호" leftIcon={<FaLock />} {...register('password')} />
                 <div>
-                  <Button variant="form">로그인</Button>
+                  <Button variant="form" disabled={!isValid || isSubmitting}>
+                    로그인
+                  </Button>
                 </div>
               </Login.Form>
               <Login.Links>
