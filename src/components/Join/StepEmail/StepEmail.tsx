@@ -1,32 +1,65 @@
 'use client';
 
+import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
+
 import { Button } from '@/components/Button/Button';
 import { Timer } from '@/components/Timer/Timer';
+import { JoinFormData } from '@/lib/schemas/joinSchema';
+import { getJoinValidations } from '@/lib/validations/joinValidation';
 import { JoinStep } from '@/types';
-import { useState } from 'react';
+
 import { Join } from '../Join';
+
+const AUTH_CODE = 'ABCDEF';
 
 interface Props {
   setStep: (step: JoinStep) => void;
+  form: UseFormReturn<JoinFormData>;
 }
 
-export const StepEmail = ({ setStep }: Props) => {
-  const [startTimer, setStartTimer] = useState(false);
+export const StepEmail = ({ setStep, form }: Props) => {
+  const [expectedAuthCode, setExpectedAuthCode] = useState<string | null>(null); // 이메일 인증코드 일치 여부
+  const [isValidTime, setIsValidTime] = useState(false);
 
-  const clickNext = () => {
-    // @todo: email validation
-    setStep('password');
+  const { register, watch, trigger } = form;
+
+  const emailValue = watch('email') || '';
+  const authCodeValue = watch('authCode') || '';
+  const emailValidations = getJoinValidations('email', emailValue);
+  const authCodeValidations = [
+    ...getJoinValidations('authCode', authCodeValue),
+    { label: '인증번호 일치', isValid: authCodeValue === expectedAuthCode },
+  ];
+
+  const onTimerEnd = () => {
+    setIsValidTime(false);
+    setExpectedAuthCode(null);
   };
 
-  const clickAuth = () => {
-    // @todo: request email auth
-    setStartTimer(true);
+  const clickAuth = async () => {
+    const isValid = await trigger('email');
+    if (isValid) {
+      // @todo: request email auth (이미 가입되어 있는 경우 /login 으로 이동)
+      // API returns { isDuplicated, authCode }
+      console.log(`${emailValue} 로 인증 메일 전송`);
+      setExpectedAuthCode(AUTH_CODE);
+      setIsValidTime(true);
+    }
+  };
+
+  const clickNext = async () => {
+    const isValidForm = await trigger(['email', 'authCode']);
+    if (isValidForm && authCodeValue === expectedAuthCode) {
+      setStep('password');
+    }
   };
 
   return (
-    <Join.Form>
+    <>
       <div>
         <Join.Input
+          type="email"
           label="이메일"
           placeholder="이메일"
           required
@@ -36,20 +69,25 @@ export const StepEmail = ({ setStep }: Props) => {
               인증
             </Button>
           }
-          validations={[{ label: '이메일 형식', isValid: false }]}
+          validations={emailValidations}
+          {...register('email')}
         />
         <Join.Input
+          type="text"
           placeholder="인증번호"
-          rightComponent={startTimer && <Timer second={180} />}
+          rightComponent={isValidTime && <Timer second={180} onTimerEnd={onTimerEnd} />}
           isValid={false}
-          validations={[{ label: '인증번호 확인', isValid: false }]}
+          validations={authCodeValidations}
+          {...register('authCode', {
+            validate: (value) => value === expectedAuthCode || '인증번호 일치하지 않음',
+          })}
         />
       </div>
       <div className="mt-12">
-        <Button variant="form" onClick={clickNext}>
+        <Button variant="form" onClick={clickNext} disabled={!authCodeValue || authCodeValue !== expectedAuthCode}>
           다음
         </Button>
       </div>
-    </Join.Form>
+    </>
   );
 };
