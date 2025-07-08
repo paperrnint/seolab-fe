@@ -14,13 +14,6 @@ export const getJoinValidations = (fieldName: keyof JoinFormData, value: string)
     });
   }
 
-  if (fieldName === 'authCode') {
-    validations.push({
-      label: '인증번호 6자리',
-      isValid: value.length === 6,
-    });
-  }
-
   if (fieldName === 'password') {
     validations.push(
       {

@@ -3,7 +3,6 @@ import { z } from 'zod/v4';
 export const joinSchema = z
   .object({
     email: z.email('올바른 이메일 형식'),
-    authCode: z.string().length(6, '인증번호 6자리'),
     password: z
       .string()
       .min(8, '최소 8자 이상')
