@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
 import { BookCard } from './BookCard';
 
 const meta = {
@@ -43,6 +44,5 @@ export const LongTextNarrowWidth: Story = {
     startAt: '25년 6월 30일',
     endAt: '25년 8월 1일',
     count: 1000,
-    width: 0,
   },
 };
