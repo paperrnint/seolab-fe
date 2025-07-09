@@ -14,7 +14,7 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
   return (
     <nav
       className={`
-        h-dvh bg-bg-panel overflow-hidden max-w-2xs border-r border-r-border pr-0.5 flex flex-col flex-shrink-0 
+        h-dvh bg-bg-panel overflow-hidden max-w-2xs border-r border-r-border flex flex-col flex-shrink-0 
         ${isMobile ? 'fixed top-0 left-0 bottom-0 z-50' : 'relative'}
       `}
     >
@@ -25,7 +25,7 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
             <button onClick={toggle} className="p-2 rounded-md hover:bg-btn-subtle cursor-pointer">
               <FaBars size={16} className="text-subtle" />
             </button>
-            <Image src="/images/seolab-logo.png" width={80} height={18} alt="로고" />
+            <Image src="/images/seolab-logo.png" width={80} height={15} alt="로고" />
           </div>
         </div>
       )}
@@ -40,8 +40,8 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
       </div>
 
       {/* Recent Books */}
-      <div className="flex-1 overflow-y-scroll pr-1 ml-2 mr-1">
-        <div className="pb-4">
+      <div className="flex-1 overflow-y-auto pr-1 ml-2 mr-0.5">
+        <div className="pb-5">
           <div className="m-2 text-subtle text-[10px]">최근 읽은 책</div>
           <div className="flex flex-col gap-1">
             <NavItem>내 문장이 그렇게 이상한가요? · 김정선</NavItem>
