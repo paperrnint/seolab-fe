@@ -1,50 +1,76 @@
 import { BookCard } from '@/components/BookCard/BookCard';
-import { BookCover } from '@/components/BookCoverImg/BookCover';
-import { Button } from '@/components/Button/Button';
-import { NavItem } from '@/components/NavItem/NavItem';
-import { QuoteNote } from '@/components/QuoteNote/QuoteNote';
-import { FaArrowRight, FaBoxArchive, FaHouse, FaStar } from 'react-icons/fa6';
+import { GridSection } from '@/components/GridSection/GridSection';
+import { NavLayout } from '@/components/NavLayout/NavLayout';
+import { NowBookContent } from '@/components/NowBookContent/NowBookContent';
+import { NowBookHeader } from '@/components/NowBookHeader/NowBookHeader';
+import { Txt } from '@/components/Txt/Txt';
 
 export default function Home() {
+  const DUMMY_BOOK = {
+    author: '작가명',
+    count: 10,
+    endAt: '25년 8월 1일',
+    startAt: '25년 6월 30일',
+    thumbnail: '/images/bookcover-long.jpg',
+    title: '책 제목',
+  } as const;
+  const FAVORITE_BOOKS = Array.from({ length: 3 }, () => DUMMY_BOOK);
+  const READING_BOOKS = Array.from({ length: 8 }, () => DUMMY_BOOK);
+
   return (
-    <div className="p-2">
-      <QuoteNote
-        quote="한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나
-          관형사 ‘모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다."
-        page={29}
-      />
-      <div className="flex gap-4">
-        <BookCard
-          title="여름어 사전 여름어 사전 여름어 사전 여름어 사전 여름어 사전 여름어 사전 여름어 사전 여름어 사전 여름어 사전"
+    <NavLayout>
+      <div className="w-full max-w-7xl">
+        {/* recent book header */}
+        <Txt variant="caption">은지님이 지금 읽고 있는 책</Txt>
+        <NowBookHeader title="여름어 사전" dateDiff={3} count={8} />
+
+        {/* recent book cover + quotes */}
+        <NowBookContent
           thumbnail="/images/bookcover.jpg"
-          author="아침달 편집부"
-          startAt="2025.06.30"
-          count={2}
+          quotes={[
+            {
+              quote:
+                "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+              page: 29,
+            },
+            {
+              quote:
+                "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+              page: 29,
+            },
+          ]}
         />
-        <BookCard
-          title="여름어 사전"
-          author="아침달 편집부"
-          thumbnail="/images/bookcover.jpg"
-          startAt="2025.06.30"
-          count={2}
-        />
+
+        {/* favorites */}
+        <GridSection label={`즐겨찾는 책 (${FAVORITE_BOOKS.length})`}>
+          {FAVORITE_BOOKS.map((book, i) => (
+            <BookCard
+              key={i}
+              author={book.author}
+              count={book.count}
+              endAt={book.endAt}
+              startAt={book.startAt}
+              thumbnail={book.thumbnail}
+              title={book.title}
+            />
+          ))}
+        </GridSection>
+
+        {/* reading */}
+        <GridSection label={`읽고 있는 책 (${READING_BOOKS.length})`}>
+          {READING_BOOKS.map((book, i) => (
+            <BookCard
+              key={i}
+              author={book.author}
+              count={book.count}
+              endAt={book.endAt}
+              startAt={book.startAt}
+              thumbnail={book.thumbnail}
+              title={book.title}
+            />
+          ))}
+        </GridSection>
       </div>
-      <Button variant="primary">이어서 기록하기</Button>
-      <Button variant="secondary">수정</Button>
-      <BookCover src="/images/bookcover.jpg" alt="여름어사전" />
-      <BookCover size="sm" src="/images/bookcover.jpg" alt="여름어사전" />
-      <BookCover size="lg" src="/images/bookcover.jpg" alt="여름어사전" />
-      <div className="w-62 flex flex-col gap-1">
-        <NavItem icon={<FaHouse className="text-secondary opacity-80" />}>홈</NavItem>
-        <NavItem icon={<FaStar className="text-secondary opacity-80" />}>즐겨찾기</NavItem>
-        <NavItem icon={<FaBoxArchive className="text-secondary opacity-80" />}>내 서랍</NavItem>
-        <NavItem>내 문장이 그렇게 이상한가요? · 김정선</NavItem>
-        <NavItem>여름은 오래 그곳에 남아 · 마쓰이에 마사시</NavItem>
-        <NavItem selected={true}>모순 · 양귀자</NavItem>
-        <Button variant="accent" rightIcon={<FaArrowRight />}>
-          새로운 책 기록하기
-        </Button>
-      </div>
-    </div>
+    </NavLayout>
   );
 }
