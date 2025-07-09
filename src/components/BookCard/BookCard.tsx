@@ -9,15 +9,13 @@ interface Props {
   startAt: string;
   endAt?: string;
   count: number;
-  width?: number; // px
 }
 
-export const BookCard = ({ title, author, thumbnail, startAt, endAt, count, width = 320 }: Props) => {
+export const BookCard = ({ title, author, thumbnail, startAt, endAt, count }: Props) => {
   const period = `${startAt} - ${endAt || '읽는중'}`;
-  const minWidth = Math.max(width, 180);
 
   return (
-    <Card style={{ width: `${minWidth}px`, minWidth: `${minWidth}px` }}>
+    <Card style={{ width: '100%' }}>
       <div className="flex gap-4 w-full">
         <BookCover src={thumbnail} size="sm" hasBorder isRounded />
         <div className="flex flex-col justify-between flex-1">
