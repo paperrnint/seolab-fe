@@ -24,7 +24,7 @@ export const MobileNavBar = () => {
           <FaBars size={16} className="text-subtle" />
         </button>
         <div>
-          <Image src="/images/seolab-logo.png" width={80} height={18} alt="로고" />
+          <Image src="/images/seolab-logo.png" width={80} height={15} alt="로고" />
         </div>
         <div>
           <NavItem icon={<FaPenToSquare size={16} className="text-subtle" />} />

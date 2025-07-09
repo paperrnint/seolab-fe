@@ -14,7 +14,7 @@ export const NavLayout = ({ children }: Props) => {
 
   if (isMobile === null) {
     return (
-      <div className="flex h-dvh">
+      <div className="flex h-dvh pr-0.5">
         <div className="w-12 border-r border-r-border bg-bg-panel"></div>
         <div className="flex-1 flex justify-center p-4">{children}</div>
       </div>
@@ -23,7 +23,7 @@ export const NavLayout = ({ children }: Props) => {
 
   if (isMobile) {
     return (
-      <div className="h-dvh">
+      <div className="h-dvh pr-0.5">
         <MobileNavBar />
         <div
           className="overflow-y-auto flex-1 flex justify-center h-full p-4"
@@ -36,7 +36,7 @@ export const NavLayout = ({ children }: Props) => {
   }
 
   return (
-    <div className="flex h-dvh">
+    <div className="flex h-dvh pr-0.5">
       <DesktopNavBar />
       <div className="overflow-y-auto flex-1 flex justify-center p-4">{children}</div>
     </div>
