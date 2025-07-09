@@ -1,7 +1,7 @@
 import { aligns, colors, config, shapes, sizes, widths } from './Button.constant';
 
 interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'accent' | 'dropdown' | 'form' | 'inner';
   disabled?: boolean;
   leftIcon?: React.ReactNode;
@@ -25,9 +25,9 @@ export const Button = ({ children, variant = 'primary', disabled = false, leftIc
       disabled={disabled}
       {...props}
     >
-      {leftIcon}
-      <div className={`flex-1 ${aligns[align]}`}>{children}</div>
-      {rightIcon}
+      {leftIcon && <div className="flex-shrink-0">{leftIcon}</div>}
+      {children && <div className={`flex-1 ${aligns[align]}`}>{children}</div>}
+      {rightIcon && <div className="flex-shrink-0">{rightIcon}</div>}
     </button>
   );
 };
