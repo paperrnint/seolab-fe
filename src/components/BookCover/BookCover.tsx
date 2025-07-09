@@ -1,4 +1,5 @@
 import Image, { ImageProps } from 'next/image';
+
 import { bookConfig } from './BookCover.constant';
 
 interface Props extends Omit<ImageProps, 'src' | 'alt'> {
@@ -8,6 +9,7 @@ interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   hasBorder?: boolean;
   isRounded?: boolean;
   isSquare?: boolean;
+  hasShadow?: boolean;
 }
 
 export const BookCover = ({
@@ -17,15 +19,17 @@ export const BookCover = ({
   hasBorder = false,
   isRounded = false,
   isSquare = false,
+  hasShadow = false,
   ...props
 }: Props) => {
   const { width, spineClasses, rounded } = bookConfig[size];
 
   const squareContainer = isSquare ? 'aspect-square' : '';
   const squareImage = isSquare ? 'object-cover object-top' : '';
+  const shadow = hasShadow ? 'shadow-xl' : '';
 
   return (
-    <div className="flex-shrink-0">
+    <div className={`flex-shrink-0 ${shadow}`}>
       <div
         className={`
         flex relative w-fit
@@ -34,6 +38,7 @@ export const BookCover = ({
         overflow-hidden
         ${squareContainer}
         ${spineClasses}
+        ${shadow}
         ${hasBorder && bookConfig.border}
         ${isRounded && rounded}
         `}
