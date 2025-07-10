@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
 import { QuoteText } from './QuoteText';
 
 const meta = {

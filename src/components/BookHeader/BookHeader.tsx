@@ -1,7 +1,9 @@
 import { convertDateText, getDaysDiff } from '@/utils';
+
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
 import { Title } from '../Title/Title';
+
 import { BadgeList } from './BadgeList/BadgeList';
 import { BookMeta } from './BookMeta/BookMeta';
 import { BookTitle } from './BookTitle/BookTitle';

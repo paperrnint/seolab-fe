@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaLock, FaUser } from 'react-icons/fa6';
+
 import { Input } from './Input';
 
 const iconMap = {

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
+
 import { FadeoutContent } from './FadeoutContent';
 
 const iconMap = {

@@ -1,5 +1,6 @@
-import { Txt } from '@/components/Txt/Txt';
 import Link from 'next/link';
+
+import { Txt } from '@/components/Txt/Txt';
 
 interface Props {
   children: React.ReactNode;

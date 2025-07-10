@@ -1,7 +1,9 @@
 'use client';
 
-import type { DropdownOption } from '@/types';
 import { useEffect, useRef, useState } from 'react';
+
+import type { DropdownOption } from '@/types';
+
 import { DropdownContext } from '../@context/DropdownContext';
 
 interface Props {
