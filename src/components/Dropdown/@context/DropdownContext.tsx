@@ -1,7 +1,8 @@
 'use client';
 
-import { DropdownOption } from '@/types';
 import { createContext, RefObject, useContext } from 'react';
+
+import { DropdownOption } from '@/types';
 
 export interface DropdownContextValue {
   isOpen: boolean;

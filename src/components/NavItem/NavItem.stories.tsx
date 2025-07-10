@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaBoxArchive, FaHouse, FaStar } from 'react-icons/fa6';
+
 import { NavItem } from './NavItem';
 
 const iconMap = {

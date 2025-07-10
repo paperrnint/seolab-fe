@@ -1,5 +1,6 @@
-import { Txt } from '@/components/Txt/Txt';
 import Image from 'next/image';
+
+import { Txt } from '@/components/Txt/Txt';
 
 interface Props {
   label?: string;

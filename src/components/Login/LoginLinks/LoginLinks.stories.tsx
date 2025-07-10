@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
 import { LoginLink } from '../LoginLink/LoginLink';
+
 import { LoginLinks } from './LoginLinks';
 
 const links = [

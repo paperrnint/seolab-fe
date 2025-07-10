@@ -1,7 +1,9 @@
 'use client';
 
-import { ANIMATION_DURATION } from '@/constants';
 import { useEffect, useState } from 'react';
+
+import { ANIMATION_DURATION } from '@/constants';
+
 import { useDropdown } from '../@context/DropdownContext';
 
 interface Props {

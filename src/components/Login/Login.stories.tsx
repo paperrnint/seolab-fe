@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaLock, FaUser } from 'react-icons/fa6';
+
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { SocialButton } from '../SocialButton/SocialButton';
+
 import { Login } from './Login';
 
 const meta = {

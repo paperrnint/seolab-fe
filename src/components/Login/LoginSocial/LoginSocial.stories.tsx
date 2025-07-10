@@ -1,5 +1,7 @@
-import { SocialButton } from '@/components/SocialButton/SocialButton';
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
+import { SocialButton } from '@/components/SocialButton/SocialButton';
+
 import { LoginSocial } from './LoginSocial';
 
 const meta = {

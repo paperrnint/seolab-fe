@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
 import { JoinValidationText } from './JoinValidationText';
 
 const meta = {
@@ -29,7 +30,7 @@ export const Invalid: Story = {
   },
 };
 
-export const valid: Story = {
+export const Valid: Story = {
   args: {
     label: '최소 8자-20자',
     isValid: true,

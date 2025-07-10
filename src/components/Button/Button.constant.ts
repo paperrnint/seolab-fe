@@ -1,3 +1,5 @@
+import { ButtonVariant } from './Button';
+
 type Shape = 'square' | 'circular';
 type Width = 'fit' | 'full';
 type Align = 'left' | 'center';
@@ -55,7 +57,7 @@ export const sizes = {
   xl: 'px-4 py-2 text-lg leading-8',
 } as const;
 
-export const config: Record<any, ButtonConfig> = {
+export const config: Record<ButtonVariant, ButtonConfig> = {
   primary: {
     shape: 'circular',
     width: 'fit',

@@ -1,5 +1,7 @@
-import { Button } from '@/components/Button/Button';
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
+import { Button } from '@/components/Button/Button';
+
 import { JoinInput } from './JoinInput';
 
 const buttonMap = {

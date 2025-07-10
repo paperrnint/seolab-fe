@@ -1,7 +1,9 @@
 'use client';
 
-import { Button } from '@/components/Button/Button';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
+
+import { Button } from '@/components/Button/Button';
+
 import { useDropdown } from '../@context/DropdownContext';
 
 interface Props {

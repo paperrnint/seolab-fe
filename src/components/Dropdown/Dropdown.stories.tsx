@@ -1,5 +1,7 @@
-import { DropdownOption } from '@/types';
 import type { Meta, StoryObj } from '@storybook/nextjs';
+
+import { DropdownOption } from '@/types';
+
 import { Dropdown } from './Dropdown';
 
 interface DropdownStoryArgs {
