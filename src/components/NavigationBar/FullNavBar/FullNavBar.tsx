@@ -53,7 +53,7 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
 
       {/* Start New */}
       <div className="mb-2 px-2">
-        <ExternalGradient>
+        <ExternalGradient variant="bottom" bg="panel">
           <Button variant="accent" rightIcon={<FaPenToSquare />}>
             새로운 책 기록하기
           </Button>
