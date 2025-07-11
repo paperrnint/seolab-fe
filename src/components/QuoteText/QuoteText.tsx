@@ -6,9 +6,9 @@ interface Props {
 
 export const QuoteText = ({ page, quote, isFavorite = false }: Props) => {
   return (
-    <div className="flex px-4 py-2 leading-7">
-      <div className="w-14.5">{page}p</div>
-      <div className={`flex-1 pl-4 ${isFavorite && 'underline-dotted'}`}>{quote}</div>
+    <div className="flex gap-4 py-2 px-4 lg:pl-5 lg:pr-3 leading-7 border border-transparent">
+      <div className="w-12">{page}p</div>
+      <div className={`flex-1 ${isFavorite && 'underline-dotted'}`}>{quote}</div>
     </div>
   );
 };

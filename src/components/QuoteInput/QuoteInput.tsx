@@ -30,7 +30,7 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
     <div className="flex flex-1 gap-4 items-start border border-border rounded-lg p-4 bg-bg-card">
       <div className="w-fit">
         <input
-          className="w-10 outline-none text-sm leading-6"
+          className="w-8 outline-none text-sm leading-6 placeholder:text-[12px]"
           placeholder="페이지"
           enterKeyHint="next"
           value={page}
