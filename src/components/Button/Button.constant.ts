@@ -4,7 +4,7 @@ type Shape = 'square' | 'circular';
 type Width = 'fit' | 'full';
 type Align = 'left' | 'center';
 type Color = 'primary' | 'secondary' | 'accent' | 'subtle';
-type Size = 'sm' | 'md' | 'lg' | 'xl';
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type Type = 'fill' | 'outline';
 
 export interface ButtonConfig {
@@ -51,6 +51,7 @@ export const colors = {
 } as const;
 
 export const sizes = {
+  xs: 'px-3 py-1.5 text-xs',
   sm: 'px-3 py-2 text-xs',
   md: 'px-4 py-2',
   lg: 'px-4 py-2 text-base leading-8',
@@ -104,6 +105,22 @@ export const config: Record<ButtonVariant, ButtonConfig> = {
     align: 'center',
     color: 'subtle',
     size: 'sm',
+    type: 'fill',
+  },
+  navEdit: {
+    shape: 'circular',
+    width: 'fit',
+    align: 'center',
+    color: 'subtle',
+    size: 'xs',
+    type: 'fill',
+  },
+  navConfirm: {
+    shape: 'circular',
+    width: 'fit',
+    align: 'center',
+    color: 'primary',
+    size: 'xs',
     type: 'fill',
   },
 };
