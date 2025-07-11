@@ -1,6 +1,15 @@
 import { aligns, colors, config, shapes, sizes, widths } from './Button.constant';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'accent' | 'dropdown' | 'form' | 'inner';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'dropdown'
+  | 'form'
+  | 'inner'
+  | 'navEdit'
+  | 'navConfirm';
+
 interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   children?: React.ReactNode;
   variant?: ButtonVariant;

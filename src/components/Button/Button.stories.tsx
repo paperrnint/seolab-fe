@@ -69,6 +69,20 @@ export const Dropdown: Story = {
   },
 };
 
+export const NavConfirmButton: Story = {
+  args: {
+    variant: 'navConfirm',
+    children: '확인',
+  },
+};
+
+export const NavEditButton: Story = {
+  args: {
+    variant: 'navEdit',
+    children: '수정',
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     variant: 'primary',
