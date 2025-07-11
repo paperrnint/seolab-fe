@@ -14,9 +14,9 @@ export const NavLayout = ({ children }: Props) => {
 
   if (isMobile === null) {
     return (
-      <div className="flex h-dvh pr-0.5">
-        <div className="w-12 border-r border-r-border bg-bg-panel"></div>
-        <div className="flex-1 flex justify-center p-4">{children}</div>
+      <div className="h-dvh pr-0.5">
+        <div className="h-12 w-full" />
+        <div className="flex-1 flex justify-center">{children}</div>
       </div>
     );
   }
@@ -25,10 +25,7 @@ export const NavLayout = ({ children }: Props) => {
     return (
       <div className="h-dvh pr-0.5">
         <MobileNavBar />
-        <div
-          className="overflow-y-auto flex-1 flex justify-center h-full p-4"
-          style={{ height: 'calc(100dvh - 48px)' }}
-        >
+        <div className="overflow-y-auto flex-1 flex justify-center h-full" style={{ height: 'calc(100dvh - 48px)' }}>
           {children}
         </div>
       </div>
@@ -38,7 +35,7 @@ export const NavLayout = ({ children }: Props) => {
   return (
     <div className="flex h-dvh pr-0.5">
       <DesktopNavBar />
-      <div className="overflow-y-auto flex-1 flex justify-center p-4">{children}</div>
+      <div className="overflow-y-auto flex-1 flex justify-center">{children}</div>
     </div>
   );
 };
