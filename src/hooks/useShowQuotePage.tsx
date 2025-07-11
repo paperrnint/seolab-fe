@@ -14,7 +14,9 @@ export const useShowQuotePage = () => {
   };
 
   const onToggle = () => {
-    setShowQuotePage((prev) => !prev);
+    setTimeout(() => {
+      setShowQuotePage((prev) => !prev);
+    }, 0);
   };
 
   return { showQuotePage, onShow, onHide, onToggle };
