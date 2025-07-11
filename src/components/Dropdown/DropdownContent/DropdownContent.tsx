@@ -9,10 +9,11 @@ import { useDropdown } from '../@context/DropdownContext';
 interface Props {
   children: React.ReactNode;
   gap?: number;
+  align?: 'left' | 'right';
 }
 
-export const DropdownContent = ({ children, gap = 8 }: Props) => {
-  const { isOpen, contentRef, onClose } = useDropdown();
+export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) => {
+  const { isOpen, contentRef } = useDropdown();
   const [shouldMount, setShouldMount] = useState(isOpen);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -37,12 +38,23 @@ export const DropdownContent = ({ children, gap = 8 }: Props) => {
 
   if (!shouldMount) return null;
 
+  const getAlignmentClasses = () => {
+    switch (align) {
+      case 'right':
+        return 'right-0';
+      case 'left':
+      default:
+        return 'left-0';
+    }
+  };
+
   return (
     <div
       className={`
-        absolute top-full left-0 right-0 z-10
+        absolute top-full z-10
         bg-bg-card rounded-lg border border-border
         shadow-default overflow-hidden
+        ${getAlignmentClasses()}
         w-fit min-w-full 
         whitespace-nowrap
         transition-all ease-out
