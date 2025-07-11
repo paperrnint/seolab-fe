@@ -1,7 +1,11 @@
+import { useBookMode } from '@/hooks/useBookMode';
 import { convertDateText, getDaysDiff } from '@/utils';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
+import { BookmarkWrapper } from '../BookmarkWrapper/BookmarkWrapper';
+import { BookMoreMenu } from '../BookMoreMenu/BookMoreMenu';
+import { Checkbox } from '../Checkbox/Checkbox';
 import { Title } from '../Title/Title';
 
 import { BadgeList } from './BadgeList/BadgeList';
@@ -20,23 +24,39 @@ interface Props {
 }
 
 export const BookHeader = ({ title, author, thumbnail, publisher, publishedDate, startAt, endAt, count }: Props) => {
+  const { isReadMode } = useBookMode();
   const daysDiff = getDaysDiff(startAt, endAt);
   const duration = `${convertDateText(startAt)} - ${endAt ? convertDateText(endAt) : '기록중'}`;
-  const meta = `${author} · ${publisher} · ${publishedDate}`;
 
   return (
-    <div className="flex gap-4 px-4 py-4 border-b border-border">
+    <div className="flex gap-4 p-4 pr-2 border-b border-border">
+      {/* 책 커버 */}
+      <BookmarkWrapper readOnly={isReadMode}>
+        <BookCover src={thumbnail} size="xs" hasBorder isRounded isSquare />
+      </BookmarkWrapper>
+
+      {/* 책 정보 컨텐츠 */}
       <div className="flex flex-col w-full">
-        <BookTitle>
-          <Title>{title}</Title>
-          <BadgeList>
-            <Badge>{duration}</Badge>
-            <Badge>{`${count}문장`}</Badge>
-          </BadgeList>
-        </BookTitle>
-        <BookMeta>{meta}</BookMeta>
+        {/* 책 제목 + badge */}
+        <div className="flex">
+          <BookTitle>
+            <Title>{title}</Title>
+            <BadgeList>
+              {isReadMode ? (
+                <>
+                  <Badge>{duration}</Badge>
+                  <Badge>{`${count}문장`}</Badge>
+                </>
+              ) : (
+                <Checkbox label="다 읽었어요" checkedLabel="완독 성공! 🎉" />
+              )}
+            </BadgeList>
+          </BookTitle>
+          <BookMoreMenu />
+        </div>
+        {/* 작가, 정보 */}
+        <BookMeta>{`${author} · ${publisher} · ${publishedDate}`}</BookMeta>
       </div>
-      <BookCover src={thumbnail} size="xs" hasBorder isRounded isSquare />
     </div>
   );
 };
