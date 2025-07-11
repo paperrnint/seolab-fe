@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+import { useState } from 'react';
 
 import { DropdownOption } from '@/types';
+
+import { BookMoreItem } from '../BookMoreItem/BookMoreItem';
 
 import { Dropdown } from './Dropdown';
 
@@ -33,35 +36,72 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Dropdown.Root {...args}>
-      <Dropdown.Trigger />
-      <Dropdown.Content>
-        <Dropdown.Item value="option1">옵션 1</Dropdown.Item>
-        <Dropdown.Item value="option2">옵션 2</Dropdown.Item>
-        <Dropdown.Item value="option3">옵션 3</Dropdown.Item>
-      </Dropdown.Content>
-    </Dropdown.Root>
-  ),
+  render: () => {
+    const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
+
+    return (
+      <Dropdown.Root>
+        <Dropdown.SelectTrigger selectedLabel={selectedOption?.label} placeholder="선택" />
+        <Dropdown.Content>
+          <Dropdown.SelectableItem value="option1" onSelect={setSelectedOption}>
+            옵션 1
+          </Dropdown.SelectableItem>
+          <Dropdown.SelectableItem value="option2" onSelect={setSelectedOption}>
+            옵션 2
+          </Dropdown.SelectableItem>
+          <Dropdown.SelectableItem value="option3" onSelect={setSelectedOption}>
+            옵션 3
+          </Dropdown.SelectableItem>
+        </Dropdown.Content>
+      </Dropdown.Root>
+    );
+  },
 };
 
-export const LongOptions: Story = {
-  render: (args) => (
-    <Dropdown.Root {...args}>
-      <Dropdown.Trigger placeholder="주제" />
-      <Dropdown.Content>
-        {[
-          { label: '가정원예', value: 'homeGardening' },
-          { label: '홈인테리어/수납', value: 'homeInteriorStorage' },
-          { label: '생활공예/DIY', value: 'lifeCraftDiy' },
-          { label: '레크레이션/게임', value: 'recreationGames' },
-          { label: '퀴즈/퍼즐/스도쿠', value: 'quizPuzzleSudoku' },
-        ].map((country) => (
-          <Dropdown.Item key={country.value} value={country.value}>
-            {country.label}
+export const LongOptionsSelect: Story = {
+  render: () => {
+    const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
+
+    const options = [
+      { label: '가정원예', value: 'homeGardening' },
+      { label: '홈인테리어/수납', value: 'homeInteriorStorage' },
+      { label: '생활공예/DIY', value: 'lifeCraftDiy' },
+      { label: '레크레이션/게임', value: 'recreationGames' },
+      { label: '퀴즈/퍼즐/스도쿠', value: 'quizPuzzleSudoku' },
+    ];
+
+    return (
+      <Dropdown.Root>
+        <Dropdown.SelectTrigger selectedLabel={selectedOption?.label} placeholder="주제를 선택하세요" />
+        <Dropdown.Content>
+          {options.map((option) => (
+            <Dropdown.SelectableItem key={option.value} value={option.value} onSelect={setSelectedOption}>
+              {option.label}
+            </Dropdown.SelectableItem>
+          ))}
+        </Dropdown.Content>
+      </Dropdown.Root>
+    );
+  },
+};
+
+export const MoreMenuDropdown: Story = {
+  render: () => (
+    <div className="w-full flex justify-end">
+      <Dropdown.Root>
+        <Dropdown.MoreTrigger />
+        <Dropdown.Content align="right">
+          <Dropdown.Item onClick={() => alert('편집 클릭됨')}>
+            <BookMoreItem>수정하기</BookMoreItem>
           </Dropdown.Item>
-        ))}
-      </Dropdown.Content>
-    </Dropdown.Root>
+          <Dropdown.Item onClick={() => alert('복사 클릭됨')}>
+            <BookMoreItem>URL 복사</BookMoreItem>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => alert('삭제 클릭됨')}>
+            <BookMoreItem isSensitive={true}>삭제하기</BookMoreItem>
+          </Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Root>
+    </div>
   ),
 };

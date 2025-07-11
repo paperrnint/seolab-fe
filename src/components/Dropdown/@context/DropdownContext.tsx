@@ -2,15 +2,11 @@
 
 import { createContext, RefObject, useContext } from 'react';
 
-import { DropdownOption } from '@/types';
-
 export interface DropdownContextValue {
   isOpen: boolean;
-  selectedOption: DropdownOption | null;
   contentRef: RefObject<HTMLDivElement | null>;
   onToggle: () => void;
   onClose: () => void;
-  onSelect: (option: DropdownOption) => void;
 }
 
 export const DropdownContext = createContext<DropdownContextValue | null>(null);

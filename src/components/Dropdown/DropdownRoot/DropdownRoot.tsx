@@ -2,18 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import type { DropdownOption } from '@/types';
-
 import { DropdownContext } from '../@context/DropdownContext';
 
 interface Props {
   children: React.ReactNode;
-  defaultOption?: DropdownOption | null;
 }
 
-export const DropdownRoot = ({ children, defaultOption = null }: Props) => {
+export const DropdownRoot = ({ children }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(defaultOption);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -41,13 +37,8 @@ export const DropdownRoot = ({ children, defaultOption = null }: Props) => {
     setIsOpen(false);
   };
 
-  const onSelect = (option: DropdownOption) => {
-    setSelectedOption(option);
-    // @todo : onValueChange(value)
-    onClose();
-  };
   return (
-    <DropdownContext.Provider value={{ isOpen, selectedOption, contentRef, onToggle, onClose, onSelect }}>
+    <DropdownContext.Provider value={{ isOpen, contentRef, onToggle, onClose }}>
       <div className="relative w-fit" ref={dropdownRef}>
         {children}
       </div>
