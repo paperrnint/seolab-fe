@@ -18,7 +18,7 @@ export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) =>
   const [isVisible, setIsVisible] = useState(false);
 
   // 열림 : DOM mount -> visible (opacity 0 -> 1)
-  // 닫힘 : invisible (opacity 1 -> 0) -> DOM unmount
+  // 닫힘 : invisible & DOM unmount
   useEffect(() => {
     console.log('isOpen changed:', isOpen);
     if (isOpen) {
@@ -29,10 +29,7 @@ export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) =>
       return () => clearTimeout(showTimer);
     } else {
       setIsVisible(false);
-      const hideTimer = setTimeout(() => {
-        setShouldMount(false);
-      }, ANIMATION_DURATION);
-      return () => clearTimeout(hideTimer);
+      setShouldMount(false);
     }
   }, [isOpen]);
 
