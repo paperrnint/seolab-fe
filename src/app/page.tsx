@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <NavLayout>
-      <div className="w-full max-w-7xl">
+      <div className="w-full max-w-7xl p-4">
         {/* recent book header */}
         <Txt variant="caption">은지님이 지금 읽고 있는 책</Txt>
         <NowBookHeader title="여름어 사전" dateDiff={3} count={8} />
