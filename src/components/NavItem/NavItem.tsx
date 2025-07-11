@@ -1,11 +1,10 @@
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
-  variant?: 'title' | 'text';
   selected?: boolean;
   icon?: React.ReactNode;
 }
 
-export const NavItem = ({ children, variant = 'text', icon, selected, ...props }: Props) => {
+export const NavItem = ({ children, icon, selected, ...props }: Props) => {
   return (
     <a
       className={`
@@ -15,11 +14,7 @@ export const NavItem = ({ children, variant = 'text', icon, selected, ...props }
       {...props}
     >
       {icon && <div className="flex-shrink-0">{icon}</div>}
-      {children && (
-        <div className={`truncate ${variant === 'title' ? 'text-btn-accent font-bold' : 'text-primary'}`}>
-          {children}
-        </div>
-      )}
+      {children && <div className="truncate text-primary">{children}</div>}
     </a>
   );
 };
