@@ -15,7 +15,7 @@ export const NavItem = ({ children, icon, selected = false, isAccent = false, ..
   return (
     <Link
       className={`
-        flex gap-2 items-center w-full h-8 px-2 rounded-sm cursor-pointer
+        flex gap-3 items-center w-full h-8 px-2 rounded-sm cursor-pointer
         ${selected ? 'bg-bg-selected' : 'bg-transparent hover:bg-bg-hover'}
       `}
       {...props}

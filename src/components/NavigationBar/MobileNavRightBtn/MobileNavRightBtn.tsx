@@ -1,8 +1,7 @@
 import { usePathname } from 'next/navigation';
-import { FaPenToSquare } from 'react-icons/fa6';
 
 import { Button } from '@/components/Button/Button';
-import { NavItem } from '@/components/NavItem/NavItem';
+import { NavMenuItem } from '@/components/NavMenuItem/NavMenuItem';
 import { useBookMode } from '@/hooks/useBookMode';
 
 export const MobileNavRightBtn = () => {
@@ -28,7 +27,7 @@ export const MobileNavRightBtn = () => {
 
   return (
     <div>
-      <NavItem icon={<FaPenToSquare size={16} className="text-subtle" />} />
+      <NavMenuItem type="new" />
     </div>
   );
 };
