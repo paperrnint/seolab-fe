@@ -13,12 +13,7 @@ export const NavLayout = ({ children }: Props) => {
   const { isMobile } = useMediaQuery();
 
   if (isMobile === null) {
-    return (
-      <div className="h-dvh pr-0.5">
-        <div className="h-12 w-full" />
-        <div className="flex-1 flex justify-center">{children}</div>
-      </div>
-    );
+    return null;
   }
 
   if (isMobile) {
