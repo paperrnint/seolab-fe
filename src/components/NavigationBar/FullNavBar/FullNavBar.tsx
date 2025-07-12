@@ -1,9 +1,13 @@
-import { FaBars, FaBoxArchive, FaHouse, FaPenToSquare, FaStar } from 'react-icons/fa6';
-
-import { Button } from '@/components/Button/Button';
-import { ExternalGradient } from '@/components/ExternalGradient/ExternalGradient';
 import { Logo } from '@/components/Logo/Logo';
 import { NavItem } from '@/components/NavItem/NavItem';
+import { NavMenu } from '@/components/NavMenu/NavMenu';
+import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
+import { UserProfile } from '@/components/UserProfile/UserProfile';
+
+import { BottomBtn } from '../BottomBtn/BottomBtn';
+import { NavContent } from '../Content/Content';
+import { NavContentSection } from '../ContentSection/ContentSection';
+import { NavContentTitle } from '../ContentTitle/ContentTitle';
 
 interface Props {
   toggle: () => void;
@@ -11,54 +15,53 @@ interface Props {
 }
 
 export const FullNavBar = ({ toggle, isMobile }: Props) => {
+  const RECENT_BOOK = {
+    title: '내 문장이 그렇게 이상한가요? · 김정선',
+    href: '/',
+  };
+  const RECENT_BOOKS = Array.from({ length: 13 }, () => RECENT_BOOK);
+  const widthClass = isMobile ? 'w-3/4 fixed top-0 left-0 bottom-0 z-50' : 'relative w-3xs max-w-3xs';
+
   return (
     <nav
       className={`
-        h-dvh bg-bg-panel overflow-hidden max-w-2xs border-r border-r-border flex flex-col flex-shrink-0 
-        ${isMobile ? 'fixed top-0 left-0 bottom-0 z-50' : 'relative'}
+        h-dvh bg-bg-panel overflow-hidden
+        border-r border-r-border
+        flex flex-col flex-shrink-0 
+        ${widthClass}
       `}
     >
       {/* Header */}
-      {!isMobile && (
-        <div>
-          <div className="flex gap-2 p-2 items-center">
-            <button onClick={toggle} className="p-2 rounded-md hover:bg-btn-subtle cursor-pointer">
-              <FaBars size={16} className="text-subtle" />
-            </button>
-            <Logo size="sm" />
-          </div>
+      <div>
+        <div className="flex gap-1 p-2 items-center">
+          <NavToggleBtn onClick={toggle} />
+          <Logo size="sm" />
         </div>
-      )}
+      </div>
 
       {/* Navigation */}
-      <div className="mx-2">
-        <div className="flex flex-col gap-1 py-2">
-          <NavItem icon={<FaHouse className="text-secondary opacity-80" />}>홈</NavItem>
-          <NavItem icon={<FaStar className="text-secondary opacity-80" />}>즐겨찾기</NavItem>
-          <NavItem icon={<FaBoxArchive className="text-secondary opacity-80" />}>내 서랍</NavItem>
-        </div>
+      <div className="m-2 mb-0">
+        <NavMenu showLabel />
       </div>
 
       {/* Recent Books */}
-      <div className="flex-1 overflow-y-auto pr-1 ml-2 mr-0.5">
-        <div className="pb-5">
-          <div className="m-2 text-subtle text-[10px]">최근 읽은 책</div>
-          <div className="flex flex-col gap-1">
-            <NavItem>내 문장이 그렇게 이상한가요? · 김정선</NavItem>
-            <NavItem>여름은 오래 그곳에 남아 · 마쓰이에 마사시</NavItem>
-            <NavItem>모순 · 양귀자</NavItem>
-          </div>
-        </div>
-      </div>
+      <NavContentSection>
+        <NavContentTitle title="최근 읽은 책" />
+        <NavContent>
+          <NavItem href="/">여름은 오래 그곳에 남아 · 마쓰이에 마사시</NavItem>
+          <NavItem href="/">모순 · 양귀자</NavItem>
+          {RECENT_BOOKS.map((book, i) => (
+            <NavItem key={i} href={book.href}>
+              {book.title}
+            </NavItem>
+          ))}
+        </NavContent>
+      </NavContentSection>
 
-      {/* Start New */}
-      <div className="mb-2 px-2">
-        <ExternalGradient variant="bottom" bg="panel">
-          <Button variant="accent" rightIcon={<FaPenToSquare />}>
-            새로운 책 기록하기
-          </Button>
-        </ExternalGradient>
-      </div>
+      {/* User */}
+      <BottomBtn>
+        <UserProfile email="eunji@example.com" nickname="은지" />
+      </BottomBtn>
     </nav>
   );
 };
