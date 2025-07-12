@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { FaBars, FaBoxArchive, FaHouse, FaPenToSquare, FaStar } from 'react-icons/fa6';
 
-import { NavItem } from '@/components/NavItem/NavItem';
+import { NavMenu } from '@/components/NavMenu/NavMenu';
+import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
+import { UserAvatar } from '@/components/UserAvatar/UserAvatar';
 
 import { FullNavBar } from '../FullNavBar/FullNavBar';
 
@@ -20,18 +21,14 @@ export const DesktopNavBar = () => {
     <nav className="h-dvh bg-bg-panel w-12 border-r border-r-border p-2 flex flex-col justify-between z-20">
       <div>
         <div className="mb-4">
-          <button className="p-2 rounded-md hover:bg-btn-subtle cursor-pointer" onClick={toggle}>
-            <FaBars size={16} className="text-subtle" />
-          </button>
+          <NavToggleBtn onClick={toggle} />
         </div>
-        <div className="flex flex-col gap-1 pb-2">
-          <NavItem icon={<FaHouse className="text-secondary opacity-80" />} />
-          <NavItem icon={<FaStar className="text-secondary opacity-80" />} />
-          <NavItem icon={<FaBoxArchive className="text-secondary opacity-80" />} />
-        </div>
+        <NavMenu showLabel={false} />
       </div>
       <div>
-        <NavItem icon={<FaPenToSquare className="text-btn-accent" />} />
+        <div className="mb-2 h-9 flex items-center">
+          <UserAvatar />
+        </div>
       </div>
     </nav>
   );
