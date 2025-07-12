@@ -58,7 +58,7 @@ export const sizes = {
   xl: 'px-4 py-2 text-lg leading-8',
 } as const;
 
-export const config: Record<ButtonVariant, ButtonConfig> = {
+export const btnConfig: Record<ButtonVariant, ButtonConfig> = {
   primary: {
     shape: 'circular',
     width: 'fit',
