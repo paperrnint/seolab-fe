@@ -1,5 +1,4 @@
-import Image from 'next/image';
-
+import { Logo } from '@/components/Logo/Logo';
 import { Txt } from '@/components/Txt/Txt';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 export const LoginHeader = ({ label }: Props) => {
   return (
     <div className="flex flex-col justify-center items-center gap-4 py-12">
-      <Image src="/images/seolab-logo.png" alt="서랍 로고" width={160} height={30} />
+      <Logo size="lg" />
       {label && <Txt variant="caption">{label}</Txt>}
     </div>
   );

@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { FaBars, FaBoxArchive, FaHouse, FaPenToSquare, FaStar } from 'react-icons/fa6';
 
 import { Button } from '@/components/Button/Button';
 import { ExternalGradient } from '@/components/ExternalGradient/ExternalGradient';
+import { Logo } from '@/components/Logo/Logo';
 import { NavItem } from '@/components/NavItem/NavItem';
 
 interface Props {
@@ -25,7 +25,7 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
             <button onClick={toggle} className="p-2 rounded-md hover:bg-btn-subtle cursor-pointer">
               <FaBars size={16} className="text-subtle" />
             </button>
-            <Image src="/images/seolab-logo.png" width={80} height={15} alt="로고" />
+            <Logo size="sm" />
           </div>
         </div>
       )}

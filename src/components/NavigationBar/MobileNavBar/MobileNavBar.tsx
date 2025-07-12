@@ -1,6 +1,7 @@
-import Image from 'next/image';
 import { useState } from 'react';
 import { FaBars } from 'react-icons/fa6';
+
+import { Logo } from '@/components/Logo/Logo';
 
 import { FullNavBar } from '../FullNavBar/FullNavBar';
 import { MobileNavRightBtn } from '../MobileNavRightBtn/MobileNavRightBtn';
@@ -26,7 +27,7 @@ export const MobileNavBar = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <Image src="/images/seolab-logo.png" width={80} height={15} alt="로고" />
+          <Logo size="sm" />
         </div>
 
         <div className="flex justify-end items-center">
