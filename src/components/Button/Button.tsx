@@ -1,4 +1,4 @@
-import { aligns, colors, config, shapes, sizes, widths } from './Button.constant';
+import { aligns, btnConfig, colors, shapes, sizes, widths } from './Button.constant';
 
 export type ButtonVariant =
   | 'primary'
@@ -19,7 +19,7 @@ interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'dis
 }
 
 export const Button = ({ children, variant = 'primary', disabled = false, leftIcon, rightIcon, ...props }: Props) => {
-  const { shape, width, align, color, size, type } = config[variant];
+  const { shape, width, align, color, size, type } = btnConfig[variant];
   const baseClass = 'flex gap-1 items-center text-sm font-bold flex-shrink-0';
   const validClass = disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer hover:opacity-90 transition-opacity';
 
