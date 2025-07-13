@@ -2,17 +2,27 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button';
+import { ErrorModal } from '@/components/ErrorModal/ErrorModal';
+import { ErrorType } from '@/components/ErrorModal/ErrorModal.constant';
 import { Join } from '@/components/Join/Join';
+import { fetchData } from '@/lib/fetch/fetchData';
 import { JoinFormData, joinSchema } from '@/lib/schemas/joinSchema';
 import { getJoinValidations } from '@/lib/validations/joinValidation';
+import { SignupResponse } from '@/types/api/auth';
+import { getErrorType } from '@/utils';
 
 export default function JoinSimple() {
   const router = useRouter();
+  const [errorType, setErrorType] = useState<ErrorType | null>(null);
+  const isModalOpen = !!errorType;
+
   const {
     register,
+    reset,
     watch,
     handleSubmit,
     formState: { isValid, isSubmitting },
@@ -36,14 +46,35 @@ export default function JoinSimple() {
     { label: '비밀번호와 일치', isValid: !!confirmPassword && confirmPassword === password },
   ];
 
-  const onSubmit = async (data: JoinFormData) => {
+  const onSubmit = async (formData: JoinFormData) => {
     try {
-      console.log('join data form:', data);
-      // @todo: join api
+      const data = await fetchData<SignupResponse>('http://localhost:8080/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      console.log('가입 성공', data);
       router.push('/login');
     } catch (err) {
-      console.error('join error', err);
+      const errMessage = (err as Error).message || '회원가입 중 오류가 발생했어요';
+      const errType = getErrorType(errMessage);
+      setErrorType(errType);
     }
+  };
+
+  const onCloseModal = () => {
+    setErrorType(null);
+  };
+
+  const onClickModalButton = () => {
+    if (errorType === 'joinDuplicatedEmail') {
+      router.push('/login');
+      return;
+    }
+
+    reset();
+    onCloseModal();
   };
 
   return (
@@ -82,6 +113,12 @@ export default function JoinSimple() {
           </Button>
         </div>
       </Join.Form>
+      <ErrorModal
+        errorType={errorType || 'default'}
+        isOpen={isModalOpen}
+        onClickButton={onClickModalButton}
+        onCloseModal={onCloseModal}
+      />
     </Join.Container>
   );
 }
