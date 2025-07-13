@@ -1,6 +1,6 @@
 import { ButtonVariant } from './Button';
 
-type Shape = 'square' | 'circular';
+type Shape = 'square' | 'circular' | 'rounded';
 type Width = 'fit' | 'full';
 type Align = 'left' | 'center';
 type Color = 'primary' | 'secondary' | 'accent' | 'subtle';
@@ -19,6 +19,7 @@ export interface ButtonConfig {
 export const shapes = {
   square: 'rounded-md',
   circular: 'rounded-full',
+  rounded: 'rounded-xl',
 } as const;
 
 export const widths = {
@@ -92,7 +93,7 @@ export const btnConfig: Record<ButtonVariant, ButtonConfig> = {
     type: 'fill',
   },
   form: {
-    shape: 'circular',
+    shape: 'rounded',
     width: 'full',
     align: 'center',
     color: 'primary',
