@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const ErrorModal = ({ errorType, isOpen, onCloseModal, onClickButton }: Props) => {
-  const { title, text } = errorConfig[errorType];
+  const { title, text, button } = errorConfig[errorType];
   const texts = getTextsByLine(text);
 
   return (
@@ -35,7 +35,7 @@ export const ErrorModal = ({ errorType, isOpen, onCloseModal, onClickButton }: P
 
       <Modal.Action>
         <Button variant="form" onClick={onClickButton}>
-          로그인 하러 가기
+          {button}
         </Button>
       </Modal.Action>
     </Modal.Root>
