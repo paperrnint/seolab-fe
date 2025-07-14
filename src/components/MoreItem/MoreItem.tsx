@@ -4,7 +4,7 @@ interface Props {
   isSensitive?: boolean;
 }
 
-export const BookMoreItem = ({ children, icon, isSensitive = false }: Props) => {
+export const MoreItem = ({ children, icon, isSensitive = false }: Props) => {
   return (
     <div className={`flex justify-between items-center w-24 ${isSensitive ? 'text-emp' : 'text-primary'}`}>
       <div>{children}</div>
