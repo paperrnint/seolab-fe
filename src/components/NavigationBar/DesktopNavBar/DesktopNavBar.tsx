@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
-import { UserAvatar } from '@/components/UserAvatar/UserAvatar';
+import { UserProfileMenu } from '@/components/UserProfileMenu/UserProfileMenu';
 
 import { FullNavBar } from '../FullNavBar/FullNavBar';
 
@@ -27,7 +27,7 @@ export const DesktopNavBar = () => {
       </div>
       <div>
         <div className="mb-2 h-9 flex items-center">
-          <UserAvatar />
+          <UserProfileMenu isFull={false} />
         </div>
       </div>
     </nav>

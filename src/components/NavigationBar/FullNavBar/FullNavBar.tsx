@@ -2,9 +2,9 @@ import { Logo } from '@/components/Logo/Logo';
 import { NavItem } from '@/components/NavItem/NavItem';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
-import { UserProfile } from '@/components/UserProfile/UserProfile';
+import { UserProfileMenu } from '@/components/UserProfileMenu/UserProfileMenu';
 
-import { BottomBtn } from '../BottomBtn/BottomBtn';
+import { BottomSection } from '../BottomSection/BottomSection';
 import { NavContent } from '../Content/Content';
 import { NavContentSection } from '../ContentSection/ContentSection';
 import { NavContentTitle } from '../ContentTitle/ContentTitle';
@@ -59,9 +59,9 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
       </NavContentSection>
 
       {/* User */}
-      <BottomBtn>
-        <UserProfile email="eunji@example.com" nickname="은지" />
-      </BottomBtn>
+      <BottomSection>
+        <UserProfileMenu />
+      </BottomSection>
     </nav>
   );
 };
