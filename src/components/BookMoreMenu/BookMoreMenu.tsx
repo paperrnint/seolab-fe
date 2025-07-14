@@ -4,9 +4,9 @@ import { useBookMode } from '@/hooks/useBookMode';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
 
-import { BookMoreItem } from '../BookMoreItem/BookMoreItem';
 import { Button } from '../Button/Button';
 import { Dropdown } from '../Dropdown/Dropdown';
+import { MoreItem } from '../MoreItem/MoreItem';
 
 export const BookMoreMenu = () => {
   const { mode, onEdit, onConfirm } = useBookMode();
@@ -31,19 +31,19 @@ export const BookMoreMenu = () => {
         <Dropdown.MoreTrigger />
         <Dropdown.Content align="right">
           <Dropdown.Item onClick={onEdit}>
-            <BookMoreItem icon={<FaPen />}>수정하기</BookMoreItem>
+            <MoreItem icon={<FaPen />}>수정하기</MoreItem>
           </Dropdown.Item>
           <Dropdown.Item onClick={onToggle}>
             {showQuotePage ? (
-              <BookMoreItem icon={<FaEyeSlash />}>페이지 숨김</BookMoreItem>
+              <MoreItem icon={<FaEyeSlash />}>페이지 숨김</MoreItem>
             ) : (
-              <BookMoreItem icon={<FaEye />}>페이지 보기</BookMoreItem>
+              <MoreItem icon={<FaEye />}>페이지 보기</MoreItem>
             )}
           </Dropdown.Item>
           <Dropdown.Item onClick={() => console.log('삭제')}>
-            <BookMoreItem isSensitive icon={<FaTrash />}>
+            <MoreItem isSensitive icon={<FaTrash />}>
               삭제
-            </BookMoreItem>
+            </MoreItem>
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown.Root>

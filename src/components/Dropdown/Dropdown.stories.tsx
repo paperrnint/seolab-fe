@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { DropdownOption } from '@/types';
 
-import { BookMoreItem } from '../BookMoreItem/BookMoreItem';
+import { MoreItem } from '../MoreItem/MoreItem';
 
 import { Dropdown } from './Dropdown';
 
@@ -92,13 +92,13 @@ export const MoreMenuDropdown: Story = {
         <Dropdown.MoreTrigger />
         <Dropdown.Content align="right">
           <Dropdown.Item onClick={() => alert('편집 클릭됨')}>
-            <BookMoreItem>수정하기</BookMoreItem>
+            <MoreItem>수정하기</MoreItem>
           </Dropdown.Item>
           <Dropdown.Item onClick={() => alert('복사 클릭됨')}>
-            <BookMoreItem>URL 복사</BookMoreItem>
+            <MoreItem>URL 복사</MoreItem>
           </Dropdown.Item>
           <Dropdown.Item onClick={() => alert('삭제 클릭됨')}>
-            <BookMoreItem isSensitive={true}>삭제하기</BookMoreItem>
+            <MoreItem isSensitive={true}>삭제하기</MoreItem>
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown.Root>
