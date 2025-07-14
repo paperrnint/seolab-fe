@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Gowun_Dodum } from 'next/font/google';
+
+import { AuthProvider } from '@/components/AuthProvider/AuthProvider';
 import './globals.css';
 
 const gowunDodum = Gowun_Dodum({
@@ -20,7 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${gowunDodum.variable} antialiased`}>{children}</body>
+      <body className={`${gowunDodum.variable} antialiased`}>
+        <AuthProvider>
+          {children}
+          <div id="portal" />
+        </AuthProvider>
+      </body>
     </html>
   );
 }
