@@ -6,11 +6,13 @@ import { ANIMATION_DURATION } from '@/constants';
 
 import { useDropdown } from '../@context/DropdownContext';
 
+import { Align, alignClasses, Position, positionClasses } from './DropdownContent.constant';
+
 interface Props {
   children: React.ReactNode;
   gap?: number;
-  align?: 'left' | 'right' | 'left-outside' | 'right-outside';
-  position?: 'top' | 'bottom';
+  align?: Align;
+  position?: Position;
   width?: 'fit' | 'auto';
 }
 
@@ -37,30 +39,6 @@ export const DropdownContent = ({ children, gap = 8, align = 'left', position = 
 
   if (!shouldMount) return null;
 
-  const getAlignmentClasses = () => {
-    switch (align) {
-      case 'right-outside':
-        return 'left-full';
-      case 'left-outside':
-        return 'right-full';
-      case 'right':
-        return 'right-0';
-      case 'left':
-      default:
-        return 'left-0';
-    }
-  };
-
-  const getPositionClasses = () => {
-    switch (position) {
-      case 'top':
-        return 'bottom-full';
-      case 'bottom':
-      default:
-        return 'top-full';
-    }
-  };
-
   const getMarginStyle = () => {
     switch (position) {
       case 'top':
@@ -77,8 +55,8 @@ export const DropdownContent = ({ children, gap = 8, align = 'left', position = 
         absolute z-10
         bg-bg-card rounded-lg border border-border
         shadow-default overflow-hidden
-        ${getPositionClasses()}
-        ${getAlignmentClasses()}
+        ${alignClasses[align]}
+        ${positionClasses[position]}
         w-fit ${width === 'auto' && 'min-w-full'}
         whitespace-nowrap
         transition-all ease-out
