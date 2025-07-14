@@ -16,5 +16,12 @@ export async function fetchData<T>(input: RequestInfo, init?: RequestInit): Prom
     throw new Error(`[${res.status}] ${err}`);
   }
 
-  return res.json();
+  const contentType = res.headers.get('content-type');
+
+  if (contentType && contentType.includes('application/json')) {
+    return res.json();
+  }
+
+  const text = await res.text();
+  return (text || {}) as T;
 }
