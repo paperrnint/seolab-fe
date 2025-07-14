@@ -26,7 +26,7 @@ export const DropdownItem = ({ children, onClick, shouldClose = true, ...props }
       onClick={onClickItem}
       {...props}
     >
-      <div className="w-full text-primary leading-6">{children}</div>
+      <div className="w-full text-primary leading-6 text-left">{children}</div>
     </button>
   );
 };

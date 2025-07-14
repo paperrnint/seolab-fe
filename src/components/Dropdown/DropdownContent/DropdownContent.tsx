@@ -9,10 +9,12 @@ import { useDropdown } from '../@context/DropdownContext';
 interface Props {
   children: React.ReactNode;
   gap?: number;
-  align?: 'left' | 'right';
+  align?: 'left' | 'right' | 'left-outside' | 'right-outside';
+  position?: 'top' | 'bottom';
+  width?: 'fit' | 'auto';
 }
 
-export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) => {
+export const DropdownContent = ({ children, gap = 8, align = 'left', position = 'bottom', width = 'auto' }: Props) => {
   const { isOpen, contentRef } = useDropdown();
   const [shouldMount, setShouldMount] = useState(isOpen);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,6 +39,10 @@ export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) =>
 
   const getAlignmentClasses = () => {
     switch (align) {
+      case 'right-outside':
+        return 'left-full';
+      case 'left-outside':
+        return 'right-full';
       case 'right':
         return 'right-0';
       case 'left':
@@ -45,20 +51,41 @@ export const DropdownContent = ({ children, gap = 8, align = 'left' }: Props) =>
     }
   };
 
+  const getPositionClasses = () => {
+    switch (position) {
+      case 'top':
+        return 'bottom-full';
+      case 'bottom':
+      default:
+        return 'top-full';
+    }
+  };
+
+  const getMarginStyle = () => {
+    switch (position) {
+      case 'top':
+        return { marginBottom: `${gap}px` };
+      case 'bottom':
+      default:
+        return { marginTop: `${gap}px` };
+    }
+  };
+
   return (
     <div
       className={`
-        absolute top-full z-10
+        absolute z-10
         bg-bg-card rounded-lg border border-border
         shadow-default overflow-hidden
+        ${getPositionClasses()}
         ${getAlignmentClasses()}
-        w-fit min-w-full 
+        w-fit ${width === 'auto' && 'min-w-full'}
         whitespace-nowrap
         transition-all ease-out
         ${isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}
       style={{
-        marginTop: `${gap}px`,
+        ...getMarginStyle(),
         transitionDuration: `${ANIMATION_DURATION}ms`,
       }}
       ref={contentRef}
