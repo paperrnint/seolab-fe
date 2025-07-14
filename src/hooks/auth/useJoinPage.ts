@@ -1,7 +1,9 @@
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 import { JoinFormData } from '@/lib/schemas/joinSchema';
 import { authService } from '@/services/authService';
+import { ApiResult } from '@/types/api/result';
 import { getErrorType } from '@/utils';
 
 import { useErrorModal } from './useErrorModal';
@@ -12,15 +14,28 @@ export const useJoinPage = () => {
   const { errorType, isOpen, showError, resetError } = useErrorModal();
   const { form, validations } = useJoinForm();
 
+  // join API
+  const join: (formData: JoinFormData) => Promise<ApiResult> = useCallback(async (formData: JoinFormData) => {
+    try {
+      await authService.signup(formData);
+      return { success: true };
+    } catch (err) {
+      return {
+        success: false,
+        error: (err as Error).message,
+      };
+    }
+  }, []);
+
   // Join Form 제출 시 수행
   const onSubmit = async (formData: JoinFormData) => {
-    try {
-      const data = await authService.signup(formData);
-      console.log('가입 성공', data);
+    const result = await join(formData);
+
+    if (result.success) {
+      // @todo: 회원가입 성공 페이지/모달 만들기?
       router.push('/login');
-    } catch (err) {
-      const errMessage = (err as Error).message || '회원가입 중 오류가 발생했어요';
-      const errType = getErrorType(errMessage);
+    } else {
+      const errType = getErrorType(result.error);
       showError(errType);
     }
   };
