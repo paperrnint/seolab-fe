@@ -39,7 +39,7 @@ export const DropdownRoot = ({ children }: Props) => {
 
   return (
     <DropdownContext.Provider value={{ isOpen, contentRef, onToggle, onClose }}>
-      <div className="relative w-fit" ref={dropdownRef}>
+      <div className="relative" ref={dropdownRef}>
         {children}
       </div>
     </DropdownContext.Provider>
