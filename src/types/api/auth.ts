@@ -12,3 +12,8 @@ export interface SignupResponse {
 export interface RefreshResponse {
   accessToken: string;
 }
+
+export interface CurrentUserResponse {
+  email: string;
+  username: string;
+}

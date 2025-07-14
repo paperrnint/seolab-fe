@@ -7,18 +7,25 @@ import { FaLock, FaUser } from 'react-icons/fa6';
 
 import { Button } from '@/components/Button/Button';
 import { Container } from '@/components/Container/Container';
+import { ErrorModal } from '@/components/ErrorModal/ErrorModal';
 import { Input } from '@/components/Input/Input';
 import { Login } from '@/components/Login/Login';
 import { LoginLink } from '@/components/Login/LoginLink/LoginLink';
 import { MainImage } from '@/components/MainImage/MainImage';
 import { SocialButton } from '@/components/SocialButton/SocialButton';
+import { useErrorModal } from '@/hooks/auth';
+import { useAuth } from '@/hooks/auth/useAuth';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
+import { getErrorType } from '@/utils';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
+  const { errorType, isOpen, showError, resetError } = useErrorModal();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting, isValid },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -29,14 +36,23 @@ export default function LoginPage() {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (formData: LoginFormData) => {
     try {
-      console.log('login data form:', data);
-      // @todo: login logic
-      router.push('/');
+      const result = await login(formData);
+      if (result.success) {
+        router.push('/');
+      } else {
+        const errType = getErrorType(result.error);
+        showError(errType);
+      }
     } catch (err) {
       console.error('login error', err);
     }
+  };
+
+  const onClickModalButton = () => {
+    reset();
+    resetError();
   };
 
   return (
@@ -71,6 +87,12 @@ export default function LoginPage() {
           </div>
         </Container>
       </div>
+      <ErrorModal
+        errorType={errorType || 'default'}
+        isOpen={isOpen}
+        onClickButton={onClickModalButton}
+        onCloseModal={resetError}
+      />
     </>
   );
 }
