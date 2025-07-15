@@ -20,7 +20,7 @@ interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'dis
 
 export const Button = ({ children, variant = 'primary', disabled = false, leftIcon, rightIcon, ...props }: Props) => {
   const { shape, width, align, color, size, type } = btnConfig[variant];
-  const baseClass = 'flex gap-1 items-center text-sm font-bold flex-shrink-0';
+  const baseClass = 'flex gap-1 items-center text-sm font-bold flex-shrink-0 focus:outline-none';
   const validClass = disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer hover:opacity-90 transition-opacity';
 
   return (
