@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
-import { ErrorType } from '@/components/ErrorModal/ErrorModal.constant';
-
 export const useErrorModal = () => {
-  const [errorType, setErrorType] = useState<ErrorType | null>(null);
-  const isOpen = !!errorType;
+  const [errorStatusCode, setErrorCode] = useState<number | null>(null);
+  const isOpen = !!errorStatusCode;
 
-  const showError = (type: ErrorType) => {
-    setErrorType(type);
+  const showError = (errorStatusCode: number) => {
+    setErrorCode(errorStatusCode);
   };
 
   const resetError = () => {
-    setErrorType(null);
+    setErrorCode(null);
   };
 
   return {
-    errorType,
+    errorStatusCode,
     isOpen,
     showError,
     resetError,

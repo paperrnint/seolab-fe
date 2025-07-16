@@ -1,6 +1,6 @@
 // @todo: 이후에 라이브러리 사용 (현재는 임시로)
 
-import { ErrorType } from '@/components/ErrorModal/ErrorModal.constant';
+import { ERROR_MESSAGES, ErrorType } from '@/constants';
 
 /**
  * 날짜 차이를 구하는 유틸 함수
@@ -28,13 +28,12 @@ export const getTextsByLine = (text: string) => {
   return normalizedText.split('\n');
 };
 
-export const getErrorType: (errorMessage: string) => ErrorType = (errorMessage: string) => {
-  if (errorMessage.includes('이미 사용중인 이메일')) {
-    return 'joinDuplicatedEmail';
-  } else if (errorMessage.includes('올바른 이메일 형식') || errorMessage.includes('비밀번호는 최소')) {
-    return 'authValidation';
-  } else if (errorMessage.includes('이메일 또는 비밀번호가 일치하지 않습니다')) {
-    return 'loginUnauthorized';
-  }
-  return 'default';
+export const getErrorMessage = (errorType: ErrorType, errorStatusCode: number) => {
+  const defaultMessage = ERROR_MESSAGES.default.unknown;
+
+  const messages = ERROR_MESSAGES[errorType];
+  if (!messages || typeof messages !== 'object') return defaultMessage;
+
+  const message = messages[errorStatusCode as keyof typeof messages];
+  return message || defaultMessage;
 };

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 import { accessTokenAtom, isAuthenticatedAtom, isLoggedInAtom, userAtom } from '@/atoms/authAtom';
+import { ApiError } from '@/lib/fetch/ApiError';
 import { LoginFormData } from '@/lib/schemas/loginSchema';
 import { authService } from '@/services/authService';
 import { ApiResult } from '@/types/api/result';
@@ -45,7 +46,7 @@ export const useAuth = () => {
       } catch (err) {
         return {
           success: false,
-          error: (err as Error).message,
+          error: err as ApiError,
         };
       }
     },
@@ -62,7 +63,7 @@ export const useAuth = () => {
       await authService.logout(accessToken);
       console.log('로그아웃 성공');
     } catch (err) {
-      console.error((err as Error).message);
+      console.error(err as ApiError);
     } finally {
       resetAuth();
     }
