@@ -68,43 +68,13 @@ export const useAuth = () => {
     }
   }, [accessToken, resetAuth]);
 
-  const refreshAccessToken: () => Promise<ApiResult> = useCallback(async () => {
-    try {
-      const data = await authService.refreshToken();
-      const { accessToken: newToken } = data;
-
-      setAccessToken(newToken);
-      return { success: true };
-    } catch (err) {
-      await logout();
-      return {
-        success: false,
-        error: (err as Error).message,
-      };
-    }
-  }, [logout, setAccessToken]);
-
-  const initAuth = useCallback(async () => {
-    try {
-      const result = await refreshAccessToken();
-
-      if (result.success && !!accessToken) {
-        const user = await authService.getCurrentUser(accessToken);
-        setAuth(user);
-      }
-    } catch (err) {
-      console.log('자동 로그인 실패:', err);
-    }
-  }, [accessToken, refreshAccessToken, setAuth]);
-
   return {
     accessToken,
     user,
     isLoggedIn,
     isAuthenticated,
+    setAuth,
     login,
     logout,
-    refreshAccessToken,
-    initAuth,
   };
 };

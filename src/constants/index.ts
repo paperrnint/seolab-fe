@@ -1,3 +1,1 @@
 export const ANIMATION_DURATION = 200;
-
-export const REFRESH_TOKEN_INTERVAL_TIME = 29 * 60 * 1000;
