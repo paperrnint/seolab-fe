@@ -16,12 +16,11 @@ import { SocialButton } from '@/components/SocialButton/SocialButton';
 import { useErrorModal } from '@/hooks/auth';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
-import { getErrorType } from '@/utils';
 
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuth();
-  const { errorType, isOpen, showError, resetError } = useErrorModal();
+  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
   const {
     register,
     handleSubmit,
@@ -42,8 +41,7 @@ export default function LoginPage() {
       if (result.success) {
         router.push('/');
       } else {
-        const errType = getErrorType(result.error);
-        showError(errType);
+        showError(result.error.status);
       }
     } catch (err) {
       console.error('login error', err);
@@ -87,12 +85,15 @@ export default function LoginPage() {
           </div>
         </Container>
       </div>
-      <ErrorModal
-        errorType={errorType || 'default'}
-        isOpen={isOpen}
-        onClickButton={onClickModalButton}
-        onCloseModal={resetError}
-      />
+      {errorStatusCode && (
+        <ErrorModal
+          errorType="login"
+          errorStatusCode={errorStatusCode}
+          isOpen={isOpen}
+          onClickButton={onClickModalButton}
+          onCloseModal={resetError}
+        />
+      )}
     </>
   );
 }

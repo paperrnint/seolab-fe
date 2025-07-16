@@ -1,17 +1,17 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
+import { ApiError } from '@/lib/fetch/ApiError';
 import { JoinFormData } from '@/lib/schemas/joinSchema';
 import { authService } from '@/services/authService';
 import { ApiResult } from '@/types/api/result';
-import { getErrorType } from '@/utils';
 
 import { useErrorModal } from './useErrorModal';
 import { useJoinForm } from './useJoinForm';
 
 export const useJoinPage = () => {
   const router = useRouter();
-  const { errorType, isOpen, showError, resetError } = useErrorModal();
+  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
   const { form, validations } = useJoinForm();
 
   // join API
@@ -22,7 +22,7 @@ export const useJoinPage = () => {
     } catch (err) {
       return {
         success: false,
-        error: (err as Error).message,
+        error: err as ApiError,
       };
     }
   }, []);
@@ -35,14 +35,13 @@ export const useJoinPage = () => {
       // @todo: 회원가입 성공 페이지/모달 만들기?
       router.push('/login');
     } else {
-      const errType = getErrorType(result.error);
-      showError(errType);
+      showError(result.error.status);
     }
   };
 
   // Error Modal 내의 버튼 클릭시 수행
   const onClickModalButton = () => {
-    if (errorType === 'joinDuplicatedEmail') {
+    if (errorStatusCode === 409) {
       router.push('/login');
       return;
     }
@@ -52,7 +51,7 @@ export const useJoinPage = () => {
   };
 
   return {
-    errorType,
+    errorStatusCode,
     isOpen,
     validations,
     formState: form.formState,

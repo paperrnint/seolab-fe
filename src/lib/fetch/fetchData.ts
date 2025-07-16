@@ -1,3 +1,5 @@
+import { ApiError } from './ApiError';
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
 export async function fetchData<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
@@ -13,7 +15,7 @@ export async function fetchData<T>(input: RequestInfo, init?: RequestInit): Prom
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`[${res.status}] ${err}`);
+    throw new ApiError(err || `HTTP ${res.status}`, res.status, res);
   }
 
   const contentType = res.headers.get('content-type');

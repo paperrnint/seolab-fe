@@ -2,23 +2,23 @@
 
 import { FaCircleExclamation } from 'react-icons/fa6';
 
-import { getTextsByLine } from '@/utils';
+import { ErrorType } from '@/constants';
+import { getErrorMessage, getTextsByLine } from '@/utils';
 
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
 import { Txt } from '../Txt/Txt';
 
-import { errorConfig, ErrorType } from './ErrorModal.constant';
-
 interface Props {
   errorType: ErrorType;
+  errorStatusCode: number;
   isOpen: boolean;
   onCloseModal: () => void;
   onClickButton: () => void;
 }
 
-export const ErrorModal = ({ errorType, isOpen, onCloseModal, onClickButton }: Props) => {
-  const { title, text, button } = errorConfig[errorType];
+export const ErrorModal = ({ errorType, errorStatusCode, isOpen, onCloseModal, onClickButton }: Props) => {
+  const { title, text, button } = getErrorMessage(errorType, errorStatusCode);
   const texts = getTextsByLine(text);
 
   return (
