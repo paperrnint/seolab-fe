@@ -1,15 +1,13 @@
-'use client';
+import { getServerAuthData } from '@/lib/auth/server';
 
-import { useAuthInit } from '@/hooks/auth/useAuthInit';
-import { useAutoRefresh } from '@/hooks/auth/useAutoRefresh';
+import { AuthClientProvider } from '../AuthClientProvider/AuthClientProvider';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const AuthProvider = ({ children }: Props) => {
-  useAuthInit();
-  useAutoRefresh();
+export const AuthProvider = async ({ children }: Props) => {
+  const authData = await getServerAuthData();
 
-  return <>{children}</>;
+  return <AuthClientProvider initialAuthData={authData}>{children}</AuthClientProvider>;
 };
