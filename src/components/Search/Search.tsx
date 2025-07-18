@@ -1,16 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaCircleXmark, FaMagnifyingGlass } from 'react-icons/fa6';
 
-import { ApiResult } from '@/types/api/result';
-
 interface Props {
-  onSubmit: (query: string) => Promise<ApiResult>;
+  initialQuery?: string;
 }
 
-export const Search = ({ onSubmit }: Props) => {
-  const [query, setQuery] = useState('');
+export const Search = ({ initialQuery = '' }: Props) => {
+  const [query, setQuery] = useState(initialQuery);
+  const router = useRouter();
 
   const resetQuery = () => {
     setQuery('');
@@ -18,11 +18,7 @@ export const Search = ({ onSubmit }: Props) => {
 
   const sendQuery = async () => {
     if (!query.trim()) return;
-    const { success } = await onSubmit(query);
-
-    if (!success) {
-      resetQuery();
-    }
+    router.push(`/search?q=${encodeURIComponent(query)}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

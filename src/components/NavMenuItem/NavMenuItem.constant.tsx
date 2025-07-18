@@ -27,6 +27,6 @@ export const tabs: Record<Tab, TabConfig> = {
   new: {
     icon: <FaPenToSquare />,
     label: '새 기록',
-    href: '/new',
+    href: '/search',
   },
 };
