@@ -98,5 +98,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/', '/login', '/join', '/new', '/favorite', '/archive', '/setting', '/book/:path*'],
+  matcher: ['/', '/login', '/join', '/search', '/favorite', '/archive', '/setting', '/book/:path*', '/api/:path*'],
 };
