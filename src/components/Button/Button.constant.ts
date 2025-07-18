@@ -39,7 +39,7 @@ export const colors = {
   },
   secondary: {
     fill: 'bg-secondary text-text-btn border border-secondary',
-    outline: 'bg-transparent text-secondary border border-secondary',
+    outline: 'bg-transparent text-secondary border border-secondary/50',
   },
   accent: {
     fill: 'bg-btn-accent text-text-btn shadow-default',
@@ -123,5 +123,13 @@ export const btnConfig: Record<ButtonVariant, ButtonConfig> = {
     color: 'primary',
     size: 'xs',
     type: 'fill',
+  },
+  query: {
+    shape: 'circular',
+    width: 'fit',
+    align: 'center',
+    color: 'secondary',
+    size: 'xs',
+    type: 'outline',
   },
 };

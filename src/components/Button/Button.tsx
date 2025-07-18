@@ -8,7 +8,8 @@ export type ButtonVariant =
   | 'form'
   | 'inner'
   | 'navEdit'
-  | 'navConfirm';
+  | 'navConfirm'
+  | 'query';
 
 interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   children?: React.ReactNode;
