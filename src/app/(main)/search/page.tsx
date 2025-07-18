@@ -1,5 +1,6 @@
 import { BookItem } from '@/components/BookItem/BookItem';
 import { Search } from '@/components/Search/Search';
+import { SearchSupport } from '@/components/SearchSupport/SearchSupport';
 import { getServerAuthData } from '@/lib/auth/server';
 import { bookService } from '@/services/bookService';
 import { SearchBook } from '@/types/api/book';
@@ -35,6 +36,7 @@ export default async function NewPage({ searchParams }: Props) {
 
         <div className="py-3">
           {/* Empty */}
+          {!query && <SearchSupport />}
 
           {/* Result */}
           {books?.map((book) => (
