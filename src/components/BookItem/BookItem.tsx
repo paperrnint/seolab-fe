@@ -4,13 +4,15 @@ import { BookCover } from '../BookCover/BookCover';
 interface Props {
   title: string;
   thumbnail: string;
-  author: string;
+  authors: string[];
   publisher: string;
   publishedDate: string;
   description?: string;
   tags?: string[];
 }
-export const BookItem = ({ title, thumbnail, author, publisher, publishedDate, description, tags }: Props) => {
+export const BookItem = ({ title, thumbnail, authors, publisher, publishedDate, description, tags }: Props) => {
+  const author = authors.join(', ');
+
   return (
     <div className="flex gap-3.5 px-2 py-4 border-b border-border">
       <BookCover src={thumbnail} size="sm" hasBorder />
