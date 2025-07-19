@@ -1,3 +1,10 @@
+'use client';
+
+import { useState } from 'react';
+import { FaPlus } from 'react-icons/fa6';
+
+import { formatDate } from '@/utils';
+
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
 
@@ -10,8 +17,16 @@ interface Props {
   description?: string;
   tags?: string[];
 }
+
 export const BookItem = ({ title, thumbnail, authors, publisher, publishedDate, description, tags }: Props) => {
+  const [showAll, setShowAll] = useState(false);
+
   const author = authors.join(', ');
+  const lineClass = showAll ? '' : 'line-clamp-2';
+
+  const onToggle = () => {
+    setShowAll((prev) => !prev);
+  };
 
   return (
     <div className="flex gap-3.5 px-2 py-4 border-b border-border">
@@ -21,7 +36,9 @@ export const BookItem = ({ title, thumbnail, authors, publisher, publishedDate, 
           <div className="flex flex-wrap items-center justify-between w-full mb-1">
             <h3 className="font-bold text-base leading-7">{title}</h3>
           </div>
-          <div className="font-bold text-xs leading-5 text-secondary">{`${author} · ${publisher} · ${publishedDate}`}</div>
+          <div className="font-bold text-xs leading-5 text-secondary">
+            {`${author} · ${publisher} · ${formatDate(publishedDate)}`}
+          </div>
         </div>
         {tags && (
           <div className="flex flex-wrap gap-1">
@@ -31,11 +48,16 @@ export const BookItem = ({ title, thumbnail, authors, publisher, publishedDate, 
           </div>
         )}
         {description && (
-          <div>
-            <div className="text-xs leading-5 text-subtle line-clamp-2">{description}</div>
+          <div className="cursor-pointer" onClick={onToggle}>
+            <div className={`text-xs leading-5 text-subtle text-justify ${lineClass}`}>{description}</div>
           </div>
         )}
       </div>
+      <button className="flex items-center cursor-pointer">
+        <div className="p-2 bg-btn-subtle text-subtle h-fit rounded-full ">
+          <FaPlus size={12} />
+        </div>
+      </button>
     </div>
   );
 };
