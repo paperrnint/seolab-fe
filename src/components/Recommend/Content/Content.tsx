@@ -3,5 +3,5 @@ interface Props {
 }
 
 export const RecommendContent = ({ children }: Props) => {
-  return <div className="pb-3 flex flex-wrap gap-2">{children}</div>;
+  return <div className="pb-5 flex flex-wrap gap-2">{children}</div>;
 };

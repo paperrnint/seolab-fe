@@ -5,6 +5,41 @@ import { useRouter } from 'next/navigation';
 import { Recommend } from '../Recommend/Recommend';
 import { RecommendTitle } from '../Recommend/Title/Title';
 
+const BEST_BOOKS = [
+  {
+    title: '혼모노',
+    author: '성해나',
+  },
+  {
+    title: '청춘의 독서',
+    author: '유시민',
+  },
+  {
+    title: '모순',
+    author: '양귀자',
+  },
+  {
+    title: '안녕이라 그랬어',
+    author: '김애란',
+  },
+  {
+    title: '급류',
+    author: '정대건',
+  },
+  {
+    title: '소년이 온다',
+    author: '한강',
+  },
+  {
+    title: '단 한 번의 삶',
+    author: '김영하',
+  },
+  {
+    title: '행동은 불안을 이긴다',
+    author: '롭 다이얼',
+  },
+];
+
 const SUMMER_BOOKS = [
   {
     title: '여름어 사전',
@@ -32,11 +67,11 @@ export const SearchSupport = () => {
   };
 
   return (
-    <>
+    <div className="px-1 py-2">
       <Recommend.Section>
-        <RecommendTitle>여름이니까, 이런 책 어때요?</RecommendTitle>
+        <RecommendTitle>지금 인기 있는 책</RecommendTitle>
         <Recommend.Content>
-          {SUMMER_BOOKS.map((book, i) => (
+          {BEST_BOOKS.map((book, i) => (
             <Recommend.Item key={i} onClick={() => onClickQuery(book.title)}>
               {book.title}
             </Recommend.Item>
@@ -53,16 +88,6 @@ export const SearchSupport = () => {
           ))}
         </Recommend.Content>
       </Recommend.Section>
-      <Recommend.Section>
-        <RecommendTitle>여름이니까, 이런 책 어때요?</RecommendTitle>
-        <Recommend.Content>
-          {SUMMER_BOOKS.map((book, i) => (
-            <Recommend.Item key={i} onClick={() => onClickQuery(book.title)}>
-              {book.title}
-            </Recommend.Item>
-          ))}
-        </Recommend.Content>
-      </Recommend.Section>
-    </>
+    </div>
   );
 };
