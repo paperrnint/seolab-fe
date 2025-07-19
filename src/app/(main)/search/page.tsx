@@ -1,7 +1,7 @@
-import { BookItem } from '@/components/BookItem/BookItem';
 import { Search } from '@/components/Search/Search';
-import { SearchSupport } from '@/components/SearchSupport/SearchSupport';
+import { SearchContent } from '@/components/SearchContent/SearchContent';
 import { getServerAuthData } from '@/lib/auth/server';
+import { ApiError } from '@/lib/fetch/ApiError';
 import { bookService } from '@/services/bookService';
 import { SearchBook } from '@/types/api/book';
 
@@ -22,35 +22,27 @@ export default async function NewPage({ searchParams }: Props) {
   const accessToken = authData?.accessToken;
 
   let books: SearchBook[] = [];
+  let error: ApiError | null = null;
+
   if (query && accessToken) {
-    const data = await bookService.search({ query }, accessToken);
-    books = data.books;
+    try {
+      // @todo: infinite scroll
+      const data = await bookService.search({ query }, accessToken);
+      books = data.books;
+    } catch (err) {
+      console.error('search failed:', err);
+      error = err as ApiError;
+    }
   }
 
   return (
-    <div className="w-full max-w-4xl">
-      <div className="p-2">
-        <div>
-          <Search key={query} initialQuery={query} />
-        </div>
+    <div className="w-full max-w-4xl h-full flex flex-col">
+      <div className="p-2 pb-0 flex-shrink-0">
+        <Search key={query} initialQuery={query} />
+      </div>
 
-        <div className="py-3">
-          {/* Empty */}
-          {!query && <SearchSupport />}
-
-          {/* Result */}
-          {books?.map((book) => (
-            <BookItem
-              key={book.isbn}
-              title={book.title}
-              authors={book.authors}
-              description={book.contents}
-              publishedDate={book.publishedDate}
-              publisher={book.publisher}
-              thumbnail={book.thumbnail}
-            />
-          ))}
-        </div>
+      <div className="flex-1 p-2 pt-1 overflow-auto">
+        <SearchContent query={query} error={error} books={books} />
       </div>
     </div>
   );
