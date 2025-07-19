@@ -36,6 +36,18 @@ export const ERROR_MESSAGES = {
       button: '로그인하기',
     },
   },
+  search: {
+    400: {
+      title: '검색 실패',
+      text: '적절한 검색어가 아니에요\n찾고 있는 책을 입력해 주세요',
+      button: '확인',
+    },
+    401: {
+      title: '인증 만료',
+      text: '로그인이 만료되었어요\n다시 로그인해 주세요',
+      button: '로그인하기',
+    },
+  },
   default: {
     unknown: {
       title: '알 수 없는 에러',
