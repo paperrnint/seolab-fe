@@ -1,4 +1,5 @@
 // @todo: 이후에 라이브러리 사용 (현재는 임시로)
+export * from './date';
 
 import { ERROR_MESSAGES, ErrorType } from '@/constants';
 
