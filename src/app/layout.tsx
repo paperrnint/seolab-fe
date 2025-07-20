@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Gowun_Dodum } from 'next/font/google';
 
 import { AuthProvider } from '@/components/AuthProvider/AuthProvider';
-
+import { QueryProvider } from '@/components/QueryProvider/QueryProvider';
 import './globals.css';
 
 const gowunDodum = Gowun_Dodum({
@@ -26,10 +26,12 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${gowunDodum.variable} antialiased`}>
         <Provider>
-          <AuthProvider>
-            {children}
-            <div id="portal" />
-          </AuthProvider>
+          <QueryProvider>
+            <AuthProvider>
+              {children}
+              <div id="portal" />
+            </AuthProvider>
+          </QueryProvider>
         </Provider>
       </body>
     </html>

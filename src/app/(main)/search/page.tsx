@@ -22,13 +22,14 @@ export default async function NewPage({ searchParams }: Props) {
   const accessToken = authData?.accessToken;
 
   let books: SearchBook[] = [];
+  let isEnd = true;
   let error: ApiError | null = null;
 
   if (query && accessToken) {
     try {
-      // @todo: infinite scroll
       const data = await bookService.search({ query }, accessToken);
       books = data.books;
+      isEnd = data.isEnd;
     } catch (err) {
       console.error('search failed:', err);
       error = err as ApiError;
@@ -41,8 +42,8 @@ export default async function NewPage({ searchParams }: Props) {
         <Search key={query} initialQuery={query} />
       </div>
 
-      <div className="flex-1 p-2 pt-1 overflow-auto">
-        <SearchContent query={query} error={error} books={books} />
+      <div key={query} className="flex-1 p-2 pt-1 overflow-auto">
+        <SearchContent query={query} error={error} books={books} hasMoreItem={!isEnd} />
       </div>
     </div>
   );

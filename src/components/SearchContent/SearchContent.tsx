@@ -4,15 +4,17 @@ import { SearchBook } from '@/types/api/book';
 import { BookItem } from '../BookItem/BookItem';
 import { SearchEmpty } from '../SearchEmpty/SearchEmpty';
 import { SearchError } from '../SearchError/SearchError';
+import { SearchMore } from '../SearchMore/SearchMore';
 import { SearchSupport } from '../SearchSupport/SearchSupport';
 
 interface Props {
   query: string;
   error: ApiError | null;
   books: SearchBook[];
+  hasMoreItem?: boolean;
 }
 
-export const SearchContent = ({ query, error, books }: Props) => {
+export const SearchContent = ({ query, error, books, hasMoreItem = false }: Props) => {
   // 쿼리 없음
   if (!query) {
     return <SearchSupport />;
@@ -42,6 +44,7 @@ export const SearchContent = ({ query, error, books }: Props) => {
           thumbnail={book.thumbnail}
         />
       ))}
+      {hasMoreItem && <SearchMore key={query} query={query} />}
     </>
   );
 };
