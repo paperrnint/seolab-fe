@@ -11,6 +11,7 @@ interface Props {
 export const Search = ({ initialQuery = '' }: Props) => {
   const [query, setQuery] = useState(initialQuery);
   const router = useRouter();
+  const hasQuery = query.length >= 1;
 
   const resetQuery = () => {
     setQuery('');
@@ -38,6 +39,7 @@ export const Search = ({ initialQuery = '' }: Props) => {
       <div className="flex items-end gap-2 flex-1">
         <input
           className="text-sm leading-6 w-full font-bold outline-none"
+          name="query"
           placeholder="책 제목, 작가, ISBN 등"
           enterKeyHint="search"
           value={query}
@@ -45,7 +47,7 @@ export const Search = ({ initialQuery = '' }: Props) => {
           onKeyDown={onKeyDown}
         />
       </div>
-      {query.length > 1 && (
+      {hasQuery && (
         <div>
           <button className="flex items-center text-subtle opacity-40 cursor-pointer" onClick={resetQuery}>
             <FaCircleXmark size={16} />
