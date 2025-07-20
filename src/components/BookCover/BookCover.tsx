@@ -1,6 +1,7 @@
 import Image, { ImageProps } from 'next/image';
 
 import { bookConfig } from './BookCover.constant';
+import { BookCoverEmpty } from './BookCoverEmtpy';
 
 interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   src: string;
@@ -22,6 +23,7 @@ export const BookCover = ({
   hasShadow = false,
   ...props
 }: Props) => {
+  const isValid = src && src.trim() !== '';
   const { width, spineClasses, rounded } = bookConfig[size];
 
   const squareContainer = isSquare ? 'aspect-square' : '';
@@ -43,16 +45,20 @@ export const BookCover = ({
         ${isRounded && rounded}
         `}
       >
-        <Image
-          className={squareImage}
-          src={src}
-          alt={alt}
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width, height: 'auto' }}
-          {...props}
-        />
+        {isValid ? (
+          <Image
+            className={squareImage}
+            src={src}
+            alt={alt}
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width, height: 'auto' }}
+            {...props}
+          />
+        ) : (
+          <BookCoverEmpty width={width} alt={alt} />
+        )}
       </div>
     </div>
   );
