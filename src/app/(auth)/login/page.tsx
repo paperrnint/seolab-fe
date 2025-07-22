@@ -13,8 +13,7 @@ import { Login } from '@/components/Login/Login';
 import { LoginLink } from '@/components/Login/LoginLink/LoginLink';
 import { MainImage } from '@/components/MainImage/MainImage';
 import { SocialButton } from '@/components/SocialButton/SocialButton';
-import { useErrorModal } from '@/hooks/auth';
-import { useAuth } from '@/hooks/auth/useAuth';
+import { useAuth, useErrorModal } from '@/hooks/auth';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
 export default function LoginPage() {
@@ -67,7 +66,7 @@ export default function LoginPage() {
                 <Input type="email" placeholder="이메일" leftIcon={<FaUser />} {...register('email')} />
                 <Input type="password" placeholder="비밀번호" leftIcon={<FaLock />} {...register('password')} />
                 <div>
-                  <Button variant="form" disabled={!isValid || isSubmitting}>
+                  <Button type="submit" variant="form" disabled={!isValid || isSubmitting}>
                     로그인
                   </Button>
                 </div>
