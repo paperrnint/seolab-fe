@@ -35,15 +35,12 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (formData: LoginFormData) => {
-    try {
-      const result = await login(formData);
-      if (result.success) {
-        router.push('/');
-      } else {
-        showError(result.error.status);
-      }
-    } catch (err) {
-      console.error('login error', err);
+    const result = await login(formData);
+
+    if (result.success) {
+      router.push('/');
+    } else {
+      showError(result.error.status);
     }
   };
 
