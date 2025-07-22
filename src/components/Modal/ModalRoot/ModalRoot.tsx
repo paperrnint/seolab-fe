@@ -1,5 +1,6 @@
 'use client';
 
+import { FocusTrap } from 'focus-trap-react';
 import { useEffect } from 'react';
 
 import { Backdrop } from '@/components/Backdrop/Backdrop';
@@ -50,12 +51,23 @@ export const ModalRoot = ({ isOpen, onClose, children, closeOnBackdropClick = tr
     <Portal>
       <div className="fixed left-0 right-0 bottom-0 z-50 flex items-center justify-center p-2">
         <Backdrop onClick={onClickBackdrop} />
-        <div
-          className="relative bg-bg-card rounded-2xl shadow-default max-w-sm w-full max-h-[90vh] overflow-auto transform transition-all duration-300 ease-out scale-100"
-          onClick={onClickModal}
+        <FocusTrap
+          focusTrapOptions={{
+            fallbackFocus: () => document.body,
+            escapeDeactivates: false,
+            clickOutsideDeactivates: closeOnBackdropClick,
+          }}
         >
-          <div className="p-5">{children}</div>
-        </div>
+          <div
+            className="relative bg-bg-card rounded-2xl shadow-default max-w-sm w-full max-h-[90vh] overflow-auto transform transition-all duration-300 ease-out scale-100 z-100"
+            onClick={onClickModal}
+            data-testid="modal-content"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="p-5">{children}</div>
+          </div>
+        </FocusTrap>
       </div>
     </Portal>
   );
