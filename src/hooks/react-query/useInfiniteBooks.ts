@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { bookService } from '@/services/bookService';
 import { SearchResponse } from '@/types/api/book';
 
-import { useAuth } from '../auth/useAuth';
+import { useAuth } from '../auth';
 
 export const useInfiniteBooks = (query: string) => {
   const { accessToken } = useAuth();

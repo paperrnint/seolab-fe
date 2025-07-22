@@ -4,7 +4,7 @@ import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import { accessTokenAtom } from '@/atoms/authAtom';
-import { useAuth } from '@/hooks/auth/useAuth';
+import { useAuth } from '@/hooks/auth';
 import { LoginResponse } from '@/types/api/auth';
 
 interface Props {

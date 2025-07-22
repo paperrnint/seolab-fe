@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { FaArrowRightFromBracket, FaEllipsisVertical } from 'react-icons/fa6';
 
-import { useAuth } from '@/hooks/auth/useAuth';
+import { useAuth } from '@/hooks/auth';
 
 import { Dropdown } from '../Dropdown/Dropdown';
 import { MoreItem } from '../MoreItem/MoreItem';
