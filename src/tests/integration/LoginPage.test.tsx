@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import LoginPage from '@/app/(auth)/login/page';
 import { useErrorModal } from '@/hooks/auth';
 
-import { invalidUser, validUser } from '../__mocks__/constants/auth';
+import { validUser, wrongUser } from '../__mocks__/constants/auth';
 import { server } from '../__mocks__/server';
 
 jest.mock('next/navigation', () => ({
@@ -79,8 +79,8 @@ describe('LoginPage - MSW 통합 테스트', () => {
     const passwordInput = await screen.findByPlaceholderText(/비밀번호/i);
     const loginButton = await screen.findByRole('button', { name: /로그인/i });
 
-    fireEvent.change(emailInput, { target: { value: invalidUser.email } });
-    fireEvent.change(passwordInput, { target: { value: invalidUser.password } });
+    fireEvent.change(emailInput, { target: { value: wrongUser.email } });
+    fireEvent.change(passwordInput, { target: { value: wrongUser.password } });
     await userEvent.click(loginButton);
 
     await waitFor(() => {
