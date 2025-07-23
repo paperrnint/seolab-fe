@@ -7,7 +7,7 @@ import { RefreshResponse } from './types/api/auth';
 const publicPaths = ['/login', '/join'];
 
 const checkTokenCache = async (refreshToken: string) => {
-  const cachedToken = getCachedToken(refreshToken);
+  const cachedToken = getCachedToken();
 
   if (cachedToken) {
     console.log('💽 캐시된 토큰 사용');
@@ -27,7 +27,7 @@ const checkTokenCache = async (refreshToken: string) => {
     });
 
     console.log('🆕 refresh 요청 후 새로운 토큰 사용');
-    setCachedToken(refreshToken, accessToken);
+    setCachedToken(accessToken);
 
     return {
       accessToken,
@@ -35,7 +35,7 @@ const checkTokenCache = async (refreshToken: string) => {
     };
   } catch (err) {
     console.log('❌ refresh 요청 실패로 캐시 삭제');
-    clearTokenCache(refreshToken);
+    clearTokenCache();
     throw err;
   }
 };
@@ -98,5 +98,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/', '/login', '/join', '/search', '/favorite', '/archive', '/setting', '/book/:path*', '/api/:path*'],
+  matcher: ['/', '/login', '/join', '/search', '/favorite', '/archive', '/setting', '/book/:path*'],
 };
