@@ -32,7 +32,9 @@ export const useAuth = () => {
     setUser(null);
     setIsLoggedIn(false);
     clearTokenCache();
+
     router.push('/login');
+    router.refresh();
   }, [router, setAccessToken, setIsLoggedIn, setUser]);
 
   const login: (formData: LoginFormData) => Promise<ApiResult> = useCallback(
