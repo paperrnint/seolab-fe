@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { FaArrowRightFromBracket, FaEllipsisVertical } from 'react-icons/fa6';
 
 import { useAuth } from '@/hooks/auth';
@@ -14,11 +13,9 @@ interface Props {
 
 export const UserProfileMenu = ({ isFull = true }: Props) => {
   const { user, logout } = useAuth();
-  const router = useRouter();
 
   const onClick = async () => {
     await logout();
-    router.push('/login');
   };
 
   if (!user) return null;
