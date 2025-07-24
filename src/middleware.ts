@@ -1,44 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { clearTokenCache, getCachedToken, setCachedToken } from './lib/auth/cache';
 import { fetchData } from './lib/fetch/fetchData';
 import { RefreshResponse } from './types/api/auth';
 
 const publicPaths = ['/login', '/join'];
-
-const checkTokenCache = async (refreshToken: string) => {
-  const cachedToken = getCachedToken();
-
-  if (cachedToken) {
-    console.log('💽 캐시된 토큰 사용');
-    return {
-      accessToken: cachedToken,
-      isCache: true,
-    };
-  }
-
-  try {
-    const { accessToken } = await fetchData<RefreshResponse>('/api/auth/refresh', {
-      method: 'POST',
-      headers: {
-        Cookie: `refreshToken=${refreshToken}`,
-      },
-      credentials: 'include',
-    });
-
-    console.log('🆕 refresh 요청 후 새로운 토큰 사용');
-    setCachedToken(accessToken);
-
-    return {
-      accessToken,
-      isCache: false,
-    };
-  } catch (err) {
-    console.log('❌ refresh 요청 실패로 캐시 삭제');
-    clearTokenCache();
-    throw err;
-  }
-};
 
 export const middleware = async (request: NextRequest) => {
   const refreshToken = request.cookies.get('refreshToken')?.value;
@@ -55,7 +20,13 @@ export const middleware = async (request: NextRequest) => {
 
     // refreshToken 이 있으면 유효성 검사
     try {
-      const { accessToken } = await checkTokenCache(refreshToken);
+      const { accessToken } = await fetchData<RefreshResponse>('/api/auth/refresh', {
+        method: 'POST',
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+        credentials: 'include',
+      });
 
       // 유효하면 accessToken, refreshToken 헤더 추가 후 요청 전달
       const requestHeaders = new Headers(request.headers);
@@ -80,7 +51,13 @@ export const middleware = async (request: NextRequest) => {
   // 공개 경로에 이미 인증된 사용자가 접근하는 경우
   if (isPublicPath && refreshToken) {
     try {
-      await checkTokenCache(refreshToken);
+      await fetchData<RefreshResponse>('/api/auth/refresh', {
+        method: 'POST',
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+        credentials: 'include',
+      });
 
       // 유효한 토큰이 있으면 홈으로 리다이렉트
       console.log('❌ (public 페이지) 인증된 사용자 → 홈으로 이동');

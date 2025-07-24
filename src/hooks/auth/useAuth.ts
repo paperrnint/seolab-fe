@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 import { accessTokenAtom, isAuthenticatedAtom, isLoggedInAtom, userAtom } from '@/atoms/authAtom';
-import { clearTokenCache } from '@/lib/auth/cache';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { LoginFormData } from '@/lib/schemas/loginSchema';
 import { authService } from '@/services/authService';
@@ -31,7 +30,6 @@ export const useAuth = () => {
     setAccessToken(null);
     setUser(null);
     setIsLoggedIn(false);
-    clearTokenCache();
 
     router.push('/login');
     router.refresh();
