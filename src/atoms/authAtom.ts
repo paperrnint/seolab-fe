@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { User } from '@/types/user/user';
+import { User } from '@/types/domain/auth';
 
 export const accessTokenAtom = atom<string | null>(null);
 export const isLoggedInAtom = atom<boolean>(false);

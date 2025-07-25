@@ -1,6 +1,6 @@
 'use client';
 
-import { DropdownOption } from '@/types';
+import { DropdownOption } from '@/types/ui/common';
 
 import { useDropdown } from '../@context/DropdownContext';
 

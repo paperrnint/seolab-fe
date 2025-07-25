@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { useState } from 'react';
 
-import { DropdownOption } from '@/types';
+import { DropdownOption } from '@/types/ui/common';
 
 import { MoreItem } from '../MoreItem/MoreItem';
 

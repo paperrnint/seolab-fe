@@ -8,8 +8,8 @@ import { accessTokenAtom, isAuthenticatedAtom, isLoggedInAtom, userAtom } from '
 import { ApiError } from '@/lib/fetch/ApiError';
 import { LoginFormData } from '@/lib/schemas/loginSchema';
 import { authService } from '@/services/authService';
-import { ApiResult } from '@/types/api/result';
-import { User } from '@/types/user/user';
+import { ApiResult } from '@/types/api/common';
+import { User } from '@/types/domain/auth';
 
 export const useAuth = () => {
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
