@@ -1,4 +1,4 @@
-import { Quote } from '@/types';
+import { Quote } from '@/types/domain/book';
 
 import { BookCover } from '../BookCover/BookCover';
 import { QuoteNote } from '../QuoteNote/QuoteNote';

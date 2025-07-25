@@ -1,6 +1,6 @@
 import { z } from 'zod/v4';
 
-import { ValidationText } from '@/types';
+import { ValidationText } from '@/types/ui/form';
 
 import { JoinFormData } from '../schemas/joinSchema';
 

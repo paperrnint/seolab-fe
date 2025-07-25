@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { JoinFormData } from '@/lib/schemas/joinSchema';
 import { authService } from '@/services/authService';
-import { ApiResult } from '@/types/api/result';
+import { ApiResult } from '@/types/api/common';
 
 import { useErrorModal } from './useErrorModal';
 import { useJoinForm } from './useJoinForm';

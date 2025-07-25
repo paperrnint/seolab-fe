@@ -1,6 +1,6 @@
 import { FaCheck } from 'react-icons/fa6';
 
-import { ValidationText } from '@/types';
+import { ValidationText } from '@/types/ui/form';
 
 export const JoinValidationText = ({ label, isValid }: ValidationText) => {
   const colorClasses = {
