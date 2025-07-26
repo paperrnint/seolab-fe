@@ -1,13 +1,18 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
+import { useErrorModal } from '@/hooks/auth';
 import { BookSearchItem } from '@/types/domain/book';
 import { formatDate } from '@/utils';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
+import { ErrorModal } from '../ErrorModal/ErrorModal';
+
+import { createBookAction } from './BookItem.action';
 
 interface Props {
   book: BookSearchItem;
@@ -15,12 +20,41 @@ interface Props {
 }
 
 export const BookItem = ({ book, tags }: Props) => {
+  const [nextId, setNextId] = useState<string | null>(null);
+
   const [showAll, setShowAll] = useState(false);
+  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
   const { title, description, publishedDate, publisher, thumbnail, author } = book;
   const lineClass = showAll ? '' : 'line-clamp-2';
 
+  const router = useRouter();
+
   const onToggle = () => {
     setShowAll((prev) => !prev);
+  };
+
+  const onClickCreate = async () => {
+    const result = await createBookAction(book);
+
+    if (result.success) {
+      const { id } = result.data;
+      router.push(`/book/${id}?mode=edit`);
+    } else {
+      const { status, data } = result.error;
+      showError(status);
+      setNextId(data.id);
+    }
+  };
+
+  const onClickModal = () => {
+    if (!nextId) {
+      return;
+    }
+    router.push(`/book/${nextId}?mode=edit`);
+  };
+
+  const onCloseModal = () => {
+    resetError();
   };
 
   return (
@@ -48,11 +82,20 @@ export const BookItem = ({ book, tags }: Props) => {
           </div>
         )}
       </div>
-      <button className="flex items-center cursor-pointer">
+      <button className="flex items-center cursor-pointer" onClick={onClickCreate}>
         <div className="p-2 bg-btn-subtle text-subtle h-fit rounded-full ">
           <FaPlus size={12} />
         </div>
       </button>
+      {errorStatusCode && (
+        <ErrorModal
+          errorType="createBooks"
+          errorStatusCode={errorStatusCode}
+          isOpen={isOpen}
+          onClickButton={onClickModal}
+          onCloseModal={onCloseModal}
+        />
+      )}
     </div>
   );
 };
