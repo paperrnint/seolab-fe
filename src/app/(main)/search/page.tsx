@@ -2,8 +2,9 @@ import { Search } from '@/components/Search/Search';
 import { SearchContent } from '@/components/SearchContent/SearchContent';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
+import { mapToBookSearchItem } from '@/lib/mappers/bookMapper';
 import { bookService } from '@/services/bookService';
-import { SearchBook } from '@/types/api/book';
+import { BookSearchItem } from '@/types/domain/book';
 
 interface Props {
   searchParams: Promise<{
@@ -21,14 +22,14 @@ export default async function NewPage({ searchParams }: Props) {
   const authData = await getServerAuthData();
   const accessToken = authData?.accessToken;
 
-  let books: SearchBook[] = [];
+  let books: BookSearchItem[] = [];
   let isEnd = true;
   let error: ApiError | null = null;
 
   if (query && accessToken) {
     try {
       const data = await bookService.search({ query }, accessToken);
-      books = data.books;
+      books = data.books.map(mapToBookSearchItem);
       isEnd = data.isEnd;
     } catch (err) {
       console.error('search failed:', err);

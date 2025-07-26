@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { useInfiniteBooks } from '@/hooks/react-query/useInfiniteBooks';
 import { useIntersection } from '@/hooks/react-query/useIntersection';
+import { mapToBookSearchItem } from '@/lib/mappers/bookMapper';
 
 import { BookItem } from '../BookItem/BookItem';
 import { Button } from '../Button/Button';
@@ -24,7 +25,8 @@ export const SearchMore = ({ query }: Props) => {
     },
   });
 
-  const books = data?.pages.flatMap((page) => page.books) ?? [];
+  const serverBooks = data?.pages.flatMap((page) => page.books) ?? [];
+  const books = serverBooks.map(mapToBookSearchItem);
 
   // 초기 화면
   if (!showAll) {
@@ -49,15 +51,7 @@ export const SearchMore = ({ query }: Props) => {
   return (
     <>
       {books.map((book, i) => (
-        <BookItem
-          key={`${book.isbn}-${i}`}
-          title={book.title}
-          authors={book.authors}
-          description={book.contents}
-          publishedDate={book.publishedDate}
-          publisher={book.publisher}
-          thumbnail={book.thumbnail}
-        />
+        <BookItem key={`${book.isbn}-${i}`} book={book} />
       ))}
       <div ref={targetRef} />
     </>

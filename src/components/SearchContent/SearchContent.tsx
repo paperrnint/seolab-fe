@@ -1,5 +1,5 @@
 import { ApiError } from '@/lib/fetch/ApiError';
-import { SearchBook } from '@/types/api/book';
+import { BookSearchItem } from '@/types/domain/book';
 
 import { BookItem } from '../BookItem/BookItem';
 import { SearchEmpty } from '../SearchEmpty/SearchEmpty';
@@ -10,7 +10,7 @@ import { SearchSupport } from '../SearchSupport/SearchSupport';
 interface Props {
   query: string;
   error: ApiError | null;
-  books: SearchBook[];
+  books: BookSearchItem[];
   hasMoreItem?: boolean;
 }
 
@@ -34,15 +34,7 @@ export const SearchContent = ({ query, error, books, hasMoreItem = false }: Prop
   return (
     <>
       {books?.map((book) => (
-        <BookItem
-          key={book.isbn}
-          title={book.title}
-          authors={book.authors}
-          description={book.contents}
-          publishedDate={book.publishedDate}
-          publisher={book.publisher}
-          thumbnail={book.thumbnail}
-        />
+        <BookItem key={book.isbn} book={book} />
       ))}
       {hasMoreItem && <SearchMore key={query} query={query} />}
     </>

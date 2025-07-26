@@ -3,25 +3,20 @@
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
+import { BookSearchItem } from '@/types/domain/book';
 import { formatDate } from '@/utils';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
 
 interface Props {
-  title: string;
-  thumbnail: string;
-  authors: string[];
-  publisher: string;
-  publishedDate: string;
-  description?: string;
+  book: BookSearchItem;
   tags?: string[];
 }
 
-export const BookItem = ({ title, thumbnail, authors, publisher, publishedDate, description, tags }: Props) => {
+export const BookItem = ({ book, tags }: Props) => {
   const [showAll, setShowAll] = useState(false);
-
-  const author = authors.join(', ');
+  const { title, description, publishedDate, publisher, thumbnail, author } = book;
   const lineClass = showAll ? '' : 'line-clamp-2';
 
   const onToggle = () => {
