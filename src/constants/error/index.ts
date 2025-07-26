@@ -48,6 +48,13 @@ export const ERROR_MESSAGES = {
       button: '로그인하기',
     },
   },
+  createBooks: {
+    409: {
+      title: '앗, 이미 추가된 책이에요',
+      text: '해당 책 기록으로 이동할까요?',
+      button: '확인',
+    },
+  },
   default: {
     unknown: {
       title: '알 수 없는 에러',
