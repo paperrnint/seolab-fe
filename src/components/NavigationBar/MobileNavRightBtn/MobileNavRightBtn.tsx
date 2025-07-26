@@ -5,11 +5,11 @@ import { NavMenuItem } from '@/components/NavMenuItem/NavMenuItem';
 import { useBookMode } from '@/hooks/useBookMode';
 
 export const MobileNavRightBtn = () => {
-  const { mode, onEdit, onConfirm } = useBookMode();
+  const { isEditMode, onEdit, onConfirm } = useBookMode();
   const pathname = usePathname();
   const isBookPage = pathname.startsWith('/book');
 
-  if (isBookPage && mode === 'read') {
+  if (isBookPage && !isEditMode) {
     return (
       <Button variant="navEdit" onClick={onEdit}>
         수정
@@ -17,7 +17,7 @@ export const MobileNavRightBtn = () => {
     );
   }
 
-  if (isBookPage && mode === 'edit') {
+  if (isBookPage && isEditMode) {
     return (
       <Button variant="navConfirm" onClick={onConfirm}>
         확인

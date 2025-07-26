@@ -9,11 +9,11 @@ import { Dropdown } from '../Dropdown/Dropdown';
 import { MoreItem } from '../MoreItem/MoreItem';
 
 export const BookMoreMenu = () => {
-  const { mode, onEdit, onConfirm } = useBookMode();
+  const { isEditMode, onConfirm, onEdit } = useBookMode();
   const { showQuotePage, onToggle } = useShowQuotePage();
   const { isMobile } = useMediaQuery();
 
-  if (mode === 'edit') {
+  if (isEditMode) {
     if (isMobile) return null;
 
     return (

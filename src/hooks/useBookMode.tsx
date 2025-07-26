@@ -1,20 +1,25 @@
-import { useAtom } from 'jotai';
-
-import { bookModeAtom } from '@/atoms/bookAtom';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 export const useBookMode = () => {
-  const [mode, setMode] = useAtom(bookModeAtom);
-  const isReadMode = mode === 'read';
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const id = params.id as string;
+  const mode = searchParams.get('mode');
   const isEditMode = mode === 'edit';
 
   const onEdit = () => {
-    setMode('edit');
+    router.push(`/book/${id}?mode=edit`);
   };
 
   const onConfirm = () => {
-    // @todo: send to server
-    setMode('read');
+    router.push(`book/${id}`);
   };
 
-  return { mode, isReadMode, isEditMode, onEdit, onConfirm };
+  return {
+    isEditMode,
+    onEdit,
+    onConfirm,
+  };
 };

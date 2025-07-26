@@ -1,5 +1,4 @@
 import { useBookMode } from '@/hooks/useBookMode';
-import { convertDateText, getDaysDiff } from '@/utils';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
@@ -24,14 +23,13 @@ interface Props {
 }
 
 export const BookHeader = ({ title, author, thumbnail, publisher, publishedDate, startAt, endAt, count }: Props) => {
-  const { isReadMode } = useBookMode();
-  const daysDiff = getDaysDiff(startAt, endAt);
-  const duration = `${convertDateText(startAt)} - ${endAt ? convertDateText(endAt) : '기록중'}`;
+  const { isEditMode } = useBookMode();
+  const duration = `${startAt} - ${endAt || '기록중'}`;
 
   return (
     <div className="flex gap-4 p-4 pr-2 border-b border-border">
       {/* 책 커버 */}
-      <BookmarkWrapper readOnly={isReadMode}>
+      <BookmarkWrapper readOnly={!isEditMode}>
         <BookCover src={thumbnail} size="xs" hasBorder isRounded isSquare />
       </BookmarkWrapper>
 
@@ -42,7 +40,7 @@ export const BookHeader = ({ title, author, thumbnail, publisher, publishedDate,
           <BookTitle>
             <Title>{title}</Title>
             <BadgeList>
-              {isReadMode ? (
+              {!isEditMode ? (
                 <>
                   <Badge>{duration}</Badge>
                   <Badge>{`${count}문장`}</Badge>
