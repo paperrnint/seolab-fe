@@ -4,6 +4,7 @@ import {
   BookSearchResponse,
   CreateBookRequest,
   CreateBookResponse,
+  GetBookDetailResponse,
   GetBooksRequest,
   GetBooksResponse,
 } from '@/types/api/book';
@@ -46,8 +47,18 @@ const getBooks = async ({ isFavorite, isReading }: GetBooksRequest, accessToken:
   });
 };
 
+const getBookDetail = async ({ id }: { id: string }, accessToken: string) => {
+  return fetchData<GetBookDetailResponse>(`/api/books/${id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
   getBooks,
+  getBookDetail,
 };
