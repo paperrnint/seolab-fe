@@ -1,14 +1,14 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { bookService } from '@/services/bookService';
-import { SearchResponse } from '@/types/api/book';
+import { BookSearchResponse } from '@/types/api/book';
 
 import { useAuth } from '../auth';
 
 export const useInfiniteBooks = (query: string) => {
   const { accessToken } = useAuth();
 
-  return useInfiniteQuery<SearchResponse>({
+  return useInfiniteQuery<BookSearchResponse>({
     queryKey: ['search', query],
     queryFn: ({ pageParam }) =>
       bookService.search(
