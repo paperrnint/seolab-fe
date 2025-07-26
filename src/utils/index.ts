@@ -39,7 +39,7 @@ export const getErrorMessage = (errorType: ErrorType, errorStatusCode: number) =
   return message || defaultMessage;
 };
 
-export const createSearchParams = (params: Record<string, string | number | undefined>) => {
+export const createSearchParams = (params: Record<string, string | number | boolean | undefined>) => {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {

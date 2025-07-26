@@ -1,5 +1,12 @@
 import { fetchData } from '@/lib/fetch/fetchData';
-import { BookSearchRequest, BookSearchResponse, CreateBookRequest, CreateBookResponse } from '@/types/api/book';
+import {
+  BookSearchRequest,
+  BookSearchResponse,
+  CreateBookRequest,
+  CreateBookResponse,
+  GetBooksRequest,
+  GetBooksResponse,
+} from '@/types/api/book';
 import { createSearchParams } from '@/utils';
 
 const search = async ({ query, page, size }: BookSearchRequest, accessToken: string) => {
@@ -26,7 +33,21 @@ const create = async (bookInfo: CreateBookRequest, accessToken: string) => {
   });
 };
 
+const getBooks = async ({ isFavorite, isReading }: GetBooksRequest, accessToken: string) => {
+  const params = createSearchParams({
+    favorite: isFavorite,
+    reading: isReading,
+  });
+  return fetchData<GetBooksResponse>(`/api/books?${params.toString()}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
+  getBooks,
 };
