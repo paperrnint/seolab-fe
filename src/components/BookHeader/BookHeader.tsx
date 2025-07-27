@@ -12,24 +12,39 @@ import { BookMeta } from './BookMeta/BookMeta';
 import { BookTitle } from './BookTitle/BookTitle';
 
 interface Props {
+  id: string;
   title: string;
   author: string;
   thumbnail: string;
   publisher: string;
   publishedDate: string;
   startAt: string;
-  endAt?: string;
+  endAt: string | null;
   count: number;
+  isFavorite: boolean;
+  isReading: boolean;
 }
 
-export const BookHeader = ({ title, author, thumbnail, publisher, publishedDate, startAt, endAt, count }: Props) => {
+export const BookHeader = ({
+  id,
+  title,
+  author,
+  thumbnail,
+  publisher,
+  publishedDate,
+  startAt,
+  endAt,
+  count,
+  isFavorite,
+  isReading,
+}: Props) => {
   const { isEditMode } = useBookMode();
   const duration = `${startAt} - ${endAt || '기록중'}`;
 
   return (
     <div className="flex gap-4 p-4 pr-2 border-b border-border">
       {/* 책 커버 */}
-      <BookmarkWrapper readOnly={!isEditMode}>
+      <BookmarkWrapper id={id} initialValue={isFavorite} readOnly={!isEditMode}>
         <BookCover src={thumbnail} size="xs" hasBorder isRounded isSquare />
       </BookmarkWrapper>
 
@@ -46,7 +61,7 @@ export const BookHeader = ({ title, author, thumbnail, publisher, publishedDate,
                   <Badge>{`${count}문장`}</Badge>
                 </>
               ) : (
-                <Checkbox label="다 읽었어요" checkedLabel="완독 성공! 🎉" />
+                <Checkbox id={id} initialValue={!isReading} label="다 읽었어요" checkedLabel="완독 성공! 🎉" />
               )}
             </BadgeList>
           </BookTitle>

@@ -25,13 +25,17 @@ export const BookDetail = ({ book, quotes }: Props) => {
       <div className="flex-1 overflow-y-auto">
         <div className="w-full max-w-4xl mx-auto">
           <BookHeader
+            id={book.id}
             author={book.author}
             count={0} // @todo: change to quoteCount
             publishedDate={book.publishedDate}
             publisher={book.publisher}
             startAt={book.startDate}
+            endAt={book.endDate}
             thumbnail={book.thumbnail}
             title={book.title}
+            isFavorite={book.isFavorite}
+            isReading={book.isReading}
           />
 
           <div className="p-2 pb-6 max-w-4xl">
