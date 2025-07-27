@@ -1,9 +1,7 @@
-import { useAtom } from 'jotai';
-
-import { showQuotePageAtom } from '@/atoms/bookAtom';
+import { useState } from 'react';
 
 export const useShowQuotePage = () => {
-  const [showQuotePage, setShowQuotePage] = useAtom(showQuotePageAtom);
+  const [showQuotePage, setShowQuotePage] = useState(true);
 
   const onShow = () => {
     setShowQuotePage(true);
