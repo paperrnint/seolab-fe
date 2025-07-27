@@ -3,18 +3,25 @@
 import { useState } from 'react';
 import { FaBookmark } from 'react-icons/fa6';
 
+import { toggleBookFavoriteAction } from './BookmarkWrapper.action';
+
 interface Props {
   children: React.ReactNode;
+  id: string;
   initialValue?: boolean;
   readOnly?: boolean;
 }
 
-export const BookmarkWrapper = ({ children, initialValue, readOnly = true }: Props) => {
+export const BookmarkWrapper = ({ children, id, initialValue, readOnly = true }: Props) => {
   const [isFavorite, setIsFavorite] = useState(initialValue || false);
 
-  const toggle = () => {
+  const toggle = async () => {
     setIsFavorite((prev) => !prev);
     // @todo: send to server
+    const result = await toggleBookFavoriteAction(id);
+    if (!result.success) {
+      console.error(result.error);
+    }
   };
 
   return (

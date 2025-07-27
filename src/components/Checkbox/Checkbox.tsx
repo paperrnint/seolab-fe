@@ -3,18 +3,29 @@
 import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 
+import { toggleBookCompleteAction } from './Checkbox.action';
+
 interface Props {
+  id: string;
   initialValue?: boolean;
   label: string;
   checkedLabel: string;
 }
 
-export const Checkbox = ({ initialValue, label, checkedLabel }: Props) => {
+export const Checkbox = ({ id, initialValue, label, checkedLabel }: Props) => {
   const [isChecked, setIsChecked] = useState(initialValue || false);
+
+  const onClick = async () => {
+    setIsChecked((prev) => !prev);
+    const result = await toggleBookCompleteAction(id);
+    if (!result.success) {
+      console.error(result.error);
+    }
+  };
 
   return (
     <button
-      onClick={() => setIsChecked(!isChecked)}
+      onClick={onClick}
       className={`flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer transition-all duration-300 ${
         isChecked
           ? 'bg-[#f1f4f7] border-1 border-btn-accent text-btn-accent'

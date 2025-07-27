@@ -56,9 +56,29 @@ const getBookDetail = async ({ id }: { id: string }, accessToken: string) => {
   });
 };
 
+const toggleBookComplete = async (id: string, accessToken: string) => {
+  return fetchData<GetBookDetailResponse>(`/api/books/${id}/complete`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const toggleBookFavorite = async (id: string, accessToken: string) => {
+  return fetchData<GetBookDetailResponse>(`/api/books/${id}/favorite`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
   getBooks,
   getBookDetail,
+  toggleBookComplete,
+  toggleBookFavorite,
 };
