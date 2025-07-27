@@ -10,11 +10,11 @@ export const useBookMode = () => {
   const isEditMode = mode === 'edit';
 
   const onEdit = () => {
-    router.push(`/book/${id}?mode=edit`);
+    router.replace(`/book/${id}?mode=edit`);
   };
 
   const onConfirm = () => {
-    router.push(`book/${id}`);
+    router.replace(`/book/${id}`);
   };
 
   return {
