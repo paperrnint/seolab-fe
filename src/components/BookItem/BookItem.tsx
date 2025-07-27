@@ -6,7 +6,6 @@ import { FaPlus } from 'react-icons/fa6';
 
 import { useErrorModal } from '@/hooks/auth';
 import { BookSearchItem } from '@/types/domain/book';
-import { formatDate } from '@/utils';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
@@ -66,7 +65,7 @@ export const BookItem = ({ book, tags }: Props) => {
             <h3 className="font-bold text-base leading-7">{title}</h3>
           </div>
           <div className="font-bold text-xs leading-5 text-secondary">
-            {`${author} · ${publisher} · ${formatDate(publishedDate)}`}
+            {`${author} · ${publisher} · ${publishedDate}`}
           </div>
         </div>
         {tags && (

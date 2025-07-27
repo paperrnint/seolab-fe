@@ -14,6 +14,15 @@ export const formatDate = (dateString: string) => {
 
 /**
  *
+ * @param dateString YYYY-MM-DD 형태의 날짜
+ * @returns YY년 M월 D일
+ */
+export const formatDateKorean = (dateString: string) => {
+  return dayjs(dateString).format('YY년 M월 D일');
+};
+
+/**
+ *
  * @param dateString YYYY.MM.DD 형태의 날짜
  * @returns YYYY-MM-DD
  */
