@@ -1,6 +1,6 @@
 import { BookListApiItem, BookSearchApiItem, CreateBookRequest, GetBookDetailResponse } from '@/types/api/book';
 import { BookCardItem, BookDetailItem, BookSearchItem } from '@/types/domain/book';
-import { convertToISOFormat, formatDate } from '@/utils';
+import { convertToISOFormat, formatDate, formatDateKorean } from '@/utils';
 
 // GET /api/books/search
 export const mapToBookSearchItem = (data: BookSearchApiItem): BookSearchItem => {
@@ -35,8 +35,8 @@ export const mapToBookCard = (data: BookListApiItem): BookCardItem => {
     title,
     author: authors.join(', '),
     thumbnail,
-    startDate: formatDate(startDate),
-    endDate: endDate ? formatDate(endDate) : null,
+    startDate: formatDateKorean(startDate),
+    endDate: endDate ? formatDateKorean(endDate) : null,
     isFavorite,
     isReading,
   };
@@ -54,8 +54,8 @@ export const mapToBookDetail = (data: GetBookDetailResponse): BookDetailItem => 
     publisher,
     publishedDate: formatDate(publishedDate),
     thumbnail,
-    startDate: formatDate(startDate),
-    endDate: endDate ? formatDate(endDate) : null,
+    startDate: formatDateKorean(startDate),
+    endDate: endDate ? formatDateKorean(endDate) : null,
     translator: translators.join(', '),
     isReading,
     isFavorite,
