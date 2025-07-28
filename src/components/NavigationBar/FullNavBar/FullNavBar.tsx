@@ -2,6 +2,7 @@ import { Logo } from '@/components/Logo/Logo';
 import { NavItem } from '@/components/NavItem/NavItem';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
+import { TooltipContainer } from '@/components/TooltipContainer/TooltipContainer';
 import { UserProfileMenu } from '@/components/UserProfileMenu/UserProfileMenu';
 
 import { BottomSection } from '../BottomSection/BottomSection';
@@ -34,7 +35,9 @@ export const FullNavBar = ({ toggle, isMobile }: Props) => {
       {/* Header */}
       <div>
         <div className="flex gap-1 p-2 items-center">
-          <NavToggleBtn onClick={toggle} />
+          <TooltipContainer text="메뉴 접기">
+            <NavToggleBtn onClick={toggle} />
+          </TooltipContainer>
           <Logo size="sm" />
         </div>
       </div>

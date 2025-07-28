@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
+import { TooltipContainer } from '@/components/TooltipContainer/TooltipContainer';
 import { UserProfileMenu } from '@/components/UserProfileMenu/UserProfileMenu';
 
 import { FullNavBar } from '../FullNavBar/FullNavBar';
@@ -21,7 +22,9 @@ export const DesktopNavBar = () => {
     <nav className="h-dvh bg-bg-panel w-12 border-r border-r-border p-2 flex flex-col justify-between z-20">
       <div>
         <div className="mb-4">
-          <NavToggleBtn onClick={toggle} />
+          <TooltipContainer text="메뉴 열기" showTooltip>
+            <NavToggleBtn onClick={toggle} />
+          </TooltipContainer>
         </div>
         <NavMenu showLabel={false} />
       </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Logo } from '@/components/Logo/Logo';
 import { NavToggleBtn } from '@/components/NavToggleBtn/NavToggleBtn';
+import { TooltipContainer } from '@/components/TooltipContainer/TooltipContainer';
 
 import { FullNavBar } from '../FullNavBar/FullNavBar';
 import { MobileNavRightBtn } from '../MobileNavRightBtn/MobileNavRightBtn';
@@ -21,7 +22,9 @@ export const MobileNavBar = () => {
     <>
       <div className="h-12 w-full grid grid-cols-3 items-center p-2 border-b border-b-border z-20 bg-bg-body">
         <div className="flex justify-start items-center">
-          <NavToggleBtn onClick={toggle} />
+          <TooltipContainer text="메뉴 열기">
+            <NavToggleBtn onClick={toggle} />
+          </TooltipContainer>
         </div>
 
         <div className="flex justify-center items-center">

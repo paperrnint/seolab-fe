@@ -1,5 +1,7 @@
 import { NavMenuItem } from '../NavMenuItem/NavMenuItem';
+import { tabs } from '../NavMenuItem/NavMenuItem.constant';
 import { NavMenuList } from '../NavMenuList/NavMenuList';
+import { TooltipContainer } from '../TooltipContainer/TooltipContainer';
 
 interface Props {
   showLabel: boolean;
@@ -8,10 +10,18 @@ interface Props {
 export const NavMenu = ({ showLabel }: Props) => {
   return (
     <NavMenuList>
-      <NavMenuItem type="new" showLabel={showLabel} />
-      <NavMenuItem type="home" showLabel={showLabel} />
-      <NavMenuItem type="favorite" showLabel={showLabel} />
-      <NavMenuItem type="archive" showLabel={showLabel} />
+      <TooltipContainer text={tabs.new.label} showTooltip={!showLabel}>
+        <NavMenuItem type="new" showLabel={showLabel} />
+      </TooltipContainer>
+      <TooltipContainer text={tabs.home.label} showTooltip={!showLabel}>
+        <NavMenuItem type="home" showLabel={showLabel} />
+      </TooltipContainer>
+      <TooltipContainer text={tabs.favorite.label} showTooltip={!showLabel}>
+        <NavMenuItem type="favorite" showLabel={showLabel} />
+      </TooltipContainer>
+      <TooltipContainer text={tabs.archive.label} showTooltip={!showLabel}>
+        <NavMenuItem type="archive" showLabel={showLabel} />
+      </TooltipContainer>
     </NavMenuList>
   );
 };
