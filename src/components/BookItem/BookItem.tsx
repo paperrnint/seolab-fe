@@ -5,13 +5,12 @@ import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
 import { useErrorModal } from '@/hooks/auth';
+import { createBookAction } from '@/lib/actions/book';
 import { BookSearchItem } from '@/types/domain/book';
 
 import { Badge } from '../Badge/Badge';
 import { BookCover } from '../BookCover/BookCover';
 import { ErrorModal } from '../ErrorModal/ErrorModal';
-
-import { createBookAction } from './BookItem.action';
 
 interface Props {
   book: BookSearchItem;

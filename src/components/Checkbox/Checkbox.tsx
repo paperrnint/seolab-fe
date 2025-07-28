@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 
-import { toggleBookCompleteAction } from './Checkbox.action';
+import { toggleBookCompleteAction } from '@/lib/actions/book';
 
 interface Props {
   id: string;
@@ -19,6 +19,7 @@ export const Checkbox = ({ id, initialValue, label, checkedLabel }: Props) => {
     setIsChecked((prev) => !prev);
     const result = await toggleBookCompleteAction(id);
     if (!result.success) {
+      setIsChecked((prev) => !prev);
       console.error(result.error);
     }
   };

@@ -6,7 +6,7 @@ interface Props {
 
 export const MoreItem = ({ children, icon, isSensitive = false }: Props) => {
   return (
-    <div className={`flex justify-between items-center w-24 ${isSensitive ? 'text-emp' : 'text-primary'}`}>
+    <div className={`flex justify-between items-center w-28 ${isSensitive ? 'text-emp' : 'text-primary'}`}>
       <div>{children}</div>
       {icon && <div className={`${isSensitive ? 'text-emp' : 'text-subtle'} opacity-60`}>{icon}</div>}
     </div>
