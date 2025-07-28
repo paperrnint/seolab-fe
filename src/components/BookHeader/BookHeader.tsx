@@ -65,7 +65,7 @@ export const BookHeader = ({
               )}
             </BadgeList>
           </BookTitle>
-          <BookMoreMenu />
+          <BookMoreMenu id={id} initialValue={{ isFavorite, isReading }} />
         </div>
         {/* 작가, 정보 */}
         <BookMeta>{`${author} · ${publisher} · ${publishedDate}`}</BookMeta>
