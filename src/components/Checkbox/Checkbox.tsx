@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 
-import { toggleBookCompleteAction } from '@/lib/actions/book';
+import { useBookComplete } from '@/hooks/useOptimisticUpdate';
 
 interface Props {
   id: string;
@@ -13,16 +12,9 @@ interface Props {
 }
 
 export const Checkbox = ({ id, initialValue, label, checkedLabel }: Props) => {
-  const [isChecked, setIsChecked] = useState(initialValue || false);
-
-  const onClick = async () => {
-    setIsChecked((prev) => !prev);
-    const result = await toggleBookCompleteAction(id);
-    if (!result.success) {
-      setIsChecked((prev) => !prev);
-      console.error(result.error);
-    }
-  };
+  const { state: isChecked, toggle: onClick } = useBookComplete(id, initialValue ?? false, {
+    onError: (err) => console.error(err),
+  });
 
   return (
     <button
