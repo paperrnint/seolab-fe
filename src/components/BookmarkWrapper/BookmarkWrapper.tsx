@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { FaBookmark } from 'react-icons/fa6';
 
-import { toggleBookFavoriteAction } from '@/lib/actions/book';
+import { useBookFavorite } from '@/hooks/useOptimisticUpdate';
 
 interface Props {
   children: React.ReactNode;
@@ -13,21 +12,9 @@ interface Props {
 }
 
 export const BookmarkWrapper = ({ children, id, initialValue, readOnly = true }: Props) => {
-  const [isFavorite, setIsFavorite] = useState(initialValue || false);
-
-  useEffect(() => {
-    setIsFavorite(initialValue || false);
-  }, [initialValue]);
-
-  const toggle = async () => {
-    setIsFavorite((prev) => !prev);
-    // @todo: send to server
-    const result = await toggleBookFavoriteAction(id);
-    if (!result.success) {
-      setIsFavorite((prev) => !prev); // UI 업데이트 취소
-      console.error(result.error);
-    }
-  };
+  const { state: isFavorite, toggle } = useBookFavorite(id, initialValue || false, {
+    onError: (err) => console.error(err),
+  });
 
   return (
     <button

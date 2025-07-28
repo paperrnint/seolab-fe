@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react-icons/fa6';
 
 import { useBookMode } from '@/hooks/useBookMode';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useBookComplete, useBookFavorite } from '@/hooks/useOptimisticUpdate';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
-import { toggleBookCompleteAction, toggleBookFavoriteAction } from '@/lib/actions/book';
 
 import { Button } from '../Button/Button';
 import { Dropdown } from '../Dropdown/Dropdown';
@@ -19,8 +18,12 @@ interface Props {
 }
 
 export const BookMoreMenu = ({ id, initialValue }: Props) => {
-  const [isFavorite, setIsFavorite] = useState(initialValue?.isFavorite ? initialValue.isFavorite : false);
-  const [isReading, setIsReading] = useState(initialValue?.isReading === false ? false : true);
+  const { state: isFavorite, toggle: onClickFavorite } = useBookFavorite(id, initialValue?.isFavorite ?? false, {
+    onError: (err) => console.error(err),
+  });
+  const { state: isReading, toggle: onClickComplete } = useBookComplete(id, initialValue?.isReading !== false, {
+    onError: (err) => console.error(err),
+  });
 
   const { isEditMode, onConfirm, onEdit } = useBookMode();
   const { showQuotePage, onToggle } = useShowQuotePage();
@@ -37,24 +40,6 @@ export const BookMoreMenu = ({ id, initialValue }: Props) => {
       </div>
     );
   }
-
-  const onClickFavorite = async () => {
-    setIsFavorite((prev) => !prev);
-    const result = await toggleBookFavoriteAction(id);
-
-    if (!result.success) {
-      setIsFavorite((prev) => !prev);
-    }
-  };
-
-  const onClickComplete = async () => {
-    setIsReading((prev) => !prev);
-    const result = await toggleBookCompleteAction(id);
-    if (!result.success) {
-      setIsReading((prev) => !prev);
-      console.error(result.error);
-    }
-  };
 
   return (
     <div className="flex-shrink-0 pl-2">
