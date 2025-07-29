@@ -1,7 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { SwiperSlide } from 'swiper/react';
 
+import { GradientSwiper } from '../GradientSwiper/GradientSwiper';
 import { Recommend } from '../Recommend/Recommend';
 import { RecommendTitle } from '../Recommend/Title/Title';
 
@@ -71,21 +73,29 @@ export const SearchSupport = () => {
       <Recommend.Section>
         <RecommendTitle>지금 인기 있는 책</RecommendTitle>
         <Recommend.Content>
-          {BEST_BOOKS.map((book, i) => (
-            <Recommend.Item key={i} onClick={() => onClickQuery(book.title)}>
-              {book.title}
-            </Recommend.Item>
-          ))}
+          <GradientSwiper>
+            {BEST_BOOKS.map((book, i) => (
+              <SwiperSlide key={i}>
+                <Recommend.Item onClick={() => onClickQuery(`${book.title} ${book.author}`)}>
+                  {book.title}
+                </Recommend.Item>
+              </SwiperSlide>
+            ))}
+          </GradientSwiper>
         </Recommend.Content>
       </Recommend.Section>
       <Recommend.Section>
         <RecommendTitle>여름이니까, 이런 책 어때요?</RecommendTitle>
         <Recommend.Content>
-          {SUMMER_BOOKS.map((book, i) => (
-            <Recommend.Item key={i} onClick={() => onClickQuery(book.title)}>
-              {book.title}
-            </Recommend.Item>
-          ))}
+          <GradientSwiper>
+            {SUMMER_BOOKS.map((book, i) => (
+              <SwiperSlide key={i}>
+                <Recommend.Item onClick={() => onClickQuery(`${book.title} ${book.author}`)}>
+                  {book.title}
+                </Recommend.Item>
+              </SwiperSlide>
+            ))}
+          </GradientSwiper>
         </Recommend.Content>
       </Recommend.Section>
     </div>
