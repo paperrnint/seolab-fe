@@ -1,0 +1,1 @@
+export const MAX_QUOTE_TEXT_LENGTH = 1000;
