@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useBookMode } from '@/hooks/useBookMode';
 import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
@@ -18,7 +18,6 @@ interface Props {
 }
 
 export const BookDetail = ({ book, initialQuotes }: Props) => {
-  const bottomRef = useRef<HTMLDivElement>(null);
   const { isEditMode } = useBookMode();
   const { showQuotePage } = useShowQuotePage();
 
@@ -28,9 +27,21 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
     },
   });
 
-  useEffect(() => {
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const prevQuotesLen = useRef(quotes.length);
+
+  const scrollToBottom = useCallback(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [quotes.length]);
+  }, []);
+
+  useEffect(() => {
+    // prevent scroll on initial mount
+    if (quotes.length > prevQuotesLen.current) {
+      scrollToBottom();
+    }
+
+    prevQuotesLen.current = quotes.length;
+  }, [quotes.length, scrollToBottom]);
 
   if (!book) return null;
 
