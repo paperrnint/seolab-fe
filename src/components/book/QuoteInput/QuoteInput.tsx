@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 
+import { MAX_QUOTE_TEXT_LENGTH } from '@/constants';
+
 interface Props {
   line?: number;
   onSubmit?: (text: string, page?: number | null) => void;
 }
 
 export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
-  const [page, setPage] = useState(''); // @todo: validation
+  const [page, setPage] = useState('');
   const [text, setText] = useState('');
 
   const resetInput = () => {
@@ -44,6 +46,16 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
     }
   };
 
+  const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.length <= MAX_QUOTE_TEXT_LENGTH) {
+      setText(value);
+    } else {
+      // @todo: text length limit 유저에게 알리기
+      setText(value.slice(0, MAX_QUOTE_TEXT_LENGTH));
+    }
+  };
+
   return (
     <div className="flex flex-1 gap-4 items-start border border-border rounded-lg p-4 bg-bg-card">
       <div className="w-fit">
@@ -63,7 +75,7 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
           placeholder="기록할 문장을 작성하세요.."
           enterKeyHint="send"
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={onChangeText}
           onKeyDown={onKeyDown}
         />
       </div>
