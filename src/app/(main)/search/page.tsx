@@ -38,13 +38,17 @@ export default async function NewPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="w-full max-w-4xl h-full flex flex-col">
-      <div className="p-2 pb-0 flex-shrink-0">
-        <Search key={query} initialQuery={query} />
+    <div className="w-full h-full flex flex-col">
+      <div className="p-2 pb-0 flex-shrink-0 flex justify-center">
+        <div className="w-full max-w-4xl">
+          <Search key={query} initialQuery={query} />
+        </div>
       </div>
 
-      <div key={query} className="flex-1 p-2 pt-1 overflow-auto">
-        <SearchContent query={query} error={error} books={books} hasMoreItem={!isEnd} />
+      <div key={query} className="flex-1 overflow-auto">
+        <div className="p-2 pt-1 max-w-4xl mx-auto">
+          <SearchContent query={query} error={error} books={books} hasMoreItem={!isEnd} />
+        </div>
       </div>
     </div>
   );
