@@ -1,7 +1,7 @@
 import { BookDetail } from '@/components/book/BookDetail/BookDetail';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
-import { mapToBookDetail } from '@/lib/mappers/bookMapper';
+import { mapToBookDetail, mapToQuote } from '@/lib/mappers/bookMapper';
 import { bookService } from '@/services/bookService';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
@@ -16,18 +16,23 @@ export default async function BookPage({ params }: Props) {
   const accessToken = authData?.accessToken;
 
   let book: BookDetailItem | null = null;
-  const quotes: Quote[] = [];
+  let quotes: Quote[] = [];
   let error: ApiError | null = null;
 
   if (accessToken) {
     try {
-      const data = await bookService.getBookDetail({ id }, accessToken);
-      book = mapToBookDetail(data);
+      const [bookData, quotesData] = await Promise.all([
+        bookService.getBookDetail(id, accessToken),
+        bookService.getQuotes(id, accessToken),
+      ]);
+
+      book = mapToBookDetail(bookData);
+      quotes = quotesData.map(mapToQuote);
     } catch (err) {
       error = err as ApiError;
       console.error('detail page fetch book detail failed', error);
     }
   }
 
-  return <BookDetail book={book} quotes={quotes} />;
+  return <BookDetail book={book} initialQuotes={quotes} />;
 }

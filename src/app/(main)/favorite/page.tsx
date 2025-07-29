@@ -41,7 +41,7 @@ export default async function FavoritePage() {
               key={book.id}
               id={book.id}
               author={book.author}
-              count={0} // @todo: quotes 개수로 변경
+              count={book.quoteCount}
               endAt={book.endDate}
               startAt={book.startDate}
               thumbnail={book.thumbnail}

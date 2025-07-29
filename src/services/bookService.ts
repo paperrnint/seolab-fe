@@ -4,9 +4,12 @@ import {
   BookSearchResponse,
   CreateBookRequest,
   CreateBookResponse,
+  CreateQuoteRequest,
+  CreateQuoteResponse,
   GetBookDetailResponse,
   GetBooksRequest,
   GetBooksResponse,
+  GetQuotesResponse,
 } from '@/types/api/book';
 import { createSearchParams } from '@/utils';
 
@@ -47,7 +50,7 @@ const getBooks = async ({ isFavorite, isReading }: GetBooksRequest, accessToken:
   });
 };
 
-const getBookDetail = async ({ id }: { id: string }, accessToken: string) => {
+const getBookDetail = async (id: string, accessToken: string) => {
   return fetchData<GetBookDetailResponse>(`/api/books/${id}`, {
     method: 'GET',
     headers: {
@@ -74,6 +77,25 @@ const toggleBookFavorite = async (id: string, accessToken: string) => {
   });
 };
 
+const createQuote = async (quote: CreateQuoteRequest, id: string, accessToken: string) => {
+  return fetchData<CreateQuoteResponse>(`/api/books/${id}/quotes`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(quote),
+  });
+};
+
+const getQuotes = async (id: string, accessToken: string) => {
+  return fetchData<GetQuotesResponse>(`/api/books/${id}/quotes`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
@@ -81,4 +103,6 @@ export const bookService = {
   getBookDetail,
   toggleBookComplete,
   toggleBookFavorite,
+  createQuote,
+  getQuotes,
 };

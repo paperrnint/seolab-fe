@@ -1,6 +1,9 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { useBookMode } from '@/hooks/useBookMode';
+import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
@@ -11,12 +14,23 @@ import { QuoteText } from '../QuoteText/QuoteText';
 
 interface Props {
   book: BookDetailItem | null;
-  quotes: Quote[];
+  initialQuotes: Quote[];
 }
 
-export const BookDetail = ({ book, quotes }: Props) => {
+export const BookDetail = ({ book, initialQuotes }: Props) => {
+  const bottomRef = useRef<HTMLDivElement>(null);
   const { isEditMode } = useBookMode();
   const { showQuotePage } = useShowQuotePage();
+
+  const { quotes, addQuote } = useOptimisticQuotes(initialQuotes, book?.id, {
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [quotes.length]);
 
   if (!book) return null;
 
@@ -27,7 +41,7 @@ export const BookDetail = ({ book, quotes }: Props) => {
           <BookHeader
             id={book.id}
             author={book.author}
-            count={0} // @todo: change to quoteCount
+            count={book.quoteCount}
             publishedDate={book.publishedDate}
             publisher={book.publisher}
             startAt={book.startDate}
@@ -39,18 +53,19 @@ export const BookDetail = ({ book, quotes }: Props) => {
           />
 
           <div className="p-2 pb-6 max-w-4xl">
-            {quotes.map((quote, i) => (
+            {quotes.map((quote) => (
               // edit mode 에선 항상 페이지 보여줘야 함
-              <QuoteText key={i} page={quote.page} quote={quote.quote} showPage={isEditMode || showQuotePage} />
+              <QuoteText key={quote.id} page={quote.page} text={quote.text} showPage={isEditMode || showQuotePage} />
             ))}
           </div>
+          <div ref={bottomRef} />
         </div>
       </div>
 
       {isEditMode && (
         <div className="w-full max-w-4xl mx-auto px-2 pb-2">
           <ExternalGradient variant="top" height={48}>
-            <QuoteInput />
+            <QuoteInput onSubmit={addQuote} />
           </ExternalGradient>
         </div>
       )}

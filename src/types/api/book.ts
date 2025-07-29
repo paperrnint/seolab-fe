@@ -21,6 +21,16 @@ export type BookListApiItem = {
   isReading: boolean;
   createdAt: string;
   updatedAt: string;
+  quoteCount: number;
+};
+
+export type QuoteApiItem = {
+  quoteId: string;
+  text: string;
+  page: number | null;
+  isFavorite: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 // GET api/books/search
@@ -61,5 +71,16 @@ export type GetBookDetailResponse = {
   isReading: boolean;
   createdAt: string;
   updatedAt: string;
-  // quotes:
+  quoteCount: number;
 };
+
+// POST api/books/{id}/quotes
+export type CreateQuoteRequest = {
+  text: string;
+  page?: number | null;
+};
+
+export type CreateQuoteResponse = QuoteApiItem;
+
+// GET api/books/{id}/quotes
+export type GetQuotesResponse = QuoteApiItem[];

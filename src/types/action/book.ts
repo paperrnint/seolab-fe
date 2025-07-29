@@ -1,3 +1,7 @@
+import { ApiError } from '@/lib/fetch/ApiError';
+
+import { QuoteApiItem } from '../api/book';
+
 export type CreateBookActionReturn =
   | {
       success: true;
@@ -15,4 +19,14 @@ export type CreateBookActionReturn =
         status: number;
         name: string;
       };
+    };
+
+export type CreateQuoteActionReturn =
+  | {
+      success: true;
+      data: QuoteApiItem;
+    }
+  | {
+      success: false;
+      error: ApiError;
     };

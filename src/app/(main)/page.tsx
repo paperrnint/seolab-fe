@@ -50,14 +50,20 @@ export default async function Home() {
         thumbnail="/images/bookcover.jpg"
         quotes={[
           {
-            quote:
-              "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+            id: '1',
+            text: "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
             page: 29,
+            isFavorite: false,
+            createdAt: '2025.6.20',
+            updatedAt: '2025.6.20',
           },
           {
-            quote:
-              "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
+            id: '2',
+            text: "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
             page: 29,
+            isFavorite: false,
+            createdAt: '2025.6.20',
+            updatedAt: '2025.6.20',
           },
         ]}
       />
@@ -70,7 +76,7 @@ export default async function Home() {
               key={book.id}
               id={book.id}
               author={book.author}
-              count={0} // @todo: quotes 개수로 변경
+              count={book.quoteCount}
               endAt={book.endDate}
               startAt={book.startDate}
               thumbnail={book.thumbnail}
@@ -88,7 +94,7 @@ export default async function Home() {
               key={book.id}
               id={book.id}
               author={book.author}
-              count={0} // @todo: quotes 개수로 변경
+              count={book.quoteCount}
               endAt={book.endDate}
               startAt={book.startDate}
               thumbnail={book.thumbnail}
@@ -106,7 +112,7 @@ export default async function Home() {
               key={book.id}
               id={book.id}
               author={book.author}
-              count={0} // @todo: quotes 개수로 변경
+              count={book.quoteCount}
               endAt={book.endDate}
               startAt={book.startDate}
               thumbnail={book.thumbnail}
