@@ -96,3 +96,7 @@ body {
   text-decoration-color: rgba(132, 102, 102, 0.8);
   text-underline-offset: 0.5em;
 }
+
+.swiper-slide {
+  width: fit-content !important;
+}

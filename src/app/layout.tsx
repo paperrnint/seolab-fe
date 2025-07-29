@@ -4,6 +4,7 @@ import { Gowun_Dodum } from 'next/font/google';
 
 import { AuthProvider } from '@/components/AuthProvider/AuthProvider';
 import { QueryProvider } from '@/components/QueryProvider/QueryProvider';
+import 'swiper/css';
 import './globals.css';
 
 const gowunDodum = Gowun_Dodum({
