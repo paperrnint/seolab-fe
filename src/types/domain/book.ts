@@ -1,6 +1,10 @@
 export type Quote = {
-  page: number;
-  quote: string;
+  id: string;
+  page: number | null;
+  text: string;
+  isFavorite: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 type Book = {
@@ -23,8 +27,7 @@ export type BookDetailItem = Book & {
   endDate: string | null;
   isReading: boolean;
   isFavorite: boolean;
-  // quotes: Quote[];
-  // quoteCount: number;
+  quoteCount: number;
 };
 
 export type BookCardItem = Omit<BookDetailItem, 'isbn' | 'publisher' | 'publishedDate' | 'translator'>;

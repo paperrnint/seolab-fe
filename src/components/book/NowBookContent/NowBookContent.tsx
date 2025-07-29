@@ -15,7 +15,7 @@ export const NowBookContent = ({ thumbnail, quotes }: Props) => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {quotes.map((quote, i) => (
-          <QuoteNote key={i} quote={quote.quote} page={quote.page} />
+          <QuoteNote key={i} text={quote.text} page={quote.page} />
         ))}
       </div>
     </div>

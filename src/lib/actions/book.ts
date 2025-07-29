@@ -4,7 +4,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { bookService } from '@/services/bookService';
-import { CreateBookActionReturn } from '@/types/action/book';
+import { CreateBookActionReturn, CreateQuoteActionReturn } from '@/types/action/book';
+import { CreateQuoteRequest } from '@/types/api/book';
 import { ApiResult } from '@/types/api/common';
 import { BookSearchItem } from '@/types/domain/book';
 
@@ -79,6 +80,28 @@ export const createBookAction = async (book: BookSearchItem): Promise<CreateBook
         status: apiError.status,
         name: apiError.name,
       },
+    };
+  }
+};
+
+export const createQuoteAction = async (id: string, quote: CreateQuoteRequest): Promise<CreateQuoteActionReturn> => {
+  const { accessToken } = await requireAuth();
+
+  try {
+    const data = await bookService.createQuote(quote, id, accessToken);
+    return { success: true, data };
+  } catch (err) {
+    const apiError = err as ApiError;
+
+    let parsedErr = null;
+    try {
+      parsedErr = JSON.parse(apiError.message);
+      console.log(parsedErr);
+    } catch {}
+
+    return {
+      success: false,
+      error: err as ApiError,
     };
   }
 };

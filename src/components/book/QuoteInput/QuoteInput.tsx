@@ -4,26 +4,44 @@ import { useState } from 'react';
 
 interface Props {
   line?: number;
-  onSubmit?: (page: string, quote: string) => void;
+  onSubmit?: (text: string, page?: number | null) => void;
 }
 
 export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
   const [page, setPage] = useState(''); // @todo: validation
-  const [quote, setQuote] = useState('');
+  const [text, setText] = useState('');
 
-  const saveQuote = () => {
-    if (!page.trim() || !quote.trim()) return;
-    onSubmit?.(page, quote);
+  const resetInput = () => {
     setPage('');
-    setQuote('');
+    setText('');
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const saveQuote = async () => {
+    if (!text.trim()) return;
+
+    const pageNum = page.trim() === '' ? null : Number(page);
+    onSubmit?.(text, pageNum);
+    resetInput();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      if (e.nativeEvent.isComposing) {
+        return;
+      }
+
       e.preventDefault();
       saveQuote();
     }
     // @todo : 줄바꿈 (Shift + Enter) 처리할지
+  };
+
+  const onChangePage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // 숫자만 입력 가능하도록 필터링
+    if (value === '' || /^\d+$/.test(value)) {
+      setPage(value);
+    }
   };
 
   return (
@@ -34,7 +52,8 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
           placeholder="페이지"
           enterKeyHint="next"
           value={page}
-          onChange={(e) => setPage(e.target.value)}
+          onChange={onChangePage}
+          onKeyDown={onKeyDown}
         />
       </div>
       <div className="flex items-end gap-4 border-l border-l-border pl-4 flex-1 ">
@@ -43,8 +62,8 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
           rows={line}
           placeholder="기록할 문장을 작성하세요.."
           enterKeyHint="send"
-          value={quote}
-          onChange={(e) => setQuote(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           onKeyDown={onKeyDown}
         />
       </div>
