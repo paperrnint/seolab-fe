@@ -1,6 +1,6 @@
-import { BookCard } from '@/components/BookCard/BookCard';
-import { GridSection } from '@/components/GridSection/GridSection';
-import { MainBookSupport } from '@/components/MainBookSupport/MainBookSupport';
+import { BookCard } from '@/components/book/BookCard/BookCard';
+import { MainBookSupport } from '@/components/book/MainBookSupport/MainBookSupport';
+import { GridSection } from '@/components/layout/GridSection/GridSection';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { mapToBookCard } from '@/lib/mappers/bookMapper';

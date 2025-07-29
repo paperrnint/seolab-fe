@@ -1,5 +1,5 @@
-import { Search } from '@/components/Search/Search';
-import { SearchContent } from '@/components/SearchContent/SearchContent';
+import { Search } from '@/components/search/Search/Search';
+import { SearchContent } from '@/components/search/SearchContent/SearchContent';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { mapToBookSearchItem } from '@/lib/mappers/bookMapper';

@@ -2,8 +2,8 @@ import { Provider } from 'jotai';
 import type { Metadata } from 'next';
 import { Gowun_Dodum } from 'next/font/google';
 
-import { AuthProvider } from '@/components/AuthProvider/AuthProvider';
-import { QueryProvider } from '@/components/QueryProvider/QueryProvider';
+import { AuthProvider } from '@/components/providers/AuthProvider/AuthProvider';
+import { QueryProvider } from '@/components/providers/QueryProvider/QueryProvider';
 import 'swiper/css';
 import './globals.css';
 
@@ -11,6 +11,7 @@ const gowunDodum = Gowun_Dodum({
   variable: '--font-gowun-dodum',
   subsets: ['latin'],
   weight: ['400'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {

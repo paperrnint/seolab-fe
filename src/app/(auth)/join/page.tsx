@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/components/Button/Button';
-import { ErrorModal } from '@/components/ErrorModal/ErrorModal';
-import { Join } from '@/components/Join/Join';
+import { Join } from '@/components/auth/Join/Join';
+import { Button } from '@/components/common/ui/Button/Button';
+import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
 import { useJoinPage } from '@/hooks/auth';
 
 export default function JoinSimple() {

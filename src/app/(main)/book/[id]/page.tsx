@@ -1,4 +1,4 @@
-import { BookDetail } from '@/components/BookDetail/BookDetail';
+import { BookDetail } from '@/components/book/BookDetail/BookDetail';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { mapToBookDetail } from '@/lib/mappers/bookMapper';

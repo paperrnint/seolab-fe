@@ -1,9 +1,9 @@
-import { BookCard } from '@/components/BookCard/BookCard';
-import { GridSection } from '@/components/GridSection/GridSection';
-import { MainBookSupport } from '@/components/MainBookSupport/MainBookSupport';
-import { NowBookContent } from '@/components/NowBookContent/NowBookContent';
-import { NowBookHeader } from '@/components/NowBookHeader/NowBookHeader';
-import { Txt } from '@/components/Txt/Txt';
+import { BookCard } from '@/components/book/BookCard/BookCard';
+import { MainBookSupport } from '@/components/book/MainBookSupport/MainBookSupport';
+import { NowBookContent } from '@/components/book/NowBookContent/NowBookContent';
+import { NowBookHeader } from '@/components/book/NowBookHeader/NowBookHeader';
+import { Txt } from '@/components/common/ui/Txt/Txt';
+import { GridSection } from '@/components/layout/GridSection/GridSection';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
 import { mapToBookCard } from '@/lib/mappers/bookMapper';

@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { FaLock, FaUser } from 'react-icons/fa6';
 
-import { Button } from '@/components/Button/Button';
-import { Container } from '@/components/Container/Container';
-import { ErrorModal } from '@/components/ErrorModal/ErrorModal';
-import { Input } from '@/components/Input/Input';
-import { Login } from '@/components/Login/Login';
-import { LoginLink } from '@/components/Login/LoginLink/LoginLink';
-import { MainImage } from '@/components/MainImage/MainImage';
-import { SocialButton } from '@/components/SocialButton/SocialButton';
+import { Login } from '@/components/auth/Login/Login';
+import { LoginLink } from '@/components/auth/Login/LoginLink/LoginLink';
+import { MainImage } from '@/components/auth/Login/MainImage/MainImage';
+import { Button } from '@/components/common/ui/Button/Button';
+import { Container } from '@/components/common/ui/Container/Container';
+import { Input } from '@/components/common/ui/Input/Input';
+import { SocialButton } from '@/components/common/ui/SocialButton/SocialButton';
+import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
 import { useAuth, useErrorModal } from '@/hooks/auth';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
