@@ -1,9 +1,8 @@
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
 import { ErrorType } from '@/constants';
-
-import { ErrorModal } from '../../components/ErrorModal/ErrorModal';
 
 jest.mock('react-icons/fa6', () => ({
   FaCircleExclamation: () => 'error-icon',

@@ -1,4 +1,4 @@
-import { NavLayout } from '@/components/NavLayout/NavLayout';
+import { NavLayout } from '@/components/layout/NavLayout/NavLayout';
 
 export default function MainLayout({
   children,
