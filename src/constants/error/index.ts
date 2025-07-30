@@ -55,7 +55,7 @@ export const ERROR_MESSAGES = {
       button: '확인',
     },
   },
-  createQuotes: {
+  quote: {
     400: {
       title: '빈 문장이에요',
       text: '문장을 기록 후 다시 시도해 보세요',
