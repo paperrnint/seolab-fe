@@ -30,7 +30,7 @@ export default async function BookPage({ params }: Props) {
       quotes = quotesData.map(mapToQuote);
     } catch (err) {
       error = err as ApiError;
-      console.error('detail page fetch book detail failed', error);
+      throw error;
     }
   }
 
