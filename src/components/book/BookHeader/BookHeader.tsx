@@ -1,11 +1,11 @@
 import { useBookMode } from '@/hooks/useBookMode';
 
 import { Badge } from '../../common/ui/Badge/Badge';
-import { Checkbox } from '../../common/ui/Checkbox/Checkbox';
 import { Title } from '../../common/ui/Title/Title';
 import { BookCover } from '../BookCover/BookCover';
 import { BookmarkWrapper } from '../BookmarkWrapper/BookmarkWrapper';
 import { BookMoreMenu } from '../BookMoreMenu/BookMoreMenu';
+import { Checkbox } from '../Checkbox/Checkbox';
 
 import { BadgeList } from './BadgeList/BadgeList';
 import { BookMeta } from './BookMeta/BookMeta';
