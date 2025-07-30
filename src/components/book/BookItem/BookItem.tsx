@@ -6,6 +6,7 @@ import { FaPlus } from 'react-icons/fa6';
 
 import { useErrorModal } from '@/hooks/auth';
 import { createBookAction } from '@/lib/actions/book';
+import { mapToBookError, mapToBookId } from '@/lib/mappers/bookMapper';
 import { BookSearchItem } from '@/types/domain/book';
 
 import { Badge } from '../../common/ui/Badge/Badge';
@@ -35,12 +36,13 @@ export const BookItem = ({ book, tags }: Props) => {
     const result = await createBookAction(book);
 
     if (result.success) {
-      const { id } = result.data;
+      const { id } = mapToBookId(result.data);
       router.push(`/book/${id}?mode=edit`);
     } else {
       const { status, data } = result.error;
       showError(status);
-      setNextId(data.id);
+      const { id } = mapToBookError(data);
+      setNextId(id);
     }
   };
 

@@ -8,20 +8,4 @@ export class ApiError extends Error {
     this.status = status;
     this.response = response;
   }
-
-  isClientError() {
-    return this.status >= 400 && this.status < 500;
-  }
-
-  isServerError() {
-    return this.status >= 500;
-  }
-
-  isUnauthorized() {
-    return this.status === 401;
-  }
-
-  isForbidden() {
-    return this.status === 403;
-  }
 }

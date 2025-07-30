@@ -1,3 +1,5 @@
+import { ApiErrorResponse } from './common';
+
 type Book = {
   title: string;
   isbn: string;
@@ -50,6 +52,10 @@ export type BookSearchResponse = {
 export type CreateBookRequest = BookSearchApiItem;
 
 export type CreateBookResponse = {
+  userBookId: string;
+};
+
+export type CreateBookErrorResponse = ApiErrorResponse & {
   userBookId: string;
 };
 
