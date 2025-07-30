@@ -1,14 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useRef } from 'react';
 
 import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
 import { useErrorModal } from '@/hooks/auth';
+import { useAutoScroll } from '@/hooks/useAutoScroll';
 import { useBookMode } from '@/hooks/useBookMode';
 import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
-import { ApiError } from '@/lib/fetch/ApiError';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
 import { ExternalGradient } from '../../common/effects/ExternalGradient/ExternalGradient';
@@ -19,30 +18,23 @@ import { QuoteText } from '../QuoteText/QuoteText';
 interface Props {
   book: BookDetailItem | null;
   initialQuotes: Quote[];
-  error?: ApiError | null;
 }
 
-export const BookDetail = ({ book, initialQuotes, error }: Props) => {
+export const BookDetail = ({ book, initialQuotes }: Props) => {
   const { isEditMode } = useBookMode();
   const { showQuotePage } = useShowQuotePage();
   const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
 
   const { quotes, addQuote } = useOptimisticQuotes(initialQuotes, book?.id, {
     onError: (error) => {
-      console.error(error);
+      showError(error.status);
     },
   });
-
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const prevQuotesLen = useRef(quotes.length);
+  const { bottomRef } = useAutoScroll(quotes.length);
   const router = useRouter();
 
-  const scrollToBottom = useCallback(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, []);
-
   const onClickModalButton = () => {
-    if (error?.status === 401) {
+    if (errorStatusCode === 401) {
       resetError();
       router.push('/login');
     } else {
@@ -50,20 +42,9 @@ export const BookDetail = ({ book, initialQuotes, error }: Props) => {
     }
   };
 
-  useEffect(() => {
-    // prevent scroll on initial mount
-    if (quotes.length > prevQuotesLen.current) {
-      scrollToBottom();
-    }
-
-    prevQuotesLen.current = quotes.length;
-  }, [quotes.length, scrollToBottom]);
-
-  useEffect(() => {
-    if (error) {
-      showError(error.status);
-    }
-  }, [error, showError]);
+  const onCloseModal = () => {
+    resetError();
+  };
 
   if (!book) return null;
 
@@ -85,12 +66,14 @@ export const BookDetail = ({ book, initialQuotes, error }: Props) => {
             isReading={book.isReading}
           />
 
-          <div className="p-2 pb-6 max-w-4xl">
+          <ul className="p-2 pb-6 max-w-4xl">
             {quotes.map((quote) => (
               // edit mode 에선 항상 페이지 보여줘야 함
-              <QuoteText key={quote.id} page={quote.page} text={quote.text} showPage={isEditMode || showQuotePage} />
+              <li key={quote.id}>
+                <QuoteText page={quote.page} text={quote.text} showPage={isEditMode || showQuotePage} />
+              </li>
             ))}
-          </div>
+          </ul>
           <div ref={bottomRef} />
         </div>
       </div>
@@ -109,7 +92,7 @@ export const BookDetail = ({ book, initialQuotes, error }: Props) => {
           errorStatusCode={errorStatusCode}
           isOpen={isOpen}
           onClickButton={onClickModalButton}
-          onCloseModal={resetError}
+          onCloseModal={onCloseModal}
         />
       )}
     </div>
