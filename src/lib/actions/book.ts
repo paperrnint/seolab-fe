@@ -4,13 +4,13 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { bookService } from '@/services/bookService';
-import { CreateBookActionReturn, CreateQuoteActionReturn } from '@/types/action/book';
-import { CreateQuoteRequest } from '@/types/api/book';
-import { ApiResult } from '@/types/api/common';
+import { CreateBookResult, CreateQuoteResult, VoidResult } from '@/types/action/book';
+import { CreateBookErrorResponse, CreateQuoteRequest } from '@/types/api/book';
 import { BookSearchItem } from '@/types/domain/book';
 
 import { getServerAuthData } from '../auth/server';
 import { ApiError } from '../fetch/ApiError';
+import { mapToServerActionResult } from '../mappers/apiResultMapper';
 import { mapToCreateBookRequest } from '../mappers/bookMapper';
 
 const requireAuth = async () => {
@@ -24,7 +24,7 @@ const requireAuth = async () => {
   return { accessToken };
 };
 
-export const toggleBookCompleteAction = async (id: string): Promise<ApiResult> => {
+export const toggleBookCompleteAction = async (id: string): Promise<VoidResult> => {
   const { accessToken } = await requireAuth();
 
   try {
@@ -32,14 +32,15 @@ export const toggleBookCompleteAction = async (id: string): Promise<ApiResult> =
     revalidatePath(`/book/${id}`);
     return { success: true };
   } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
     return {
       success: false,
-      error: err as ApiError,
+      error,
     };
   }
 };
 
-export const toggleBookFavoriteAction = async (id: string): Promise<ApiResult> => {
+export const toggleBookFavoriteAction = async (id: string): Promise<VoidResult> => {
   const { accessToken } = await requireAuth();
 
   try {
@@ -47,61 +48,42 @@ export const toggleBookFavoriteAction = async (id: string): Promise<ApiResult> =
     revalidatePath(`/book/${id}`);
     return { success: true };
   } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
     return {
       success: false,
-      error: err as ApiError,
+      error,
     };
   }
 };
 
-export const createBookAction = async (book: BookSearchItem): Promise<CreateBookActionReturn> => {
+export const createBookAction = async (book: BookSearchItem): Promise<CreateBookResult> => {
   const { accessToken } = await requireAuth();
 
   try {
     const bookInfo = mapToCreateBookRequest(book);
     const { userBookId } = await bookService.create(bookInfo, accessToken);
-    return { success: true, data: { id: userBookId } };
+    return { success: true, data: { userBookId } };
   } catch (err) {
-    const apiError = err as ApiError;
-
-    let parsedErr = null;
-    try {
-      parsedErr = JSON.parse(apiError.message);
-      console.log(parsedErr);
-    } catch {}
+    const error = mapToServerActionResult<CreateBookErrorResponse>(err as ApiError);
 
     return {
       success: false,
-      error: {
-        data: {
-          message: parsedErr?.message || apiError.message,
-          id: parsedErr?.userBookId,
-        },
-        status: apiError.status,
-        name: apiError.name,
-      },
+      error,
     };
   }
 };
 
-export const createQuoteAction = async (id: string, quote: CreateQuoteRequest): Promise<CreateQuoteActionReturn> => {
+export const createQuoteAction = async (id: string, quote: CreateQuoteRequest): Promise<CreateQuoteResult> => {
   const { accessToken } = await requireAuth();
 
   try {
     const data = await bookService.createQuote(quote, id, accessToken);
     return { success: true, data };
   } catch (err) {
-    const apiError = err as ApiError;
-
-    let parsedErr = null;
-    try {
-      parsedErr = JSON.parse(apiError.message);
-      console.log(parsedErr);
-    } catch {}
-
+    const error = mapToServerActionResult(err as ApiError);
     return {
       success: false,
-      error: err as ApiError,
+      error,
     };
   }
 };

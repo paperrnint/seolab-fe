@@ -1,7 +1,9 @@
 import {
   BookListApiItem,
   BookSearchApiItem,
+  CreateBookErrorResponse,
   CreateBookRequest,
+  CreateBookResponse,
   GetBookDetailResponse,
   QuoteApiItem,
 } from '@/types/api/book';
@@ -77,5 +79,18 @@ export const mapToQuote = (data: QuoteApiItem): Quote => {
     id: quoteId,
     createdAt: formatDate(createdAt),
     updatedAt: formatDate(updatedAt),
+  };
+};
+
+export const mapToBookId = (data: CreateBookResponse) => {
+  return {
+    id: data.userBookId,
+  };
+};
+
+export const mapToBookError = (data: CreateBookErrorResponse) => {
+  return {
+    id: data.userBookId,
+    message: data.message,
   };
 };

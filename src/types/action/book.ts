@@ -1,32 +1,8 @@
-import { ApiError } from '@/lib/fetch/ApiError';
+import { CreateBookErrorResponse, CreateBookResponse, QuoteApiItem } from '../api/book';
+import { ServerActionResult } from '../api/common';
 
-import { QuoteApiItem } from '../api/book';
+export type VoidResult = ServerActionResult<void>;
 
-export type CreateBookActionReturn =
-  | {
-      success: true;
-      data: {
-        id: string;
-      };
-    }
-  | {
-      success: false;
-      error: {
-        data: {
-          message: string;
-          id: string;
-        };
-        status: number;
-        name: string;
-      };
-    };
+export type CreateBookResult = ServerActionResult<CreateBookResponse, CreateBookErrorResponse>;
 
-export type CreateQuoteActionReturn =
-  | {
-      success: true;
-      data: QuoteApiItem;
-    }
-  | {
-      success: false;
-      error: ApiError;
-    };
+export type CreateQuoteResult = ServerActionResult<QuoteApiItem>;
