@@ -2,6 +2,7 @@ import { Provider } from 'jotai';
 import type { Metadata } from 'next';
 import { Gowun_Dodum } from 'next/font/google';
 
+import { GlobalErrorModal } from '@/components/error/GloabalErrorModal/GlobalErrorModal';
 import { AuthProvider } from '@/components/providers/AuthProvider/AuthProvider';
 import { QueryProvider } from '@/components/providers/QueryProvider/QueryProvider';
 import 'swiper/css';
@@ -31,6 +32,7 @@ export default function RootLayout({
           <QueryProvider>
             <AuthProvider>
               {children}
+              <GlobalErrorModal />
               <div id="portal" />
             </AuthProvider>
           </QueryProvider>

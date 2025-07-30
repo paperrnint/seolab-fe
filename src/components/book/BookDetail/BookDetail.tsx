@@ -2,10 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
-import { useErrorModal } from '@/hooks/auth';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
 import { useBookMode } from '@/hooks/useBookMode';
+import { useError } from '@/hooks/useError';
 import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
 import { BookDetailItem, Quote } from '@/types/domain/book';
@@ -23,28 +22,22 @@ interface Props {
 export const BookDetail = ({ book, initialQuotes }: Props) => {
   const { isEditMode } = useBookMode();
   const { showQuotePage } = useShowQuotePage();
-  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
+  const { showError } = useError();
 
   const { quotes, addQuote } = useOptimisticQuotes(initialQuotes, book?.id, {
     onError: (error) => {
-      showError(error.status);
+      if (error.status === 401) {
+        showError('quote', error.status, () => {
+          router.push('/login');
+        });
+      } else {
+        showError('quote', error.status);
+      }
     },
   });
+
   const { bottomRef } = useAutoScroll(quotes.length);
   const router = useRouter();
-
-  const onClickModalButton = () => {
-    if (errorStatusCode === 401) {
-      resetError();
-      router.push('/login');
-    } else {
-      resetError();
-    }
-  };
-
-  const onCloseModal = () => {
-    resetError();
-  };
 
   if (!book) return null;
 
@@ -84,16 +77,6 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
             <QuoteInput onSubmit={addQuote} />
           </ExternalGradient>
         </div>
-      )}
-
-      {errorStatusCode && (
-        <ErrorModal
-          errorType="quote"
-          errorStatusCode={errorStatusCode}
-          isOpen={isOpen}
-          onClickButton={onClickModalButton}
-          onCloseModal={onCloseModal}
-        />
       )}
     </div>
   );
