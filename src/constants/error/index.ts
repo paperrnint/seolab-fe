@@ -59,7 +59,7 @@ export const ERROR_MESSAGES = {
     400: {
       title: '빈 문장이에요',
       text: '문장을 기록 후 다시 시도해 보세요',
-      button: '확인,',
+      button: '확인',
     },
     401: {
       title: '인증 만료',
