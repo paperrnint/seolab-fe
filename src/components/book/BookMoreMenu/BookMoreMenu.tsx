@@ -1,5 +1,7 @@
 import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react-icons/fa6';
 
+import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
+import { useErrorModal } from '@/hooks/auth';
 import { useBookMode } from '@/hooks/useBookMode';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useBookComplete, useBookFavorite } from '@/hooks/useOptimisticUpdate';
@@ -18,11 +20,12 @@ interface Props {
 }
 
 export const BookMoreMenu = ({ id, initialValue }: Props) => {
+  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
   const { state: isFavorite, toggle: onClickFavorite } = useBookFavorite(id, initialValue?.isFavorite ?? false, {
-    onError: (err) => console.error(err),
+    onError: (error) => showError(error.status),
   });
   const { state: isReading, toggle: onClickComplete } = useBookComplete(id, initialValue?.isReading !== false, {
-    onError: (err) => console.error(err),
+    onError: (error) => showError(error.status),
   });
 
   const { isEditMode, onConfirm, onEdit } = useBookMode();
@@ -75,6 +78,16 @@ export const BookMoreMenu = ({ id, initialValue }: Props) => {
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown.Root>
+
+      {errorStatusCode && (
+        <ErrorModal
+          errorType="createBooks"
+          errorStatusCode={errorStatusCode}
+          isOpen={isOpen}
+          onClickButton={resetError}
+          onCloseModal={resetError}
+        />
+      )}
     </div>
   );
 };
