@@ -12,18 +12,18 @@ import { Button } from '@/components/common/ui/Button/Button';
 import { Container } from '@/components/common/ui/Container/Container';
 import { Input } from '@/components/common/ui/Input/Input';
 import { SocialButton } from '@/components/common/ui/SocialButton/SocialButton';
-import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
-import { useAuth, useErrorModal } from '@/hooks/auth';
+import { useAuth } from '@/hooks/auth';
+import { useError } from '@/hooks/useError';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuth();
-  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
+  const { showError } = useError();
   const {
     register,
     handleSubmit,
-    reset,
+    reset: formReset,
     formState: { isSubmitting, isValid },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -36,17 +36,13 @@ export default function LoginPage() {
 
   const onSubmit = async (formData: LoginFormData) => {
     const result = await login(formData);
-
     if (result.success) {
       router.push('/');
     } else {
-      showError(result.error.status);
+      showError('login', result.error.status, () => {
+        formReset();
+      });
     }
-  };
-
-  const onClickModalButton = () => {
-    reset();
-    resetError();
   };
 
   return (
@@ -81,15 +77,6 @@ export default function LoginPage() {
           </div>
         </Container>
       </div>
-      {errorStatusCode && (
-        <ErrorModal
-          errorType="login"
-          errorStatusCode={errorStatusCode}
-          isOpen={isOpen}
-          onClickButton={onClickModalButton}
-          onCloseModal={resetError}
-        />
-      )}
     </>
   );
 }

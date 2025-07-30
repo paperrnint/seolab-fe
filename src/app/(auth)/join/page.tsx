@@ -2,12 +2,10 @@
 
 import { Join } from '@/components/auth/Join/Join';
 import { Button } from '@/components/common/ui/Button/Button';
-import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
 import { useJoinPage } from '@/hooks/auth';
 
 export default function JoinSimple() {
-  const { errorStatusCode, isOpen, validations, formState, register, handleSubmit, resetError, onClickModalButton } =
-    useJoinPage();
+  const { validations, formState, register, handleSubmit } = useJoinPage();
 
   return (
     <Join.Container>
@@ -45,15 +43,6 @@ export default function JoinSimple() {
           </Button>
         </div>
       </Join.Form>
-      {errorStatusCode && (
-        <ErrorModal
-          errorType="signup"
-          errorStatusCode={errorStatusCode}
-          isOpen={isOpen}
-          onClickButton={onClickModalButton}
-          onCloseModal={resetError}
-        />
-      )}
     </Join.Container>
   );
 }

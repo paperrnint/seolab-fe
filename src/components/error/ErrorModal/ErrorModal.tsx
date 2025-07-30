@@ -7,7 +7,7 @@ import { getErrorMessage, getTextsByLine } from '@/utils';
 
 import { Button } from '../../common/ui/Button/Button';
 import { Txt } from '../../common/ui/Txt/Txt';
-import { Modal } from '../Modal/Modal';
+import { Modal } from '../../modal/Modal/Modal';
 
 interface Props {
   errorType: ErrorType;

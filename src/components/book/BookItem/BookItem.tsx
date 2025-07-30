@@ -4,13 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
-import { useErrorModal } from '@/hooks/auth';
+import { useError } from '@/hooks/useError';
 import { createBookAction } from '@/lib/actions/book';
 import { mapToBookError, mapToBookId } from '@/lib/mappers/bookMapper';
 import { BookSearchItem } from '@/types/domain/book';
 
 import { Badge } from '../../common/ui/Badge/Badge';
-import { ErrorModal } from '../../modal/ErrorModal/ErrorModal';
 import { BookCover } from '../BookCover/BookCover';
 
 interface Props {
@@ -19,14 +18,12 @@ interface Props {
 }
 
 export const BookItem = ({ book, tags }: Props) => {
-  const [nextId, setNextId] = useState<string | null>(null);
-
-  const [showAll, setShowAll] = useState(false);
-  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
-  const { title, description, publishedDate, publisher, thumbnail, author } = book;
-  const lineClass = showAll ? '' : 'line-clamp-2';
-
   const router = useRouter();
+  const [showAll, setShowAll] = useState(false);
+  const { showError } = useError();
+  const { title, description, publishedDate, publisher, thumbnail, author } = book;
+
+  const lineClass = showAll ? '' : 'line-clamp-2';
 
   const onToggle = () => {
     setShowAll((prev) => !prev);
@@ -40,21 +37,12 @@ export const BookItem = ({ book, tags }: Props) => {
       router.push(`/book/${id}?mode=edit`);
     } else {
       const { status, data } = result.error;
-      showError(status);
       const { id } = mapToBookError(data);
-      setNextId(id);
-    }
-  };
 
-  const onClickModal = () => {
-    if (!nextId) {
-      return;
+      showError('createBooks', status, () => {
+        router.push(`/book/${id}?mode=edit`);
+      });
     }
-    router.push(`/book/${nextId}?mode=edit`);
-  };
-
-  const onCloseModal = () => {
-    resetError();
   };
 
   return (
@@ -87,15 +75,6 @@ export const BookItem = ({ book, tags }: Props) => {
           <FaPlus size={12} />
         </div>
       </button>
-      {errorStatusCode && (
-        <ErrorModal
-          errorType="createBooks"
-          errorStatusCode={errorStatusCode}
-          isOpen={isOpen}
-          onClickButton={onClickModal}
-          onCloseModal={onCloseModal}
-        />
-      )}
     </div>
   );
 };

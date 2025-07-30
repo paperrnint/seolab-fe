@@ -6,12 +6,13 @@ import { JoinFormData } from '@/lib/schemas/joinSchema';
 import { authService } from '@/services/authService';
 import { ApiResult } from '@/types/api/common';
 
-import { useErrorModal } from './useErrorModal';
+import { useError } from '../useError';
+
 import { useJoinForm } from './useJoinForm';
 
 export const useJoinPage = () => {
   const router = useRouter();
-  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
+  const { showError } = useError();
   const { form, validations } = useJoinForm();
 
   // join API
@@ -32,32 +33,22 @@ export const useJoinPage = () => {
     const result = await join(formData);
 
     if (result.success) {
-      // @todo: 회원가입 성공 페이지/모달 만들기?
       router.push('/login');
     } else {
-      showError(result.error.status);
+      showError('signup', result.error.status, () => {
+        if (result.error.status === 409) {
+          router.push('/login');
+        } else {
+          form.reset();
+        }
+      });
     }
-  };
-
-  // Error Modal 내의 버튼 클릭시 수행
-  const onClickModalButton = () => {
-    if (errorStatusCode === 409) {
-      router.push('/login');
-      return;
-    }
-
-    form.reset();
-    resetError();
   };
 
   return {
-    errorStatusCode,
-    isOpen,
     validations,
     formState: form.formState,
     register: form.register,
     handleSubmit: form.handleSubmit(onSubmit),
-    resetError,
-    onClickModalButton,
   };
 };
