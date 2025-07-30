@@ -88,7 +88,7 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
 
       {errorStatusCode && (
         <ErrorModal
-          errorType="createQuotes"
+          errorType="quote"
           errorStatusCode={errorStatusCode}
           isOpen={isOpen}
           onClickButton={onClickModalButton}
