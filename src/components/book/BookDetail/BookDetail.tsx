@@ -1,10 +1,14 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
 
+import { ErrorModal } from '@/components/modal/ErrorModal/ErrorModal';
+import { useErrorModal } from '@/hooks/auth';
 import { useBookMode } from '@/hooks/useBookMode';
 import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
+import { ApiError } from '@/lib/fetch/ApiError';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
 import { ExternalGradient } from '../../common/effects/ExternalGradient/ExternalGradient';
@@ -15,11 +19,13 @@ import { QuoteText } from '../QuoteText/QuoteText';
 interface Props {
   book: BookDetailItem | null;
   initialQuotes: Quote[];
+  error?: ApiError | null;
 }
 
-export const BookDetail = ({ book, initialQuotes }: Props) => {
+export const BookDetail = ({ book, initialQuotes, error }: Props) => {
   const { isEditMode } = useBookMode();
   const { showQuotePage } = useShowQuotePage();
+  const { errorStatusCode, isOpen, showError, resetError } = useErrorModal();
 
   const { quotes, addQuote } = useOptimisticQuotes(initialQuotes, book?.id, {
     onError: (error) => {
@@ -29,10 +35,20 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const prevQuotesLen = useRef(quotes.length);
+  const router = useRouter();
 
   const scrollToBottom = useCallback(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, []);
+
+  const onClickModalButton = () => {
+    if (error?.status === 401) {
+      resetError();
+      router.push('/login');
+    } else {
+      resetError();
+    }
+  };
 
   useEffect(() => {
     // prevent scroll on initial mount
@@ -42,6 +58,12 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
 
     prevQuotesLen.current = quotes.length;
   }, [quotes.length, scrollToBottom]);
+
+  useEffect(() => {
+    if (error) {
+      showError(error.status);
+    }
+  }, [error, showError]);
 
   if (!book) return null;
 
@@ -79,6 +101,16 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
             <QuoteInput onSubmit={addQuote} />
           </ExternalGradient>
         </div>
+      )}
+
+      {errorStatusCode && (
+        <ErrorModal
+          errorType="createQuotes"
+          errorStatusCode={errorStatusCode}
+          isOpen={isOpen}
+          onClickButton={onClickModalButton}
+          onCloseModal={resetError}
+        />
       )}
     </div>
   );

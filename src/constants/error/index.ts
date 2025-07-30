@@ -55,6 +55,23 @@ export const ERROR_MESSAGES = {
       button: '확인',
     },
   },
+  createQuotes: {
+    400: {
+      title: '빈 문장이에요',
+      text: '문장을 기록 후 다시 시도해 보세요',
+      button: '확인,',
+    },
+    401: {
+      title: '인증 만료',
+      text: '로그인이 만료되었어요\n다시 로그인해 주세요',
+      button: '로그인하기',
+    },
+    403: {
+      title: '접근 불가',
+      text: '접근할 수 없는 기록이에요',
+      button: '확인',
+    },
+  },
   default: {
     unknown: {
       title: '알 수 없는 에러',
