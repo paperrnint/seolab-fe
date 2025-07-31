@@ -1,5 +1,3 @@
-import { ButtonVariant } from './Button';
-
 type Shape = 'square' | 'circular' | 'rounded';
 type Width = 'fit' | 'full';
 type Align = 'left' | 'center';
@@ -59,7 +57,7 @@ export const sizes = {
   xl: 'px-4 py-2 text-lg leading-8',
 } as const;
 
-export const btnConfig: Record<ButtonVariant, ButtonConfig> = {
+export const btnConfig: Record<string, ButtonConfig> = {
   primary: {
     shape: 'circular',
     width: 'fit',
@@ -132,4 +130,22 @@ export const btnConfig: Record<ButtonVariant, ButtonConfig> = {
     size: 'xs',
     type: 'outline',
   },
-};
+  edit: {
+    shape: 'square',
+    width: 'fit',
+    align: 'center',
+    color: 'accent',
+    size: 'xs',
+    type: 'fill',
+  },
+  cancel: {
+    shape: 'square',
+    width: 'fit',
+    align: 'center',
+    color: 'subtle',
+    size: 'xs',
+    type: 'fill',
+  },
+} as const;
+
+export type ButtonVariant = keyof typeof btnConfig;
