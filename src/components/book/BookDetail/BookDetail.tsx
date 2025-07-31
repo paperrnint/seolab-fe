@@ -63,7 +63,12 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
             {quotes.map((quote) => (
               // edit mode 에선 항상 페이지 보여줘야 함
               <li key={quote.id}>
-                <QuoteText page={quote.page} text={quote.text} showPage={isEditMode || showQuotePage} />
+                <QuoteText
+                  page={quote.page}
+                  text={quote.text}
+                  showPage={isEditMode || showQuotePage}
+                  isEditMode={isEditMode}
+                />
               </li>
             ))}
           </ul>
@@ -74,7 +79,11 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
       {isEditMode && (
         <div className="w-full max-w-4xl mx-auto px-2 pb-2">
           <ExternalGradient variant="top" height={48}>
-            <QuoteInput onSubmit={addQuote} />
+            <QuoteInput.Root onSubmit={addQuote}>
+              <QuoteInput.Container>
+                <QuoteInput.InputField />
+              </QuoteInput.Container>
+            </QuoteInput.Root>
           </ExternalGradient>
         </div>
       )}
