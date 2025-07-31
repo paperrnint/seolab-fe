@@ -1,30 +1,17 @@
-'use client';
-
-import { useState } from 'react';
-
 import { MAX_QUOTE_TEXT_LENGTH } from '@/constants';
+import { useTextareaHeight } from '@/hooks/useTextareaHeight';
+
+import { useQuoteInput } from '../@context/QuoteInputContext';
 
 interface Props {
-  line?: number;
-  onSubmit?: (text: string, page?: number | null) => void;
+  minLine?: number;
 }
 
-export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
-  const [page, setPage] = useState('');
-  const [text, setText] = useState('');
-
-  const resetInput = () => {
-    setPage('');
-    setText('');
-  };
-
-  const saveQuote = async () => {
-    if (!text.trim()) return;
-
-    const pageNum = page.trim() === '' ? null : Number(page);
-    onSubmit?.(text, pageNum);
-    resetInput();
-  };
+export const QuoteInputField = ({ minLine = 2 }: Props) => {
+  const { page, text, setPage, setText, submit } = useQuoteInput();
+  const { textareaRef } = useTextareaHeight(text, {
+    minLine: minLine,
+  });
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -33,7 +20,7 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
       }
 
       e.preventDefault();
-      saveQuote();
+      submit();
     }
     // @todo : 줄바꿈 (Shift + Enter) 처리할지
   };
@@ -57,10 +44,10 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
   };
 
   return (
-    <div className="flex flex-1 gap-4 items-start border border-border rounded-lg p-4 bg-bg-card">
+    <div className="flex w-full gap-3">
       <div className="w-fit">
         <input
-          className="w-8 outline-none text-sm leading-6 placeholder:text-[12px]"
+          className="w-11 outline-none text-sm leading-6"
           placeholder="페이지"
           enterKeyHint="next"
           value={page}
@@ -68,15 +55,16 @@ export const QuoteInput = ({ line = 2, onSubmit }: Props) => {
           onKeyDown={onKeyDown}
         />
       </div>
-      <div className="flex items-end gap-4 border-l border-l-border pl-4 flex-1 ">
+      <div className="flex items-end gap-4 pl-3 flex-1">
         <textarea
-          className="outline-none resize-none text-sm leading-6 w-full"
-          rows={line}
+          ref={textareaRef}
+          className="outline-none resize-none text-sm leading-6 w-full pr-2"
           placeholder="기록할 문장을 작성하세요.."
           enterKeyHint="send"
           value={text}
           onChange={onChangeText}
           onKeyDown={onKeyDown}
+          style={{ minHeight: `${minLine * 24}px` }}
         />
       </div>
     </div>
