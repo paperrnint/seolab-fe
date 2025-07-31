@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import LoginPage from '@/app/(auth)/login/page';
-import { useAuth, useErrorModal } from '@/hooks/auth';
+import { useAuth } from '@/hooks/auth';
+import { useError } from '@/hooks/useError';
 import { validUser } from '@/tests/__mocks__/constants/auth';
 
 jest.mock('next/navigation', () => ({
@@ -13,7 +14,10 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('@/hooks/auth', () => ({
   useAuth: jest.fn(),
-  useErrorModal: jest.fn(),
+}));
+
+jest.mock('@/hooks/useError', () => ({
+  useError: jest.fn(),
 }));
 
 jest.mock('react-hook-form', () => ({
@@ -33,6 +37,7 @@ describe('LoginPage 렌더링', () => {
       login: jest.fn().mockResolvedValue({ success: true }),
       showError: jest.fn(),
       resetError: jest.fn(),
+      clickModalButton: jest.fn(),
       register: jest.fn(() => ({
         onChange: jest.fn(),
         onBlur: jest.fn(),
@@ -54,11 +59,11 @@ describe('LoginPage 렌더링', () => {
       login: defaultMocks.login,
     });
 
-    (useErrorModal as jest.Mock).mockReturnValue({
-      errorStatusCode: null,
-      isOpen: false,
+    (useError as jest.Mock).mockReturnValue({
+      error: null,
       showError: defaultMocks.showError,
       resetError: defaultMocks.resetError,
+      clickModalButton: defaultMocks.clickModalButton,
     });
 
     (useForm as jest.Mock).mockReturnValue({
