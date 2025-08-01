@@ -8,10 +8,11 @@ interface Props {
   children: React.ReactNode;
   initialPage?: string;
   initialText?: string;
+  shouldResetField?: boolean;
   onSubmit?: (text: string, page?: number | null) => void | Promise<void>;
 }
 
-export const QuoteInputRoot = ({ children, initialPage = '', initialText = '', onSubmit }: Props) => {
+export const QuoteInputRoot = ({ children, initialPage = '', initialText = '', shouldResetField, onSubmit }: Props) => {
   const [page, setPage] = useState(initialPage);
   const [text, setText] = useState(initialText);
 
@@ -24,7 +25,9 @@ export const QuoteInputRoot = ({ children, initialPage = '', initialText = '', o
     if (!text?.trim()) return;
 
     const pageNum = page.trim() === '' ? null : Number(page);
-    reset();
+    if (shouldResetField) {
+      reset();
+    }
     await onSubmit?.(text, pageNum);
   };
 

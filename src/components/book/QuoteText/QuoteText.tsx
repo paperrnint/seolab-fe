@@ -44,22 +44,23 @@ export const QuoteText = ({
 
   const editQuote = async (text: string, page?: number | null) => {
     console.log(text, page);
-    // @todo: send to server
     const result = await editQuoteAction(bookId, quoteId, { text, page });
 
     if (result.success) {
       setCurData({ page: result.data.page, text: result.data.text });
+      endEdit();
     } else {
       showError('quote', result.error.status);
     }
-
-    // @todo: server response 로 update
-    endEdit();
   };
 
   if (isEditing) {
     return (
-      <QuoteInput.Root initialPage={page === null ? '' : page.toString()} initialText={text} onSubmit={editQuote}>
+      <QuoteInput.Root
+        initialPage={curData.page === null ? '' : curData.page.toString()}
+        initialText={curData.text}
+        onSubmit={editQuote}
+      >
         <QuoteInput.Container bg="card">
           <QuoteInput.InputField minLine={1} />
           <QuoteInput.Action>
