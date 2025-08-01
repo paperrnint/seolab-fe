@@ -61,7 +61,7 @@ export const QuoteText = ({
     return (
       <QuoteInput.Root initialPage={page === null ? '' : page.toString()} initialText={text} onSubmit={editQuote}>
         <QuoteInput.Container bg="card">
-          <QuoteInput.InputField />
+          <QuoteInput.InputField minLine={1} />
           <QuoteInput.Action>
             <p className="text-[10px] text-subtle">{updatedAt}</p>
             <QuoteInput.CancelButton onCancel={endEdit}>취소</QuoteInput.CancelButton>
