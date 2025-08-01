@@ -16,7 +16,7 @@ export const CancelButton = ({ children, onCancel }: Props) => {
   };
 
   return (
-    <Button variant="cancel" onClick={cancel}>
+    <Button variant="subtle" size="xs" shape="square" width="fit" align="center" outline={false} onClick={cancel}>
       {children}
     </Button>
   );

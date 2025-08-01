@@ -8,8 +8,8 @@ import { FaLock, FaUser } from 'react-icons/fa6';
 import { Login } from '@/components/auth/Login/Login';
 import { LoginLink } from '@/components/auth/Login/LoginLink/LoginLink';
 import { MainImage } from '@/components/auth/Login/MainImage/MainImage';
-import { Button } from '@/components/common/ui/Button/Button';
 import { Container } from '@/components/common/ui/Container/Container';
+import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
 import { Input } from '@/components/common/ui/Input/Input';
 import { SocialButton } from '@/components/common/ui/SocialButton/SocialButton';
 import { useAuth } from '@/hooks/auth';
@@ -59,9 +59,7 @@ export default function LoginPage() {
                 <Input type="email" placeholder="이메일" leftIcon={<FaUser />} {...register('email')} />
                 <Input type="password" placeholder="비밀번호" leftIcon={<FaLock />} {...register('password')} />
                 <div>
-                  <Button type="submit" variant="form" disabled={!isValid || isSubmitting}>
-                    로그인
-                  </Button>
+                  <FormSubmitButton disabled={!isValid || isSubmitting}>로그인</FormSubmitButton>
                 </div>
               </Login.Form>
               <Login.Links>

@@ -6,7 +6,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const RecommendItem = ({ children, ...props }: Props) => {
   return (
-    <Button variant="query" {...props}>
+    <Button variant="secondary" size="xs" shape="circular" width="fit" align="center" outline={true} {...props}>
       {children}
     </Button>
   );

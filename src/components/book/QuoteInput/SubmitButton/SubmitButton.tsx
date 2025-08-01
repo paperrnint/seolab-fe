@@ -10,7 +10,7 @@ export const SubmitButton = ({ children }: Props) => {
   const { submit } = useQuoteInput();
 
   return (
-    <Button variant="edit" onClick={submit}>
+    <Button variant="accent" size="xs" shape="square" width="fit" align="center" outline={false} onClick={submit}>
       {children}
     </Button>
   );

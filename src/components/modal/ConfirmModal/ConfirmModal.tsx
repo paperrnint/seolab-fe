@@ -1,6 +1,6 @@
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
-import { Button } from '@/components/common/ui/Button/Button';
+import { ModalButton } from '@/components/common/ui/ModalButton/ModalButton';
 import { Txt } from '@/components/common/ui/Txt/Txt';
 import { getTextsByLine } from '@/utils';
 
@@ -44,12 +44,12 @@ export const ConfirmModal = ({
         ))}
       </Modal.Content>
       <Modal.Action>
-        <Button variant="confirmModalCancel" onClick={onClose}>
+        <ModalButton variant="cancel" onClick={onClose}>
           {cancelText}
-        </Button>
-        <Button variant={`${type === 'default' ? 'confirmModalConfirm' : 'delete'}`} onClick={onConfirm}>
+        </ModalButton>
+        <ModalButton variant={`${type === 'default' ? 'confirm' : 'delete'}`} onClick={onConfirm}>
           {confirmText}
-        </Button>
+        </ModalButton>
       </Modal.Action>
     </Modal.Root>
   );

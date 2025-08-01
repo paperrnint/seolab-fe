@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FaLock, FaUser } from 'react-icons/fa6';
 
-import { Button } from '../../common/ui/Button/Button';
+import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
+
 import { Input } from '../../common/ui/Input/Input';
 import { SocialButton } from '../../common/ui/SocialButton/SocialButton';
 
@@ -66,9 +67,7 @@ export const Default: Story = {
       <Login.Form>
         <Input leftIcon={<FaUser />} placeholder="이메일" />
         <Input leftIcon={<FaLock />} placeholder="비밀번호" />
-        <Button variant="form" style={{ fontSize: '16px' }}>
-          로그인
-        </Button>
+        <FormSubmitButton style={{ fontSize: '16px' }}>로그인</FormSubmitButton>
       </Login.Form>
       <Login.Links>
         <Login.Link href="/">이메일 찾기</Login.Link>

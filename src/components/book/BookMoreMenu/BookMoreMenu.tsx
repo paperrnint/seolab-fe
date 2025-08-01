@@ -1,12 +1,12 @@
 import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react-icons/fa6';
 
+import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
 import { useBookMode } from '@/hooks/useBookMode';
 import { useError } from '@/hooks/useError';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useBookComplete, useBookFavorite } from '@/hooks/useOptimisticUpdate';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
 
-import { Button } from '../../common/ui/Button/Button';
 import { Dropdown } from '../../common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '../../common/ui/Dropdown/DropdownLabel/DropdownLabel';
 
@@ -36,9 +36,9 @@ export const BookMoreMenu = ({ id, initialValue }: Props) => {
 
     return (
       <div className="flex-shrink-0 pl-2">
-        <Button variant="navConfirm" onClick={onConfirm}>
+        <SmallButton variant="primary" onClick={onConfirm}>
           확인
-        </Button>
+        </SmallButton>
       </div>
     );
   }
