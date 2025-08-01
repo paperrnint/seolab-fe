@@ -82,7 +82,7 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
       {isEditMode && (
         <div className="w-full max-w-4xl mx-auto px-2 pb-2">
           <ExternalGradient variant="top" height={48}>
-            <QuoteInput.Root onSubmit={addQuote}>
+            <QuoteInput.Root onSubmit={addQuote} shouldResetField>
               <QuoteInput.Container>
                 <QuoteInput.InputField />
               </QuoteInput.Container>
