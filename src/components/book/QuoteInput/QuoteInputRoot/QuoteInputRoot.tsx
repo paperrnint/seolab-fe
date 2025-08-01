@@ -24,6 +24,7 @@ export const QuoteInputRoot = ({ children, initialPage = '', initialText = '', o
     if (!text?.trim()) return;
 
     const pageNum = page.trim() === '' ? null : Number(page);
+    reset();
     await onSubmit?.(text, pageNum);
   };
 
