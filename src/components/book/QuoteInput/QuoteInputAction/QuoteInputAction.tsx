@@ -5,7 +5,7 @@ interface Props {
 export const QuoteInputAction = ({ children }: Props) => {
   return (
     <div className="w-full">
-      <div className="flex gap-2 justify-end">{children}</div>
+      <div className="flex gap-2 justify-end items-center">{children}</div>
     </div>
   );
 };

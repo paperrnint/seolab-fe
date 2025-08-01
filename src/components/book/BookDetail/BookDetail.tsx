@@ -64,8 +64,11 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
               // edit mode 에선 항상 페이지 보여줘야 함
               <li key={quote.id}>
                 <QuoteText
+                  bookId={book.id}
+                  quoteId={quote.id}
                   page={quote.page}
                   text={quote.text}
+                  updatedAt={quote.updatedAt}
                   showPage={isEditMode || showQuotePage}
                   isEditMode={isEditMode}
                 />
