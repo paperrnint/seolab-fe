@@ -72,6 +72,13 @@ export const ERROR_MESSAGES = {
       button: '확인',
     },
   },
+  delete: {
+    403: {
+      title: '접근 불가',
+      text: '접근할 수 없는 기록이에요',
+      button: '확인',
+    },
+  },
   default: {
     unknown: {
       title: '알 수 없는 에러',

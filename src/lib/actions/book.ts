@@ -87,3 +87,38 @@ export const createQuoteAction = async (id: string, quote: CreateQuoteRequest): 
     };
   }
 };
+
+export const editQuoteAction = async (
+  bookId: string,
+  quoteId: string,
+  quote: CreateQuoteRequest
+): Promise<CreateQuoteResult> => {
+  const { accessToken } = await requireAuth();
+
+  try {
+    const data = await bookService.editQuote(quote, bookId, quoteId, accessToken);
+    return { success: true, data };
+  } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
+    return {
+      success: false,
+      error,
+    };
+  }
+};
+
+export const deleteQuoteAction = async (bookId: string, quoteId: string): Promise<VoidResult> => {
+  const { accessToken } = await requireAuth();
+
+  try {
+    await bookService.deleteQuote(bookId, quoteId, accessToken);
+    revalidatePath(`/book/${bookId}`);
+    return { success: true };
+  } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
+    return {
+      success: false,
+      error,
+    };
+  }
+};

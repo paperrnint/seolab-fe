@@ -96,6 +96,25 @@ const getQuotes = async (id: string, accessToken: string) => {
   });
 };
 
+const editQuote = async (quote: CreateQuoteRequest, bookId: string, quoteId: string, accessToken: string) => {
+  return fetchData<CreateQuoteResponse>(`/api/books/${bookId}/quotes/${quoteId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(quote),
+  });
+};
+
+const deleteQuote = async (bookId: string, quoteId: string, accessToken: string) => {
+  return fetchData(`/api/books/${bookId}/quotes/${quoteId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
@@ -105,4 +124,6 @@ export const bookService = {
   toggleBookFavorite,
   createQuote,
   getQuotes,
+  editQuote,
+  deleteQuote,
 };
