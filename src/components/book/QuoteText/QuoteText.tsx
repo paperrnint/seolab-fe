@@ -85,7 +85,6 @@ export const QuoteText = ({
             quoteId={quoteId}
             clickEdit={startEdit}
             onToggleFavorite={() => console.log('즐겨찾기 토글')}
-            onDelete={() => console.log('삭제')}
           />
         </div>
       )}

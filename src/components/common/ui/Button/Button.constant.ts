@@ -1,7 +1,7 @@
 type Shape = 'square' | 'circular' | 'rounded';
 type Width = 'fit' | 'full';
 type Align = 'left' | 'center';
-type Color = 'primary' | 'secondary' | 'accent' | 'subtle';
+type Color = 'primary' | 'secondary' | 'accent' | 'subtle' | 'emp';
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type Type = 'fill' | 'outline';
 
@@ -46,6 +46,10 @@ export const colors = {
   subtle: {
     fill: 'bg-btn-subtle text-secondary',
     outline: 'bg-transparent text-subtle border border-subtle',
+  },
+  emp: {
+    fill: 'bg-emp text-text-btn',
+    outline: 'bg-transparent text-emp border border-emp',
   },
 } as const;
 
@@ -144,6 +148,30 @@ export const btnConfig: Record<string, ButtonConfig> = {
     align: 'center',
     color: 'subtle',
     size: 'xs',
+    type: 'fill',
+  },
+  confirmModalCancel: {
+    shape: 'square',
+    width: 'fit',
+    align: 'center',
+    color: 'subtle',
+    size: 'md',
+    type: 'fill',
+  },
+  confirmModalConfirm: {
+    shape: 'square',
+    width: 'fit',
+    align: 'center',
+    color: 'primary',
+    size: 'md',
+    type: 'fill',
+  },
+  delete: {
+    shape: 'square',
+    width: 'fit',
+    align: 'center',
+    color: 'emp',
+    size: 'md',
     type: 'fill',
   },
 } as const;
