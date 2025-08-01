@@ -59,6 +59,7 @@ export const QuoteInputField = ({ minLine = 2 }: Props) => {
         <textarea
           ref={textareaRef}
           className="outline-none resize-none text-sm leading-6 w-full pr-2"
+          rows={minLine}
           placeholder="기록할 문장을 작성하세요.."
           enterKeyHint="send"
           value={text}
