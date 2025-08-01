@@ -8,7 +8,7 @@ import {
   QuoteApiItem,
 } from '@/types/api/book';
 import { BookCardItem, BookDetailItem, BookSearchItem, Quote } from '@/types/domain/book';
-import { convertToISOFormat, formatDate, formatDateKorean } from '@/utils';
+import { convertToISOFormat, formatDate, formatDateKorean, formatDateTimeKorean } from '@/utils';
 
 // GET /api/books/search
 export const mapToBookSearchItem = (data: BookSearchApiItem): BookSearchItem => {
@@ -77,8 +77,8 @@ export const mapToQuote = (data: QuoteApiItem): Quote => {
   return {
     ...quote,
     id: quoteId,
-    createdAt: formatDate(createdAt),
-    updatedAt: formatDate(updatedAt),
+    createdAt: formatDateTimeKorean(createdAt),
+    updatedAt: formatDateTimeKorean(updatedAt),
   };
 };
 
