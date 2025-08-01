@@ -33,7 +33,15 @@ export const SearchMore = ({ query }: Props) => {
     return (
       <ExternalGradient height={120}>
         <div className="pb-4 flex justify-center">
-          <Button variant="query" onClick={() => setShowAll(true)}>
+          <Button
+            variant="secondary"
+            size="xs"
+            shape="circular"
+            width="fit"
+            align="center"
+            outline={true}
+            onClick={() => setShowAll(true)}
+          >
             검색 결과 더보기
           </Button>
         </div>

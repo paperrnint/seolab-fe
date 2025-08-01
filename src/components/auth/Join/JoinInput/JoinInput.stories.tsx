@@ -6,7 +6,11 @@ import { JoinInput } from './JoinInput';
 
 const buttonMap = {
   none: null,
-  authButton: <Button variant="secondary">인증</Button>,
+  authButton: (
+    <Button variant="primary" size="md" shape="circular" width="fit" align="center" outline={true}>
+      인증
+    </Button>
+  ),
 };
 
 const validationsMap = {

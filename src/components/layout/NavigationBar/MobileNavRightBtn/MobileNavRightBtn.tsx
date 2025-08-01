@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation';
 
-import { Button } from '@/components/common/ui/Button/Button';
+import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
 import { NavMenuItem } from '@/components/layout/NavMenuItem/NavMenuItem';
 import { useBookMode } from '@/hooks/useBookMode';
 
@@ -11,17 +11,17 @@ export const MobileNavRightBtn = () => {
 
   if (isBookPage && !isEditMode) {
     return (
-      <Button variant="navEdit" onClick={onEdit}>
+      <SmallButton variant="subtle" onClick={onEdit}>
         수정
-      </Button>
+      </SmallButton>
     );
   }
 
   if (isBookPage && isEditMode) {
     return (
-      <Button variant="navConfirm" onClick={onConfirm}>
+      <SmallButton variant="primary" onClick={onConfirm}>
         확인
-      </Button>
+      </SmallButton>
     );
   }
 

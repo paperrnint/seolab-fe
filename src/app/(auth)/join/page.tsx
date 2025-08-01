@@ -1,7 +1,7 @@
 'use client';
 
 import { Join } from '@/components/auth/Join/Join';
-import { Button } from '@/components/common/ui/Button/Button';
+import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
 import { useJoinPage } from '@/hooks/auth';
 
 export default function JoinSimple() {
@@ -38,9 +38,7 @@ export default function JoinSimple() {
           />
         </div>
         <div className="flex gap-2 mt-12">
-          <Button variant="form" disabled={!formState.isValid || formState.isSubmitting}>
-            가입하기
-          </Button>
+          <FormSubmitButton disabled={!formState.isValid || formState.isSubmitting}>가입하기</FormSubmitButton>
         </div>
       </Join.Form>
     </Join.Container>

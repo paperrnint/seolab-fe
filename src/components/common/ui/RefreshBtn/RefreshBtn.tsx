@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { FaArrowRotateRight } from 'react-icons/fa6';
 
-import { Button } from '../Button/Button';
+import { SmallButton } from '../SmallButton/SmallButton';
 
 export const RefreshBtn = () => {
   const router = useRouter();
@@ -13,8 +13,8 @@ export const RefreshBtn = () => {
   };
 
   return (
-    <Button variant="navEdit" onClick={refresh}>
+    <SmallButton variant="subtle" onClick={refresh}>
       <FaArrowRotateRight size={12} />
-    </Button>
+    </SmallButton>
   );
 };

@@ -2,10 +2,10 @@
 
 import { FaCircleExclamation } from 'react-icons/fa6';
 
+import { ModalButton } from '@/components/common/ui/ModalButton/ModalButton';
 import { ErrorType } from '@/constants';
 import { getErrorMessage, getTextsByLine } from '@/utils';
 
-import { Button } from '../../common/ui/Button/Button';
 import { Txt } from '../../common/ui/Txt/Txt';
 import { Modal } from '../../modal/Modal/Modal';
 
@@ -34,9 +34,9 @@ export const ErrorModal = ({ errorType, errorStatusCode, isOpen, onCloseModal, o
       </Modal.Content>
 
       <Modal.Action>
-        <Button variant="form" onClick={onClickButton}>
+        <ModalButton variant="full" onClick={onClickButton}>
           {button}
-        </Button>
+        </ModalButton>
       </Modal.Action>
     </Modal.Root>
   );
