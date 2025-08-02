@@ -10,14 +10,23 @@ interface Props {
   quoteId: string;
   clickEdit: () => void;
   onToggleFavorite?: () => void;
+  menuOpenCallback?: () => void;
+  menuCloseCallback?: () => void;
 }
 
-export const QuoteMoreMenu = ({ bookId, quoteId, clickEdit, onToggleFavorite }: Props) => {
+export const QuoteMoreMenu = ({
+  bookId,
+  quoteId,
+  clickEdit,
+  onToggleFavorite,
+  menuOpenCallback,
+  menuCloseCallback,
+}: Props) => {
   const { isOpenModal, showModal, closeModal, confirmDelete } = useQuoteDelete(bookId, quoteId);
 
   return (
     <>
-      <Dropdown.Root>
+      <Dropdown.Root openCallback={menuOpenCallback} closeCallback={menuCloseCallback}>
         <Dropdown.MoreTrigger size="sm" />
         <Dropdown.Content align="right">
           <Dropdown.Item onClick={clickEdit}>

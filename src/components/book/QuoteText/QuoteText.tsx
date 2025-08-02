@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { useError } from '@/hooks/useError';
 import { editQuoteAction } from '@/lib/actions/book';
@@ -27,12 +27,17 @@ export const QuoteText = ({
   showPage = true,
   isEditMode,
 }: Props) => {
+  const [isActive, setIsActive] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [curData, setCurData] = useState({
-    page,
-    text,
-  });
+  const [curData, setCurData] = useState({ page, text });
   const { showError } = useError();
+
+  useLayoutEffect(() => {
+    setIsActive(false);
+  }, [isEditMode]);
+
+  const hoverClass = isEditMode ? 'hover:bg-bg-hover' : '';
+  const bgClass = isEditMode && isActive ? 'bg-bg-hover' : 'bg-transparent';
 
   const startEdit = () => {
     setIsEditing(true);
@@ -74,7 +79,7 @@ export const QuoteText = ({
   }
 
   return (
-    <div className="relative">
+    <div className={`relative rounded-md ${hoverClass} ${bgClass}`}>
       <div className={`flex py-1 px-4 pl-3 lg:pl-5 lg:pr-3 leading-6 border border-transparent`}>
         {showPage && <div className="w-14">{curData.page !== null && `${curData.page}p`}</div>}
         <div className={`flex-1 text-justify pl-3 ${isFavorite && 'underline-dotted'}`}>{curData.text}</div>
@@ -86,6 +91,12 @@ export const QuoteText = ({
             quoteId={quoteId}
             clickEdit={startEdit}
             onToggleFavorite={() => console.log('즐겨찾기 토글')}
+            menuOpenCallback={() => {
+              setIsActive(true);
+            }}
+            menuCloseCallback={() => {
+              setIsActive(false);
+            }}
           />
         </div>
       )}

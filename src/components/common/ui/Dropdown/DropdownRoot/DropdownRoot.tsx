@@ -6,9 +6,11 @@ import { DropdownContext } from '../@context/DropdownContext';
 
 interface Props {
   children: React.ReactNode;
+  openCallback?: () => void;
+  closeCallback?: () => void;
 }
 
-export const DropdownRoot = ({ children }: Props) => {
+export const DropdownRoot = ({ children, openCallback, closeCallback }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -23,6 +25,7 @@ export const DropdownRoot = ({ children }: Props) => {
 
       if (!isClickInsideTrigger && !isClickInsideContent) {
         setIsOpen(false);
+        closeCallback?.();
       }
     };
 
@@ -41,14 +44,20 @@ export const DropdownRoot = ({ children }: Props) => {
     return () => {
       document.removeEventListener('mousedown', clickOutside);
     };
-  }, [isOpen]);
+  }, [closeCallback, isOpen]);
 
   const onToggle = () => {
     setIsOpen((prev) => !prev);
+    if (isOpen) {
+      closeCallback?.();
+    } else {
+      openCallback?.();
+    }
   };
 
   const onClose = () => {
     setIsOpen(false);
+    closeCallback?.();
   };
 
   return (
