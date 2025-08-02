@@ -8,19 +8,27 @@ interface Props {
 }
 
 export const DropdownTrigger = ({ children, asChild = false }: Props) => {
-  const { onToggle } = useDropdown();
+  const { onToggle, triggerRef } = useDropdown();
 
   if (asChild) {
     const element = children as React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 
-    return React.cloneElement(element, {
-      onClick: (e: React.MouseEvent<HTMLElement>) => {
-        const originalOnClick = element.props.onClick;
-        originalOnClick?.(e);
-        onToggle();
-      },
-    });
+    return (
+      <div ref={triggerRef}>
+        {React.cloneElement(element, {
+          onClick: (e: React.MouseEvent<HTMLElement>) => {
+            const originalOnClick = element.props.onClick;
+            originalOnClick?.(e);
+            onToggle();
+          },
+        })}
+      </div>
+    );
   }
 
-  return <button onClick={onToggle}>{children}</button>;
+  return (
+    <div ref={triggerRef}>
+      <button onClick={onToggle}>{children}</button>
+    </div>
+  );
 };

@@ -10,20 +10,22 @@ interface Props {
 }
 
 export const DropdownSelectTrigger = ({ selectedLabel, placeholder = '선택' }: Props) => {
-  const { isOpen, onToggle } = useDropdown();
+  const { isOpen, onToggle, triggerRef } = useDropdown();
 
   return (
-    <Button
-      variant="subtle"
-      size="sm"
-      shape="circular"
-      width="fit"
-      align="left"
-      outline={false}
-      rightIcon={isOpen ? <FaAngleUp size={10} /> : <FaAngleDown size={10} />}
-      onClick={onToggle}
-    >
-      {selectedLabel || placeholder}
-    </Button>
+    <div ref={triggerRef}>
+      <Button
+        variant="subtle"
+        size="sm"
+        shape="circular"
+        width="fit"
+        align="left"
+        outline={false}
+        rightIcon={isOpen ? <FaAngleUp size={10} /> : <FaAngleDown size={10} />}
+        onClick={onToggle}
+      >
+        {selectedLabel || placeholder}
+      </Button>
+    </div>
   );
 };

@@ -10,18 +10,32 @@ interface Props {
 
 export const DropdownRoot = ({ children }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const isClickInsideTrigger = dropdownRef.current?.contains(target);
+      const isClickInsideContent = contentRef.current?.contains(target);
+
+      if (!isClickInsideTrigger && !isClickInsideContent) {
         setIsOpen(false);
       }
     };
 
+    document.addEventListener('mousedown', clickOutside);
+
     if (isOpen) {
-      document.addEventListener('mousedown', clickOutside);
+      if (triggerRef.current) {
+        const rect = triggerRef.current.getBoundingClientRect();
+        setPosition({
+          top: rect.bottom + window.scrollY,
+          left: rect.left + window.scrollX,
+        });
+      }
     }
 
     return () => {
@@ -38,7 +52,7 @@ export const DropdownRoot = ({ children }: Props) => {
   };
 
   return (
-    <DropdownContext.Provider value={{ isOpen, contentRef, onToggle, onClose }}>
+    <DropdownContext.Provider value={{ isOpen, contentRef, triggerRef, position, onToggle, onClose }}>
       <div className="relative" ref={dropdownRef}>
         {children}
       </div>
