@@ -30,13 +30,17 @@ export const QuoteMoreMenu = ({
         <Dropdown.MoreTrigger size="sm" />
         <Dropdown.Content align="right">
           <Dropdown.Item onClick={clickEdit}>
-            <DropdownLabel icon={<FaPen />}>수정</DropdownLabel>
+            <DropdownLabel variant="sm" icon={<FaPen />}>
+              수정
+            </DropdownLabel>
           </Dropdown.Item>
           <Dropdown.Item onClick={onToggleFavorite}>
-            <DropdownLabel icon={<FaHeart />}>즐겨찾기</DropdownLabel>
+            <DropdownLabel variant="sm" icon={<FaHeart />}>
+              즐겨찾기
+            </DropdownLabel>
           </Dropdown.Item>
           <Dropdown.Item onClick={showModal}>
-            <DropdownLabel isSensitive icon={<FaTrash />}>
+            <DropdownLabel variant="sm" isSensitive icon={<FaTrash />}>
               삭제
             </DropdownLabel>
           </Dropdown.Item>
