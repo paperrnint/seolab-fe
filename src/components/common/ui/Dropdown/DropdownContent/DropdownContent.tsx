@@ -31,7 +31,6 @@ export const DropdownContent = ({ children, gap = 8, align = 'left', position = 
   useEffect(() => {
     if (isOpen) {
       setShouldMount(true);
-      // calculatePosition(); // 위치 계산
       const showTimer = setTimeout(() => {
         setIsVisible(true);
       }, 10);
