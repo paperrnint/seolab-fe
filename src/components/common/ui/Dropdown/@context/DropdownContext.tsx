@@ -5,6 +5,8 @@ import { createContext, RefObject, useContext } from 'react';
 export interface DropdownContextValue {
   isOpen: boolean;
   contentRef: RefObject<HTMLDivElement | null>;
+  triggerRef: RefObject<HTMLDivElement | null>;
+  position: { top: number; left: number };
   onToggle: () => void;
   onClose: () => void;
 }

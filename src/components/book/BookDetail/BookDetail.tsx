@@ -43,7 +43,7 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex-1 overflow-y-auto">
+      <div id="detail-container" className="flex-1 overflow-y-auto">
         <div className="w-full max-w-4xl mx-auto">
           <BookHeader
             id={book.id}

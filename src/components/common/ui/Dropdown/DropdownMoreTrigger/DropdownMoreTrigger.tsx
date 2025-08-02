@@ -7,12 +7,14 @@ interface Props {
 }
 
 export const DropdownMoreTrigger = ({ size = 'md' }: Props) => {
-  const { onToggle } = useDropdown();
+  const { onToggle, triggerRef } = useDropdown();
   const sizeClass = size === 'md' ? 'text-sm' : 'text-xs';
 
   return (
-    <button className="hover:opacity-60 py-2 px-0 rounded-md cursor-pointer" onClick={onToggle} aria-label="더보기">
-      <FaEllipsisVertical className={`text-subtle ${sizeClass}`} />
-    </button>
+    <div ref={triggerRef}>
+      <button className="hover:opacity-60 py-2 px-0 rounded-md cursor-pointer" onClick={onToggle} aria-label="더보기">
+        <FaEllipsisVertical className={`text-subtle ${sizeClass}`} />
+      </button>
+    </div>
   );
 };
