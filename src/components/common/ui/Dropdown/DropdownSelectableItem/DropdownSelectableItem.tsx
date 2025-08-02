@@ -18,7 +18,6 @@ export const DropdownSelectableItem = ({ children, value, icon, onSelect }: Prop
   const onClick = () => {
     const option = { value, label };
     onSelect?.(option);
-    console.log(option);
     onClose();
   };
 
