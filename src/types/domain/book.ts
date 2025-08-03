@@ -31,3 +31,14 @@ export type BookDetailItem = Book & {
 };
 
 export type BookCardItem = Omit<BookDetailItem, 'isbn' | 'publisher' | 'publishedDate' | 'translator'>;
+
+export type RecentBook = {
+  id: string;
+  title: string;
+  author: string;
+  thumbnail: string;
+  startDate: string; // ISO 8601
+  endDate?: string | null; // ISO 8601
+  quoteCount: number;
+  quotes: Quote[];
+};

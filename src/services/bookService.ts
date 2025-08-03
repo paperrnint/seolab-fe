@@ -10,6 +10,7 @@ import {
   GetBooksRequest,
   GetBooksResponse,
   GetQuotesResponse,
+  GetRecentResponse,
 } from '@/types/api/book';
 import { createSearchParams } from '@/utils';
 
@@ -43,6 +44,15 @@ const getBooks = async ({ isFavorite, isReading }: GetBooksRequest, accessToken:
     reading: isReading,
   });
   return fetchData<GetBooksResponse>(`/api/books?${params.toString()}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const getRecentBook = async (accessToken: string) => {
+  return fetchData<GetRecentResponse>(`/api/books/recent`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -119,6 +129,7 @@ export const bookService = {
   search,
   create,
   getBooks,
+  getRecentBook,
   getBookDetail,
   toggleBookComplete,
   toggleBookFavorite,

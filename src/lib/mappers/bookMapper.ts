@@ -5,9 +5,10 @@ import {
   CreateBookRequest,
   CreateBookResponse,
   GetBookDetailResponse,
+  GetRecentResponse,
   QuoteApiItem,
 } from '@/types/api/book';
-import { BookCardItem, BookDetailItem, BookSearchItem, Quote } from '@/types/domain/book';
+import { BookCardItem, BookDetailItem, BookSearchItem, Quote, RecentBook } from '@/types/domain/book';
 import { convertToISOFormat, formatDate, formatDateKorean, formatDateTimeKorean } from '@/utils';
 
 // GET /api/books/search
@@ -85,6 +86,26 @@ export const mapToQuote = (data: QuoteApiItem): Quote => {
 export const mapToBookId = (data: CreateBookResponse) => {
   return {
     id: data.userBookId,
+  };
+};
+
+// GET /api/books/recent
+export const mapToRecentBook = (data: GetRecentResponse): RecentBook | null => {
+  const { recentBook, quotes } = data;
+
+  if (recentBook === null) {
+    return null;
+  }
+
+  return {
+    id: recentBook.userBookId,
+    title: recentBook.book.title,
+    author: recentBook.book.authors.join(', '),
+    thumbnail: recentBook.book.thumbnail,
+    startDate: recentBook.startDate,
+    endDate: recentBook.endDate,
+    quoteCount: recentBook.quoteCount,
+    quotes: quotes.map(mapToQuote),
   };
 };
 
