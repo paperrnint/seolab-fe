@@ -60,7 +60,12 @@ export default async function Home() {
           />
 
           {/* recent book cover + quotes */}
-          <NowBookContent thumbnail={recentBook.thumbnail} quotes={recentBook.quotes.slice(0, 2)} />
+          <NowBookContent
+            title={recentBook.title}
+            author={recentBook.author}
+            thumbnail={recentBook.thumbnail}
+            quotes={recentBook.quotes}
+          />
         </>
       ) : (
         <div>최근 책 없음</div>
