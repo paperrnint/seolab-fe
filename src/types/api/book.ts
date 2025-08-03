@@ -90,3 +90,9 @@ export type CreateQuoteResponse = QuoteApiItem;
 
 // GET api/books/{id}/quotes
 export type GetQuotesResponse = QuoteApiItem[];
+
+// GET api/books/recent
+export type GetRecentResponse = {
+  recentBook: BookListApiItem | null;
+  quotes: QuoteApiItem[];
+};

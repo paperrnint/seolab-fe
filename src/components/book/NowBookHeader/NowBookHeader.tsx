@@ -2,23 +2,26 @@
 
 import { useRouter } from 'next/navigation';
 
+import { calculateDaysDiff } from '@/utils';
+
 import { Badge } from '../../common/ui/Badge/Badge';
 import { Button } from '../../common/ui/Button/Button';
 import { Title } from '../../common/ui/Title/Title';
 
 interface Props {
+  id: string;
   title: string;
-  dateDiff?: number;
+  startDate: string;
+  endDate?: string | null;
   count?: number;
 }
 
-export const NowBookHeader = ({ title, dateDiff, count }: Props) => {
-  const BOOK_ID = 'abcd';
+export const NowBookHeader = ({ id, title, startDate, endDate, count }: Props) => {
   const router = useRouter();
+  const dateDiff = calculateDaysDiff(startDate, endDate);
 
   const onClick = () => {
-    router.push(`/book/${BOOK_ID}`);
-    // @todo: start with 'edit' mode
+    router.push(`/book/${id}?mode=edit`);
   };
 
   return (
@@ -33,7 +36,7 @@ export const NowBookHeader = ({ title, dateDiff, count }: Props) => {
           {/* Badges */}
           <div className="flex gap-2">
             {dateDiff && <Badge>{dateDiff}일째</Badge>}
-            {count && <Badge>{count}문장 수집 중</Badge>}
+            {!!count && <Badge>{count}문장 수집 중</Badge>}
           </div>
           {/* Action */}
           <div>

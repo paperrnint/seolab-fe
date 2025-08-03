@@ -1,3 +1,5 @@
+'use client';
+
 import { Quote } from '@/types/domain/book';
 
 import { BookCover } from '../BookCover/BookCover';
@@ -7,9 +9,10 @@ interface Props {
   thumbnail: string;
   quotes: Quote[];
 }
+
 export const NowBookContent = ({ thumbnail, quotes }: Props) => {
   return (
-    <div className="flex gap-4 mb-8 flex-col md:flex-row">
+    <div className="flex mb-8 flex-col md:flex-row mr-0 md:-mr-4">
       <div className="mx-auto flex-shrink-0 px-4 py-8 md:p-0">
         <BookCover src={thumbnail} size="lg" hasShadow />
       </div>

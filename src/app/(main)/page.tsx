@@ -6,21 +6,27 @@ import { Txt } from '@/components/common/ui/Txt/Txt';
 import { GridSection } from '@/components/layout/GridSection/GridSection';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
-import { mapToBookCard } from '@/lib/mappers/bookMapper';
+import { mapToBookCard, mapToRecentBook } from '@/lib/mappers/bookMapper';
 import { bookService } from '@/services/bookService';
-import { BookCardItem } from '@/types/domain/book';
+import { BookCardItem, RecentBook } from '@/types/domain/book';
 
 export default async function Home() {
   const authData = await getServerAuthData();
   const accessToken = authData?.accessToken;
 
   let allBooks: BookCardItem[] = [];
+  let recentBook: RecentBook | null = null;
   let error: ApiError | null = null;
 
   if (accessToken) {
     try {
-      const data = await bookService.getBooks({}, accessToken);
-      allBooks = data.map(mapToBookCard);
+      const [booksData, recentData] = await Promise.all([
+        bookService.getBooks({}, accessToken),
+        bookService.getRecentBook(accessToken),
+      ]);
+
+      allBooks = booksData.map(mapToBookCard);
+      recentBook = mapToRecentBook(recentData);
     } catch (err) {
       error = err as ApiError;
       console.error('main page fetch books failed:', error);
@@ -43,30 +49,22 @@ export default async function Home() {
     <div className="w-full max-w-7xl p-4">
       {/* recent book header */}
       <Txt variant="caption">은지님이 지금 읽고 있는 책</Txt>
-      <NowBookHeader title="여름어 사전" dateDiff={3} count={8} />
+      {recentBook ? (
+        <>
+          <NowBookHeader
+            id={recentBook.id}
+            title={recentBook.title}
+            startDate={recentBook.startDate}
+            endDate={recentBook.endDate}
+            count={recentBook.quoteCount}
+          />
 
-      {/* recent book cover + quotes */}
-      <NowBookContent
-        thumbnail="/images/bookcover.jpg"
-        quotes={[
-          {
-            id: '1',
-            text: "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
-            page: 29,
-            isFavorite: false,
-            createdAt: '2025.6.20',
-            updatedAt: '2025.6.20',
-          },
-          {
-            id: '2',
-            text: "한국어 문장을 이렇게 쓰는 경우는 드물다. 접미사 '-들'을 남발하는 문장은 대부분 번역 문장이다. (중략) 더군다나 관형사 '모든'으로 수식되는 명사에는 복수를 나타내는 접미사 '-들'을 붙이지 않는 것이 자연스럽다.",
-            page: 29,
-            isFavorite: false,
-            createdAt: '2025.6.20',
-            updatedAt: '2025.6.20',
-          },
-        ]}
-      />
+          {/* recent book cover + quotes */}
+          <NowBookContent thumbnail={recentBook.thumbnail} quotes={recentBook.quotes.slice(0, 2)} />
+        </>
+      ) : (
+        <div>최근 책 없음</div>
+      )}
 
       {/* favorites */}
       {favorites.length > 0 && (
