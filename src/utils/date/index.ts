@@ -38,3 +38,21 @@ export const convertToISOFormat = (dateString: string) => {
 export const formatDateTimeKorean = (dateTimeString: string) => {
   return dayjs(dateTimeString).format('YYYY년 M월 D일 A h:mm');
 };
+
+/**
+ * 날짜 차이를 계산하는 함수
+ * @param startDate 시작 날짜 (ISO 8601 형태)
+ * @param endDate 종료 날짜 (ISO 8601 형태, null이면 현재 날짜)
+ * @returns endDate가 null이면 현재까지의 일, null이 아니면 endDate - startDate
+ */
+export const calculateDaysDiff = (startDate: string, endDate?: string | null): number => {
+  const start = dayjs(startDate);
+
+  if (!endDate) {
+    const today = dayjs();
+    return today.diff(start, 'day') + 1; // 시작일도 포함
+  } else {
+    const end = dayjs(endDate);
+    return end.diff(start, 'day');
+  }
+};
