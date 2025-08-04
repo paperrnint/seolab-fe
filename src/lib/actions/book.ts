@@ -122,3 +122,19 @@ export const deleteQuoteAction = async (bookId: string, quoteId: string): Promis
     };
   }
 };
+
+export const toggleQuoteFavoriteAction = async (bookId: string, quoteId: string): Promise<VoidResult> => {
+  const { accessToken } = await requireAuth();
+
+  try {
+    await bookService.toggleQuoteFavorite(bookId, quoteId, accessToken);
+    revalidatePath(`/book/${bookId}`);
+    return { success: true };
+  } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
+    return {
+      success: false,
+      error,
+    };
+  }
+};

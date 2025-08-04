@@ -125,6 +125,15 @@ const deleteQuote = async (bookId: string, quoteId: string, accessToken: string)
   });
 };
 
+const toggleQuoteFavorite = async (bookId: string, quoteId: string, accessToken: string) => {
+  return fetchData(`/api/books/${bookId}/quotes/${quoteId}/favorite`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export const bookService = {
   search,
   create,
@@ -137,4 +146,5 @@ export const bookService = {
   getQuotes,
   editQuote,
   deleteQuote,
+  toggleQuoteFavorite,
 };
