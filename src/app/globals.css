@@ -93,8 +93,8 @@ body {
 .underline-dotted {
   text-decoration: underline dotted;
   text-decoration-thickness: 10%;
-  text-decoration-color: rgba(132, 102, 102, 0.8);
-  text-underline-offset: 0.5em;
+  text-decoration-color: rgba(132, 102, 102, 0.4);
+  text-underline-offset: 0.4em;
 }
 
 .dotted-lines-bg {
