@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
 import { useBookMode } from '@/hooks/useBookMode';
 import { useError } from '@/hooks/useError';
+import { useFilterQuotes } from '@/hooks/useFilterQuotes';
 import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
 import { useShowQuotePage } from '@/hooks/useShowQuotePage';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
 import { ExternalGradient } from '../../common/effects/ExternalGradient/ExternalGradient';
 import { BookHeader } from '../BookHeader/BookHeader';
+import { QuoteFilter } from '../QuoteFilter/QuoteFilter';
 import { QuoteInput } from '../QuoteInput/QuoteInput';
 import { QuoteText } from '../QuoteText/QuoteText';
 
@@ -35,8 +37,8 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
       }
     },
   });
-
-  const { bottomRef } = useAutoScroll(quotes.length);
+  const { filteredQuotes, option, setOption } = useFilterQuotes(quotes, { disabled: isEditMode });
+  const { bottomRef } = useAutoScroll(filteredQuotes.length);
   const router = useRouter();
 
   if (!book) return null;
@@ -48,7 +50,6 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
           <BookHeader
             id={book.id}
             author={book.author}
-            count={book.quoteCount}
             publishedDate={book.publishedDate}
             publisher={book.publisher}
             startAt={book.startDate}
@@ -59,8 +60,10 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
             isReading={book.isReading}
           />
 
+          {!isEditMode && <QuoteFilter count={filteredQuotes.length} option={option} onOptionChange={setOption} />}
+
           <ul className="p-2 pb-6 max-w-4xl">
-            {quotes.map((quote) => (
+            {filteredQuotes.map((quote) => (
               // edit mode 에선 항상 페이지 보여줘야 함
               <li key={quote.id}>
                 <QuoteText
@@ -69,6 +72,7 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
                   page={quote.page}
                   text={quote.text}
                   updatedAt={quote.updatedAt}
+                  isFavorite={quote.isFavorite}
                   showPage={isEditMode || showQuotePage}
                   isEditMode={isEditMode}
                 />
