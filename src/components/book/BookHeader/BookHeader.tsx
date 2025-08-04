@@ -20,7 +20,6 @@ interface Props {
   publishedDate: string;
   startAt: string;
   endAt: string | null;
-  count: number;
   isFavorite: boolean;
   isReading: boolean;
 }
@@ -34,7 +33,6 @@ export const BookHeader = ({
   publishedDate,
   startAt,
   endAt,
-  count,
   isFavorite,
   isReading,
 }: Props) => {
@@ -56,10 +54,7 @@ export const BookHeader = ({
             <Title>{title}</Title>
             <BadgeList>
               {!isEditMode ? (
-                <>
-                  <Badge>{duration}</Badge>
-                  <Badge>{`${count}문장`}</Badge>
-                </>
+                <Badge>{duration}</Badge>
               ) : (
                 <Checkbox id={id} initialValue={!isReading} label="다 읽었어요" checkedLabel="완독 성공! 🎉" />
               )}
