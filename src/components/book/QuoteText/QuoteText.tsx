@@ -99,6 +99,7 @@ export const QuoteText = ({
           <QuoteMoreMenu
             bookId={bookId}
             quoteId={quoteId}
+            isFavorite={isFavorite}
             clickEdit={startEdit}
             onToggleFavorite={toggleQuoteFavorite}
             menuOpenCallback={() => {

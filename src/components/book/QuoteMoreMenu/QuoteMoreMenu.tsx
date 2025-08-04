@@ -1,4 +1,4 @@
-import { FaHeart, FaPen, FaTrash } from 'react-icons/fa6';
+import { FaHeart, FaHeartCircleXmark, FaPen, FaTrash } from 'react-icons/fa6';
 
 import { Dropdown } from '@/components/common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '@/components/common/ui/Dropdown/DropdownLabel/DropdownLabel';
@@ -8,6 +8,7 @@ import { useQuoteDelete } from '@/hooks/useQuoteDelete';
 interface Props {
   bookId: string;
   quoteId: string;
+  isFavorite: boolean;
   clickEdit: () => void;
   onToggleFavorite?: () => void;
   menuOpenCallback?: () => void;
@@ -17,6 +18,7 @@ interface Props {
 export const QuoteMoreMenu = ({
   bookId,
   quoteId,
+  isFavorite,
   clickEdit,
   onToggleFavorite,
   menuOpenCallback,
@@ -35,8 +37,8 @@ export const QuoteMoreMenu = ({
             </DropdownLabel>
           </Dropdown.Item>
           <Dropdown.Item onClick={onToggleFavorite}>
-            <DropdownLabel variant="sm" icon={<FaHeart />}>
-              즐겨찾기
+            <DropdownLabel variant="sm" icon={isFavorite ? <FaHeartCircleXmark /> : <FaHeart />}>
+              {isFavorite ? '즐겨찾기 해제' : '즐겨찾기'}
             </DropdownLabel>
           </Dropdown.Item>
           <Dropdown.Item onClick={showModal}>
