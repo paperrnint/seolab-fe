@@ -2,6 +2,7 @@ export const btnConfig = {
   base: 'flex gap-1 items-center text-sm font-bold flex-shrink-0 focus:outline-none',
 
   sizes: {
+    '2xs': 'px-2 py-1.5 text-[10px]',
     xs: 'px-3 py-1.5 text-xs',
     sm: 'px-3 py-2 text-xs',
     md: 'px-4 py-2',
@@ -29,6 +30,10 @@ export const btnConfig = {
     emp: {
       fill: 'bg-emp text-text-btn',
       outline: 'bg-transparent text-emp border border-emp',
+    },
+    transparent: {
+      fill: 'bg-transparent text-secondary',
+      outline: 'bg-transparent text-secondary',
     },
   },
 
