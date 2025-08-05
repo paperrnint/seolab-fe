@@ -6,7 +6,7 @@ import { JoinFormData } from '@/lib/schemas/joinSchema';
 import { authService } from '@/services/authService';
 import { ApiResult } from '@/types/api/common';
 
-import { useError } from '../useError';
+import { useError } from '../common';
 
 import { useJoinForm } from './useJoinForm';
 

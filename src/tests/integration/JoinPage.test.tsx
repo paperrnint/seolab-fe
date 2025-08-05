@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 
 import JoinSimple from '@/app/(auth)/join/page';
 import { GlobalErrorModal } from '@/components/error/GloabalErrorModal/GlobalErrorModal';
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks/common/useError';
 
 import { duplicatedUser, invalidUser, validUser } from '../__mocks__/constants/auth';
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
-jest.mock('@/hooks/useError'); // useError mock
+jest.mock('@/hooks/common/useError'); // useError mock
 
 // 테스트용 래퍼 컴포넌트
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (

@@ -1,4 +1,4 @@
-import { useBookMode } from '@/hooks/useBookMode';
+import { useBookMode } from '@/hooks';
 
 import { Badge } from '../../common/ui/Badge/Badge';
 import { Title } from '../../common/ui/Title/Title';

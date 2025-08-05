@@ -1,6 +1,6 @@
 'use client';
 
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks';
 
 import { ErrorModal } from '../ErrorModal/ErrorModal';
 

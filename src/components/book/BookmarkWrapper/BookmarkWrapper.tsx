@@ -2,8 +2,7 @@
 
 import { FaBookmark } from 'react-icons/fa6';
 
-import { useError } from '@/hooks/useError';
-import { useBookFavorite } from '@/hooks/useOptimisticUpdate';
+import { useBookFavorite, useError } from '@/hooks';
 
 interface Props {
   children: React.ReactNode;

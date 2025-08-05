@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { Portal } from '@/components/modal/Portal/Portal';
 import { ANIMATION_DURATION } from '@/constants';
-import { useDropdownPosition } from '@/hooks/useDropdownPosition';
-import { useScrollLock } from '@/hooks/useScrollLock';
+import { useDropdownPosition, useScrollLock } from '@/hooks';
 
 import { useDropdown } from '../@context/DropdownContext';
 

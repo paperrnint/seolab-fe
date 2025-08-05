@@ -2,7 +2,7 @@ import { usePathname } from 'next/navigation';
 
 import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
 import { NavMenuItem } from '@/components/layout/NavMenuItem/NavMenuItem';
-import { useBookMode } from '@/hooks/useBookMode';
+import { useBookMode } from '@/hooks';
 
 export const MobileNavRightBtn = () => {
   const { isEditMode, onEdit, onConfirm } = useBookMode();

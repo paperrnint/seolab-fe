@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks';
 import { editQuoteAction, toggleQuoteFavoriteAction } from '@/lib/actions/book';
 
 import { QuoteInput } from '../QuoteInput/QuoteInput';

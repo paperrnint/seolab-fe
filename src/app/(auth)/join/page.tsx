@@ -2,7 +2,7 @@
 
 import { Join } from '@/components/auth/Join/Join';
 import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
-import { useJoinPage } from '@/hooks/auth';
+import { useJoinPage } from '@/hooks';
 
 export default function JoinSimple() {
   const { validations, formState, register, handleSubmit } = useJoinPage();
