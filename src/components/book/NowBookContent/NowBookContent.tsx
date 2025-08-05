@@ -35,7 +35,7 @@ export const NowBookContent = ({ title, author, thumbnail, quotes }: Props) => {
           </HoverSwiper>
         </div>
       ) : (
-        <div className="w-full flex flex-col justify-center items-center min-h-36 border-2 border-dotted border-subtle/30 rounded-lg">
+        <div className="w-full flex flex-col justify-center items-center min-h-36 rounded-lg">
           <FaCircleExclamation className="text-subtle mb-2 text-lg" />
           <Txt variant="captionSm">아직 기록한 문장이 없어요</Txt>
           <Txt variant="captionSm">마음에 드는 문장을 기록해 보세요</Txt>
