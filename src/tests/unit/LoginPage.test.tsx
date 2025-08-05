@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import LoginPage from '@/app/(auth)/login/page';
 import { useAuth } from '@/hooks/auth';
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks/common';
 import { validUser } from '@/tests/__mocks__/constants/auth';
 
 jest.mock('next/navigation', () => ({
@@ -16,7 +16,7 @@ jest.mock('@/hooks/auth', () => ({
   useAuth: jest.fn(),
 }));
 
-jest.mock('@/hooks/useError', () => ({
+jest.mock('@/hooks/common', () => ({
   useError: jest.fn(),
 }));
 

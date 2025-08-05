@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { useAuth } from '@/hooks/auth';
+import { useAuth } from '@/hooks';
 
 import { Button } from '../../common/ui/Button/Button';
 import { Txt } from '../../common/ui/Txt/Txt';

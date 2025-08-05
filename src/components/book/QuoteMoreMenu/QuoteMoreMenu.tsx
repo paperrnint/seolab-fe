@@ -3,7 +3,7 @@ import { FaHeart, FaHeartCircleXmark, FaPen, FaTrash } from 'react-icons/fa6';
 import { Dropdown } from '@/components/common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '@/components/common/ui/Dropdown/DropdownLabel/DropdownLabel';
 import { ConfirmModal } from '@/components/modal/ConfirmModal/ConfirmModal';
-import { useQuoteDelete } from '@/hooks/useQuoteDelete';
+import { useQuoteDelete } from '@/hooks';
 
 interface Props {
   bookId: string;

@@ -10,7 +10,7 @@ interface Options {
   onError?: (error: ApiError) => void;
 }
 
-export const useOptimisticUpdate = (initialValue: boolean, action: AsyncAction, id: string, options?: Options) => {
+export const useOptimisticBook = (initialValue: boolean, action: AsyncAction, id: string, options?: Options) => {
   const [state, setState] = useState(initialValue);
 
   useEffect(() => {
@@ -39,9 +39,9 @@ export const useOptimisticUpdate = (initialValue: boolean, action: AsyncAction, 
 };
 
 export const useBookFavorite = (id: string, initialValue: boolean, options?: Options) => {
-  return useOptimisticUpdate(initialValue, toggleBookFavoriteAction, id, options);
+  return useOptimisticBook(initialValue, toggleBookFavoriteAction, id, options);
 };
 
 export const useBookComplete = (id: string, initialValue: boolean, options?: Options) => {
-  return useOptimisticUpdate(initialValue, toggleBookCompleteAction, id, options);
+  return useOptimisticBook(initialValue, toggleBookCompleteAction, id, options);
 };

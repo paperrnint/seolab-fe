@@ -2,12 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { useAutoScroll } from '@/hooks/useAutoScroll';
-import { useBookMode } from '@/hooks/useBookMode';
-import { useError } from '@/hooks/useError';
-import { useFilterQuotes } from '@/hooks/useFilterQuotes';
-import { useOptimisticQuotes } from '@/hooks/useOptimisticQuotes';
-import { useShowQuotePage } from '@/hooks/useShowQuotePage';
+import { useAutoScroll, useBookMode, useError, useFilterQuotes, useOptimisticQuotes, useShowQuotePage } from '@/hooks';
 import { BookDetailItem, Quote } from '@/types/domain/book';
 
 import { ExternalGradient } from '../../common/effects/ExternalGradient/ExternalGradient';

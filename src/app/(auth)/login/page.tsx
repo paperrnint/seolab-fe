@@ -12,8 +12,7 @@ import { Container } from '@/components/common/ui/Container/Container';
 import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
 import { Input } from '@/components/common/ui/Input/Input';
 import { SocialButton } from '@/components/common/ui/SocialButton/SocialButton';
-import { useAuth } from '@/hooks/auth';
-import { useError } from '@/hooks/useError';
+import { useAuth, useError } from '@/hooks';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
 export default function LoginPage() {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import LoginPage from '@/app/(auth)/login/page';
 import { GlobalErrorModal } from '@/components/error/GloabalErrorModal/GlobalErrorModal';
-import { useError } from '@/hooks/useError'; // useError로 변경
+import { useError } from '@/hooks/common/useError';
 
 import { validUser, wrongUser } from '../__mocks__/constants/auth';
 import { server } from '../__mocks__/server';
@@ -13,7 +13,7 @@ import { server } from '../__mocks__/server';
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
-jest.mock('@/hooks/useError'); // useError로 변경
+jest.mock('@/hooks/common/useError');
 jest.mock('@/assets/kakao-logo.svg', () => 'kakao-logo');
 jest.mock('@/assets/naver-logo.svg', () => 'naver-logo');
 

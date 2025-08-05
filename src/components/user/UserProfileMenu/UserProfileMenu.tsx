@@ -1,6 +1,6 @@
 import { FaArrowRightFromBracket, FaEllipsisVertical } from 'react-icons/fa6';
 
-import { useAuth } from '@/hooks/auth';
+import { useAuth } from '@/hooks';
 
 import { Dropdown } from '../../common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '../../common/ui/Dropdown/DropdownLabel/DropdownLabel';

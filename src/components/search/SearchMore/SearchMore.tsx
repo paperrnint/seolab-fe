@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 
-import { useInfiniteBooks } from '@/hooks/react-query/useInfiniteBooks';
-import { useIntersection } from '@/hooks/react-query/useIntersection';
+import { useInfiniteBooks, useIntersection } from '@/hooks';
 import { mapToBookSearchItem } from '@/lib/mappers/bookMapper';
 
 import { BookItem } from '../../book/BookItem/BookItem';

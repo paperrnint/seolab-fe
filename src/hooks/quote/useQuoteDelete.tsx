@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { deleteQuoteAction } from '@/lib/actions/book';
 
-import { useError } from './useError';
+import { useError } from '../common/useError';
 
 export const useQuoteDelete = (bookId: string, quoteId: string) => {
   const [isOpenModal, setIsOpenModal] = useState(false);

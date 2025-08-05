@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks';
 import { createBookAction } from '@/lib/actions/book';
 import { mapToBookError, mapToBookId } from '@/lib/mappers/bookMapper';
 import { BookSearchItem } from '@/types/domain/book';

@@ -2,8 +2,7 @@
 
 import { FaCheck } from 'react-icons/fa6';
 
-import { useError } from '@/hooks/useError';
-import { useBookComplete } from '@/hooks/useOptimisticUpdate';
+import { useBookComplete, useError } from '@/hooks';
 
 interface Props {
   id: string;

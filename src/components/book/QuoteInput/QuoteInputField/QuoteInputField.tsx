@@ -1,5 +1,5 @@
 import { MAX_QUOTE_TEXT_LENGTH } from '@/constants';
-import { useTextareaHeight } from '@/hooks/useTextareaHeight';
+import { useTextareaHeight } from '@/hooks';
 
 import { useQuoteInput } from '../@context/QuoteInputContext';
 

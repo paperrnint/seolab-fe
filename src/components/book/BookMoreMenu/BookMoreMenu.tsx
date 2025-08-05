@@ -1,11 +1,7 @@
 import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react-icons/fa6';
 
 import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
-import { useBookMode } from '@/hooks/useBookMode';
-import { useError } from '@/hooks/useError';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useBookComplete, useBookFavorite } from '@/hooks/useOptimisticUpdate';
-import { useShowQuotePage } from '@/hooks/useShowQuotePage';
+import { useBookComplete, useBookFavorite, useBookMode, useError, useMediaQuery, useShowQuotePage } from '@/hooks';
 
 import { Dropdown } from '../../common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '../../common/ui/Dropdown/DropdownLabel/DropdownLabel';

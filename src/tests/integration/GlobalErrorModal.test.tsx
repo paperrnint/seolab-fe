@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'jotai';
 
 import { GlobalErrorModal } from '@/components/error/GloabalErrorModal/GlobalErrorModal';
-import { useError } from '@/hooks/useError';
+import { useError } from '@/hooks';
 
 jest.mock('@/components/modal/Portal/Portal', () => ({
   Portal: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,

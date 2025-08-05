@@ -1,6 +1,6 @@
 'use client';
 
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useMediaQuery } from '@/hooks';
 
 import { DesktopNavBar } from '../NavigationBar/DesktopNavBar/DesktopNavBar';
 import { MobileNavBar } from '../NavigationBar/MobileNavBar/MobileNavBar';
