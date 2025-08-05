@@ -1,5 +1,9 @@
 import '@testing-library/jest-dom';
+import { TextDecoder, TextEncoder } from 'util';
+
 import { server } from './__mocks__/server';
+
+Object.assign(global, { TextDecoder, TextEncoder });
 
 // MSW 서버 설정
 beforeAll(() => {
