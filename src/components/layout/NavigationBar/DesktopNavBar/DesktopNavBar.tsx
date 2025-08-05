@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import { NavMenu } from '@/components/layout/NavMenu/NavMenu';
-import { NavToggleBtn } from '@/components/layout/NavToggleBtn/NavToggleBtn';
 import { TooltipContainer } from '@/components/modal/TooltipContainer/TooltipContainer';
 import { UserProfileMenu } from '@/components/user/UserProfileMenu/UserProfileMenu';
 
+import { NavToggleBtn } from '../../NavToggleBtn/NavToggleBtn';
 import { FullNavBar } from '../FullNavBar/FullNavBar';
 
 export const DesktopNavBar = () => {
