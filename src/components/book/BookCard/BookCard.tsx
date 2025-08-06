@@ -27,7 +27,7 @@ export const BookCard = ({ id, title, author, thumbnail, startAt, endAt, count }
               <h3 className="text-sm line-clamp-2 leading-6 font-bold">{title}</h3>
               <p className="text-xs line-clamp-1 leading-6">{author}</p>
             </div>
-            <div className="flex justify-between items-center flex-wrap gap-1">
+            <div className="flex justify-between items-center flex-wrap gap-1 h-6">
               <p className="text-[10px] text-text-muted line-clamp-1">{period}</p>
               {!!count && (
                 <div className="flex justify-end flex-1">
