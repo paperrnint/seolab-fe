@@ -29,9 +29,11 @@ export const BookCard = ({ id, title, author, thumbnail, startAt, endAt, count }
             </div>
             <div className="flex justify-between items-center flex-wrap gap-1">
               <p className="text-[10px] text-text-muted line-clamp-1">{period}</p>
-              <div className="flex justify-end flex-1">
-                <Badge>{count > 999 ? '999+' : count}문장</Badge>
-              </div>
+              {!!count && (
+                <div className="flex justify-end flex-1">
+                  <Badge>{count > 999 ? '999+' : count}문장</Badge>
+                </div>
+              )}
             </div>
           </div>
         </div>
