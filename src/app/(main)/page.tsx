@@ -2,7 +2,7 @@ import { BookCard } from '@/components/book/BookCard/BookCard';
 import { MainBookSupport } from '@/components/book/MainBookSupport/MainBookSupport';
 import { NowBookContent } from '@/components/book/NowBookContent/NowBookContent';
 import { NowBookHeader } from '@/components/book/NowBookHeader/NowBookHeader';
-import { Txt } from '@/components/common/ui/Txt/Txt';
+import { RecentBookTitle } from '@/components/book/RecentBookTitle/RecentBookTitle';
 import { GridSection } from '@/components/layout/GridSection/GridSection';
 import { getServerAuthData } from '@/lib/auth/server';
 import { ApiError } from '@/lib/fetch/ApiError';
@@ -48,7 +48,7 @@ export default async function Home() {
   return (
     <div className="w-full max-w-7xl p-4">
       {/* recent book header */}
-      <Txt variant="caption">은지님이 지금 읽고 있는 책</Txt>
+      <RecentBookTitle />
       {recentBook ? (
         <>
           <NowBookHeader
