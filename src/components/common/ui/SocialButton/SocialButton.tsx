@@ -1,11 +1,12 @@
 import KakaoLogo from '@/assets/kakao-logo.svg';
 import NaverLogo from '@/assets/naver-logo.svg';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   provider: 'naver' | 'kakao';
+  disabled?: boolean;
 }
 
-export const SocialButton = ({ provider, ...props }: Props) => {
+export const SocialButton = ({ provider, disabled, ...props }: Props) => {
   const providers = {
     naver: {
       label: '네이버',
@@ -25,9 +26,11 @@ export const SocialButton = ({ provider, ...props }: Props) => {
         flex gap-3 items-center justify-center
         w-fit p-4 rounded-full border
         font-[Arial] text-sm font-semibold
-        cursor-pointer
+        ${disabled ? 'opacity-50' : 'opacity-100'}
+        ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${providers[provider].color}
         `}
+      disabled={disabled}
       {...props}
     >
       {providers[provider].icon}
