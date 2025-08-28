@@ -12,6 +12,7 @@ import { Container } from '@/components/common/ui/Container/Container';
 import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
 import { Input } from '@/components/common/ui/Input/Input';
 import { SocialButton } from '@/components/common/ui/SocialButton/SocialButton';
+import { TooltipContainer } from '@/components/modal/TooltipContainer/TooltipContainer';
 import { useAuth, useError } from '@/hooks';
 import { LoginFormData, loginSchema } from '@/lib/schemas/loginSchema';
 
@@ -67,8 +68,12 @@ export default function LoginPage() {
                 <LoginLink href="/join">회원가입</LoginLink>
               </Login.Links>
               <Login.Social label="SNS 계정으로 시작하기">
-                <SocialButton provider="naver" />
-                <SocialButton provider="kakao" />
+                <TooltipContainer position="top" text="개발중..">
+                  <SocialButton provider="naver" disabled />
+                </TooltipContainer>
+                <TooltipContainer position="top" text="개발중..">
+                  <SocialButton provider="kakao" disabled />
+                </TooltipContainer>
               </Login.Social>
             </Login.Container>
           </div>
