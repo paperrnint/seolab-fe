@@ -47,8 +47,7 @@ export const useJoinPage = () => {
 
   return {
     validations,
-    formState: form.formState,
-    register: form.register,
     handleSubmit: form.handleSubmit(onSubmit),
+    form: form,
   };
 };
