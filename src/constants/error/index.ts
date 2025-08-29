@@ -5,6 +5,25 @@ export interface ErrorMessage {
 }
 
 export const ERROR_MESSAGES = {
+  verifyRequest: {
+    409: {
+      title: '가입한 적이 있나요?',
+      text: '해당 이메일은 이미 가입된 이메일이에요\n로그인으로 돌아가서 다시 시도해 보세요',
+      button: '로그인 하러 가기',
+    },
+  },
+  verifyCode: {
+    400: {
+      title: '인증 실패',
+      text: '인증 코드가 올바르지 않거나 만료되었어요',
+      button: '확인',
+    },
+    422: {
+      title: '인증 실패',
+      text: '인증 코드가 올바르지 않거나 만료되었어요',
+      button: '확인',
+    },
+  },
   signup: {
     400: {
       title: '회원가입 실패',

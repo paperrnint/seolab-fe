@@ -1,45 +1,73 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import { FormSubmitButton } from '@/components/common/ui/FormSubmitButton/FormSubmitButton';
 import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
 import { Timer } from '@/components/common/ui/Timer/Timer';
-import { JOIN_VERIFY_TIME } from '@/constants';
+import { useError } from '@/hooks';
+import { JoinFormData } from '@/lib/schemas/joinSchema';
+import { VerifyRequestResponse } from '@/types/api/auth';
+import { ApiResult } from '@/types/api/common';
 
 import { Join } from '../Join/Join';
 
 interface Props {
+  form: UseFormReturn<JoinFormData>;
+  timerExpires: number | null;
+  verifyRequest: (email: string) => Promise<ApiResult<VerifyRequestResponse>>;
+  verifyCode: (email: string, code: string) => Promise<ApiResult>;
   clickNext: () => void;
 }
 
-export const VerifyStep = ({ clickNext }: Props) => {
+export const VerifyStep = ({ form, timerExpires, verifyRequest, verifyCode, clickNext }: Props) => {
   const [codeInput, setCodeInput] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [showTimer, setShowTimer] = useState(true);
 
+  const router = useRouter();
+  const { showError } = useError();
+
+  const email = form.watch('email');
   const isValid = codeInput.trim().length > 0;
 
   const onTimerEnd = () => {
     setShowTimer(false);
   };
 
-  const verifyResend = () => {
+  const resetCode = () => {
     setCodeInput('');
-    // @todo: 재전송 api
-    setShowTimer(true);
+  };
+
+  const verifyResend = async () => {
+    resetCode();
+    const result = await verifyRequest(email);
+
+    if (result.success) {
+      setShowTimer(true);
+    } else {
+      showError('verifyRequest', result.error.status, () => {
+        if (result.error.status === 409) {
+          router.push('/login');
+        } else {
+          resetCode();
+        }
+      });
+    }
   };
 
   const verify = async () => {
     setIsVerifying(true);
-    // @todo: verify code api
 
-    // 성공 -> 다음으로 이동
-    setTimeout(() => {
-      console.log('인증 성공');
+    const result = await verifyCode(email, codeInput.trim());
+
+    if (result.success) {
       clickNext();
-    }, 1000);
-
-    // 실패 -> 실패 모달 띄우기
-    // 이메일 인증에 실패했어요 (다시 인증하기)
+    } else {
+      showError('verifyCode', result.error.status, () => {
+        resetCode();
+      });
+    }
 
     setIsVerifying(false);
   };
@@ -54,7 +82,7 @@ export const VerifyStep = ({ clickNext }: Props) => {
           type="text"
           rightComponent={
             showTimer ? (
-              <Timer second={JOIN_VERIFY_TIME} onTimerEnd={onTimerEnd} />
+              !!timerExpires && <Timer second={timerExpires} onTimerEnd={onTimerEnd} />
             ) : (
               <SmallButton variant="subtle" type="button" onClick={verifyResend}>
                 재전송

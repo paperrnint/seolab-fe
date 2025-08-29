@@ -4,10 +4,8 @@ export type ApiErrorResponse = {
   message?: string;
 };
 
-export type ApiResult =
-  | {
-      success: true;
-    }
+export type ApiResult<TData = void> =
+  | (TData extends void ? { success: true } : { success: true; data: TData })
   | {
       success: false;
       error: ApiError;
