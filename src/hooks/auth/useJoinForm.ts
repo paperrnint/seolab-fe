@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { JoinFormData, joinSchema } from '@/lib/schemas/joinSchema';
 import { getJoinValidations } from '@/lib/validations/joinValidation';
+import { JoinValidations } from '@/types/ui/form';
 
 export const useJoinForm = () => {
   const form = useForm<JoinFormData>({
@@ -20,7 +21,7 @@ export const useJoinForm = () => {
   const password = watch('password');
   const confirmPassword = watch('confirmPassword');
 
-  const validations = {
+  const validations: JoinValidations = {
     email: getJoinValidations('email', email),
     password: getJoinValidations('password', password),
     confirmPassword: [{ label: '비밀번호와 일치', isValid: !!confirmPassword && confirmPassword === password }],
