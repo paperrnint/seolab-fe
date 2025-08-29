@@ -17,3 +17,17 @@ export interface CurrentUserResponse {
   email: string;
   username: string;
 }
+
+export interface VerifyRequestResponse {
+  message: string;
+  expiresInSeconds: number;
+}
+
+export interface VerifyCodeResponse {
+  message: string;
+}
+
+export interface VerifyCodeRequest {
+  email: string;
+  code: string;
+}

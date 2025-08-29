@@ -1,5 +1,3 @@
-export const JOIN_VERIFY_TIME = 300;
-
 export const JOIN_MIN_STEP = 1;
 export const JOIN_MAX_STEP = 3;
 

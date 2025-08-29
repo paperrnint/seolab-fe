@@ -11,7 +11,8 @@ import { useJoinPage } from '@/hooks';
 import { JoinStep } from '@/types/ui/form';
 
 export default function JoinPage() {
-  const { validations, handleSubmit, form } = useJoinPage();
+  const { validations, handleSubmit, form, verifyRequest, verifyCode } = useJoinPage();
+  const [expires, setExpires] = useState<number | null>(null);
   const [step, setStep] = useState<JoinStep>(1);
 
   const clickNext = () => {
@@ -26,9 +27,21 @@ export default function JoinPage() {
       <Join.Header description={JOIN_HEADERS[step]} />
       <Join.Form onSubmit={handleSubmit}>
         {step === 1 ? (
-          <EmailStep form={form} validations={validations} clickNext={clickNext} />
+          <EmailStep
+            form={form}
+            validations={validations}
+            clickNext={clickNext}
+            verifyRequest={verifyRequest}
+            setExpires={setExpires}
+          />
         ) : step === 2 ? (
-          <VerifyStep clickNext={clickNext} />
+          <VerifyStep
+            form={form}
+            timerExpires={expires}
+            verifyRequest={verifyRequest}
+            verifyCode={verifyCode}
+            clickNext={clickNext}
+          />
         ) : (
           <PasswordStep form={form} validations={validations} />
         )}
