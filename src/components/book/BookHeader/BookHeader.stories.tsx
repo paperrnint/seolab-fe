@@ -29,16 +29,23 @@ const meta = {
       },
     },
     publishedDate: {
-      description: '입력된 string 그대로 출력',
+      description: 'YYYY.MM.DD 형태',
       control: {
         type: 'text',
       },
     },
     startAt: {
-      description: '(임시) 0000-00-00 형태',
+      description: 'YYYY.MM.DD 형태',
     },
     endAt: {
-      description: '(임시) 0000-00-00 형태',
+      description: 'YYYY.MM.DD 형태',
+      type: {
+        name: 'string',
+        required: false,
+      },
+      control: {
+        type: 'text',
+      },
     },
   },
 } satisfies Meta<typeof BookHeader>;
@@ -53,10 +60,9 @@ export const Default: Story = {
     author: '아침달 편집부',
     publisher: '아침달',
     publishedDate: '2025.06.13',
-    startAt: '2025-06-30',
+    startAt: '2025.06.30',
     endAt: null,
     thumbnail: thumbnailMap.basic,
-    count: 2,
     isFavorite: false,
     isReading: true,
   },
