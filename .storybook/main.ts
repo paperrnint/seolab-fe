@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import path from 'path';
+
 import type { StorybookConfig } from '@storybook/nextjs';
 
 const config: StorybookConfig = {
@@ -32,6 +34,13 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'next/navigation': path.resolve(__dirname, '../src/tests/__mocks__/next-navigation.js'),
+      };
+    }
 
     return config;
   },
