@@ -31,6 +31,11 @@ const meta = {
       options: Object.keys(iconMap),
       mapping: iconMap,
     },
+    rightIcon: {
+      control: { type: 'select' },
+      options: Object.keys(iconMap),
+      mapping: iconMap,
+    },
   },
   decorators: [
     (Story) => (

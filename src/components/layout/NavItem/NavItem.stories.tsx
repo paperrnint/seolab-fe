@@ -39,6 +39,7 @@ export const Default: Story = {
   args: {
     selected: false,
     children: 'Default Anchor Text',
+    href: '/',
   },
 };
 
@@ -46,6 +47,7 @@ export const Selected: Story = {
   args: {
     selected: true,
     children: 'Selected Anchor Text',
+    href: '/',
   },
 };
 
@@ -54,5 +56,6 @@ export const WithIcon: Story = {
     selected: false,
     icon: 'house',
     children: 'With Icon Anchor Text',
+    href: '/',
   },
 };
