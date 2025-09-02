@@ -4,6 +4,8 @@
 
 ## Get started
 
+#### 개발 서버 실행
+
 ```
 $ git clone https://github.com/paperrnint/seolab-fe.git
 $ pnpm install
@@ -15,6 +17,16 @@ $ pnpm dev
 > **로컬 작업 시** 클라이언트 실행 전 [도토리서랍 BE](https://github.com/paperrnint/seolab-be) 를 먼저 실행해야 함   
 > `application.yml` 에 DB, Redis, JWT, 이메일, 카카오 API 키 등 설정 필요 
 
+<br />
+
+
+#### 스토리북 실행 
+
+```
+$ pnpm storybook
+```
+
+<br />
 
 ## Preview 
 
