@@ -92,7 +92,9 @@ export const QuoteText = ({
     <div className={`relative rounded-md ${hoverClass} ${bgClass}`}>
       <div className={`flex py-1 px-4 pl-3 lg:pl-4 lg:pr-3 leading-6 border border-transparent`}>
         {showPage && <div className="w-14">{curData.page !== null && `${curData.page}p`}</div>}
-        <p className={`flex-1 text-justify pl-3 ${isFavorite && 'underline-dotted'} relative`}>{curData.text}</p>
+        <p className={`flex-1 text-justify ${showPage ? 'pl-3' : ''} ${isFavorite ? 'underline-dotted' : ''} relative`}>
+          {curData.text}
+        </p>
       </div>
       {isEditMode && (
         <div className="absolute right-0 top-1">

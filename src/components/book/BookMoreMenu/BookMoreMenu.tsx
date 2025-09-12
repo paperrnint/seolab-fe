@@ -2,15 +2,7 @@ import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react
 
 import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
 import { ConfirmModal } from '@/components/modal/ConfirmModal/ConfirmModal';
-import {
-  useBookComplete,
-  useBookDelete,
-  useBookFavorite,
-  useBookMode,
-  useError,
-  useMediaQuery,
-  useShowQuotePage,
-} from '@/hooks';
+import { useBookComplete, useBookDelete, useBookFavorite, useBookMode, useError, useMediaQuery } from '@/hooks';
 
 import { Dropdown } from '../../common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '../../common/ui/Dropdown/DropdownLabel/DropdownLabel';
@@ -21,9 +13,11 @@ interface Props {
     isFavorite?: boolean;
     isReading?: boolean;
   };
+  showQuotePage: boolean;
+  toggleQuotePage: () => void;
 }
 
-export const BookMoreMenu = ({ id, initialValue }: Props) => {
+export const BookMoreMenu = ({ id, initialValue, showQuotePage, toggleQuotePage }: Props) => {
   const { showError } = useError();
   const { state: isFavorite, toggle: onClickFavorite } = useBookFavorite(id, initialValue?.isFavorite ?? false, {
     onError: (error) => showError('createBooks', error.status),
@@ -33,7 +27,6 @@ export const BookMoreMenu = ({ id, initialValue }: Props) => {
   });
 
   const { isEditMode, onConfirm, onEdit } = useBookMode();
-  const { showQuotePage, onToggle } = useShowQuotePage();
   const { isOpenModal, showModal, closeModal, confirmDelete } = useBookDelete(id);
   const { isMobile } = useMediaQuery();
 
@@ -69,7 +62,7 @@ export const BookMoreMenu = ({ id, initialValue }: Props) => {
               <DropdownLabel icon={<FaBookOpen />}>독서 완료</DropdownLabel>
             </Dropdown.Item>
           )}
-          <Dropdown.Item onClick={onToggle}>
+          <Dropdown.Item onClick={toggleQuotePage}>
             {showQuotePage ? (
               <DropdownLabel icon={<FaEyeSlash />}>페이지 숨김</DropdownLabel>
             ) : (

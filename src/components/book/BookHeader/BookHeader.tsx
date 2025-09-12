@@ -22,6 +22,8 @@ interface Props {
   endAt: string | null;
   isFavorite: boolean;
   isReading: boolean;
+  showQuotePage: boolean;
+  toggleQuotePage: () => void;
 }
 
 export const BookHeader = ({
@@ -35,6 +37,8 @@ export const BookHeader = ({
   endAt,
   isFavorite,
   isReading,
+  showQuotePage,
+  toggleQuotePage,
 }: Props) => {
   const { isEditMode } = useBookMode();
   const duration = `${startAt} - ${endAt || '기록중'}`;
@@ -60,7 +64,12 @@ export const BookHeader = ({
               )}
             </BadgeList>
           </BookTitle>
-          <BookMoreMenu id={id} initialValue={{ isFavorite, isReading }} />
+          <BookMoreMenu
+            id={id}
+            initialValue={{ isFavorite, isReading }}
+            showQuotePage={showQuotePage}
+            toggleQuotePage={toggleQuotePage}
+          />
         </div>
         {/* 작가, 정보 */}
         <BookMeta>{`${author} · ${publisher} · ${publishedDate}`}</BookMeta>
