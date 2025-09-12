@@ -18,7 +18,7 @@ interface Props {
 
 export const BookDetail = ({ book, initialQuotes }: Props) => {
   const { isEditMode } = useBookMode();
-  const { showQuotePage } = useShowQuotePage();
+  const { showQuotePage, onToggle: toggleQuotePage } = useShowQuotePage();
   const { showError } = useError();
 
   const { quotes, addQuote } = useOptimisticQuotes(initialQuotes, book?.id, {
@@ -53,6 +53,8 @@ export const BookDetail = ({ book, initialQuotes }: Props) => {
             title={book.title}
             isFavorite={book.isFavorite}
             isReading={book.isReading}
+            showQuotePage={showQuotePage}
+            toggleQuotePage={toggleQuotePage}
           />
 
           {!isEditMode && <QuoteFilter count={filteredQuotes.length} option={option} onOptionChange={setOption} />}
