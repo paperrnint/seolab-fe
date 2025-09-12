@@ -1,7 +1,8 @@
 import { FaBookmark, FaBookOpen, FaEye, FaEyeSlash, FaPen, FaTrash } from 'react-icons/fa6';
 
 import { SmallButton } from '@/components/common/ui/SmallButton/SmallButton';
-import { useBookComplete, useBookFavorite, useBookMode, useError, useMediaQuery } from '@/hooks';
+import { ConfirmModal } from '@/components/modal/ConfirmModal/ConfirmModal';
+import { useBookComplete, useBookDelete, useBookFavorite, useBookMode, useError, useMediaQuery } from '@/hooks';
 
 import { Dropdown } from '../../common/ui/Dropdown/Dropdown';
 import { DropdownLabel } from '../../common/ui/Dropdown/DropdownLabel/DropdownLabel';
@@ -26,6 +27,7 @@ export const BookMoreMenu = ({ id, initialValue, showQuotePage, toggleQuotePage 
   });
 
   const { isEditMode, onConfirm, onEdit } = useBookMode();
+  const { isOpenModal, showModal, closeModal, confirmDelete } = useBookDelete(id);
   const { isMobile } = useMediaQuery();
 
   if (isEditMode) {
@@ -67,13 +69,22 @@ export const BookMoreMenu = ({ id, initialValue, showQuotePage, toggleQuotePage 
               <DropdownLabel icon={<FaEye />}>페이지 보기</DropdownLabel>
             )}
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => console.log('삭제')}>
+          <Dropdown.Item onClick={showModal}>
             <DropdownLabel isSensitive icon={<FaTrash />}>
               삭제
             </DropdownLabel>
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown.Root>
+
+      <ConfirmModal
+        type="danger"
+        message="이 작업은 다시 되돌릴 수 없습니다.\n정말 삭제하시겠습니까?"
+        confirmText="삭제"
+        isOpen={isOpenModal}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 };

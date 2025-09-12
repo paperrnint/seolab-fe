@@ -73,6 +73,21 @@ export const createBookAction = async (book: BookSearchItem): Promise<CreateBook
   }
 };
 
+export const deleteBookAction = async (id: string): Promise<VoidResult> => {
+  const { accessToken } = await requireAuth();
+
+  try {
+    await bookService.deleteBook(id, accessToken);
+    return { success: true };
+  } catch (err) {
+    const error = mapToServerActionResult(err as ApiError);
+    return {
+      success: false,
+      error,
+    };
+  }
+};
+
 export const createQuoteAction = async (id: string, quote: CreateQuoteRequest): Promise<CreateQuoteResult> => {
   const { accessToken } = await requireAuth();
 
