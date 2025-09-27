@@ -114,6 +114,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^3.2.4
         version: 3.2.4(@vitest/browser@3.2.4)(vitest@3.2.4)
+      chromatic:
+        specifier: ^13.2.1
+        version: 13.2.1
       eslint:
         specifier: ^9
         version: 9.30.0(jiti@2.4.2)
@@ -2760,6 +2763,18 @@ packages:
 
   chromatic@12.2.0:
     resolution: {integrity: sha512-GswmBW9ZptAoTns1BMyjbm55Z7EsIJnUvYKdQqXIBZIKbGErmpA+p4c0BYA+nzw5B0M+rb3Iqp1IaH8TFwIQew==}
+    hasBin: true
+    peerDependencies:
+      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
+      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
+    peerDependenciesMeta:
+      '@chromatic-com/cypress':
+        optional: true
+      '@chromatic-com/playwright':
+        optional: true
+
+  chromatic@13.2.1:
+    resolution: {integrity: sha512-J/b5JbwtkjXHocVgnJO1MXV1zuyFZlFEGoVEHeyNPRLqaEgGRwVXtoMJIVioeeUlavrg5OCnb//6RagS/fi5Yw==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -8923,6 +8938,8 @@ snapshots:
   chownr@3.0.0: {}
 
   chromatic@12.2.0: {}
+
+  chromatic@13.2.1: {}
 
   chrome-trace-event@1.0.4: {}
 
