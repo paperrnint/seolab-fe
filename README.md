@@ -12,15 +12,16 @@ $ pnpm install
 $ pnpm dev
 ```
 
-
 > [!NOTE]  
-> **로컬 작업 시** 클라이언트 실행 전 [도토리서랍 BE](https://github.com/paperrnint/seolab-be) 를 먼저 실행해야 함   
-> `application.yml` 에 DB, Redis, JWT, 이메일, 카카오 API 키 등 설정 필요 
+> **로컬 작업 시** 클라이언트 실행 전 [도토리서랍 BE](https://github.com/paperrnint/seolab-be) 를 먼저 실행해야 함  
+> `application.yml` 에 DB, Redis, JWT, 이메일, 카카오 API 키 등 설정 필요
 
 <br />
 
+#### 스토리북 실행
 
-#### 스토리북 실행 
+- [스토리북 보러가기 ↗](https://68d762a11bc3fc84e151d582-ykngpvcsam.chromatic.com/)
+- 로컬에서 실행 시 아래 커맨드 실행
 
 ```
 $ pnpm storybook
@@ -28,7 +29,6 @@ $ pnpm storybook
 
 <br />
 
-## Preview 
+## Preview
 
 <img width="1050" height="828" alt="메인 페이지" src="https://github.com/user-attachments/assets/8e8ca107-6dc4-4cb7-8b80-ffcb7d74496a" />
-
