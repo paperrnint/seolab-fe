@@ -30,6 +30,7 @@ export const VerifyStep = ({ form, timerExpires, verifyRequest, verifyCode, clic
 
   const email = form.watch('email');
   const isValid = codeInput.trim().length > 0;
+  const disabled = !isValid || isVerifying;
 
   const onTimerEnd = () => {
     setShowTimer(false);
@@ -72,10 +73,17 @@ export const VerifyStep = ({ form, timerExpires, verifyRequest, verifyCode, clic
     setIsVerifying(false);
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !disabled) {
+      verify();
+    }
+  };
+
   return (
     <>
       <div>
         <Join.Input
+          autoFocus
           label="인증번호"
           placeholder="인증번호"
           required
@@ -91,10 +99,11 @@ export const VerifyStep = ({ form, timerExpires, verifyRequest, verifyCode, clic
           }
           value={codeInput}
           onChange={(e) => setCodeInput(e.target.value)}
+          onKeyDown={onKeyDown}
         />
       </div>
       <div className="flex gap-2 mt-12">
-        <FormSubmitButton type="button" onClick={verify} disabled={!isValid || isVerifying}>
+        <FormSubmitButton type="button" onClick={verify} disabled={disabled}>
           다음
         </FormSubmitButton>
       </div>

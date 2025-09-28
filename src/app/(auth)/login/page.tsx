@@ -56,7 +56,7 @@ export default function LoginPage() {
             <Login.Container>
               <Login.Header label="오늘 읽은 책, 어디서나 꺼내볼 수 있게" />
               <Login.Form onSubmit={handleSubmit(onSubmit)}>
-                <Input type="email" placeholder="이메일" leftIcon={<FaUser />} {...register('email')} />
+                <Input type="email" placeholder="이메일" leftIcon={<FaUser />} autoFocus {...register('email')} />
                 <Input type="password" placeholder="비밀번호" leftIcon={<FaLock />} {...register('password')} />
                 <div>
                   <FormSubmitButton disabled={!isValid || isSubmitting}>로그인</FormSubmitButton>

@@ -26,8 +26,9 @@ export const EmailStep = ({ form, validations, clickNext, verifyRequest, setExpi
 
   const email = form.watch('email');
   const isEmailValid = validations.email.every((rule) => rule.isValid);
+  const disabled = !email || !isEmailValid;
 
-  const onClick = async () => {
+  const goToNext = async () => {
     const result = await verifyRequest(email);
 
     if (result.success) {
@@ -44,20 +45,28 @@ export const EmailStep = ({ form, validations, clickNext, verifyRequest, setExpi
     }
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !disabled) {
+      goToNext();
+    }
+  };
+
   return (
     <>
       <div>
         <Join.Input
+          autoFocus
           label="이메일"
           placeholder="이메일"
           required
           type="email"
           validations={validations.email}
+          onKeyDown={onKeyDown}
           {...form.register('email')}
         />
       </div>
       <div className="flex gap-2 mt-12">
-        <FormSubmitButton type="button" onClick={onClick} disabled={!email || !isEmailValid}>
+        <FormSubmitButton type="button" onClick={goToNext} disabled={disabled}>
           이메일 인증하기
         </FormSubmitButton>
       </div>

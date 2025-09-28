@@ -16,6 +16,7 @@ export const PasswordStep = ({ form, validations }: Props) => {
     <>
       <div>
         <Join.Input
+          autoFocus
           label="비밀번호"
           placeholder="비밀번호를 입력하세요"
           required
