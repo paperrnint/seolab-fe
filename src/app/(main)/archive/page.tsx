@@ -7,36 +7,36 @@ import { mapToBookCard } from '@/lib/mappers/bookMapper';
 import { bookService } from '@/services/bookService';
 import { BookCardItem } from '@/types/domain/book';
 
-export default async function FavoritePage() {
+export default async function ArchivePage() {
   const authData = await getServerAuthData();
   const accessToken = authData?.accessToken;
 
-  let favorites: BookCardItem[] = [];
+  let books: BookCardItem[] = [];
   let error: ApiError | null = null;
 
   if (accessToken) {
     try {
-      const data = await bookService.getBooks({ isFavorite: true }, accessToken);
-      favorites = data.map(mapToBookCard);
+      const data = await bookService.getBooks({}, accessToken);
+      books = data.map(mapToBookCard);
     } catch (err) {
       error = err as ApiError;
-      console.error('main page fetch books failed:', error);
+      console.error('archive page fetch books failed:', error);
     }
   }
 
-  if (favorites.length === 0) {
+  if (books.length === 0) {
     return (
       <div className="w-full max-w-7xl p-4">
-        <EmptyState type="favorite" />
+        <EmptyState type="all" />
       </div>
     );
   }
 
   return (
     <div className="w-full max-w-7xl p-4">
-      {favorites.length > 0 && (
-        <GridSection label={`즐겨찾는 책 (${favorites.length})`}>
-          {favorites.map((book) => (
+      {books.length > 0 && (
+        <GridSection label={`전체 (${books.length})`} hideBorder>
+          {books.map((book) => (
             <BookCard
               key={book.id}
               id={book.id}
