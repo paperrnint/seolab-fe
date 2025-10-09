@@ -1,5 +1,7 @@
+import Link from 'next/link';
+
 import { BookCard } from '@/components/book/BookCard/BookCard';
-import { MainBookSupport } from '@/components/book/MainBookSupport/MainBookSupport';
+import { EmptyState } from '@/components/book/EmptyState/EmptyState';
 import { NowBookContent } from '@/components/book/NowBookContent/NowBookContent';
 import { NowBookHeader } from '@/components/book/NowBookHeader/NowBookHeader';
 import { RecentBookTitle } from '@/components/book/RecentBookTitle/RecentBookTitle';
@@ -40,7 +42,7 @@ export default async function Home() {
   if (books.length === 0) {
     return (
       <div className="w-full max-w-7xl p-4">
-        <MainBookSupport />
+        <EmptyState type="all" />
       </div>
     );
   }
@@ -107,23 +109,11 @@ export default async function Home() {
         </GridSection>
       )}
 
-      {/* favorites */}
-      {books.length > 0 && (
-        <GridSection label={`전체 (${books.length})`}>
-          {books.map((book) => (
-            <BookCard
-              key={book.id}
-              id={book.id}
-              author={book.author}
-              count={book.quoteCount}
-              endAt={book.endDate}
-              startAt={book.startDate}
-              thumbnail={book.thumbnail}
-              title={book.title}
-            />
-          ))}
-        </GridSection>
-      )}
+      <div className="pb-4 flex justify-center">
+        <Link className="px-3 py-1.5 text-xs bg-btn-subtle text-secondary rounded-full" href="/archive">
+          기록한 책 전체 보기
+        </Link>
+      </div>
     </div>
   );
 }

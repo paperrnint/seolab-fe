@@ -46,6 +46,7 @@ export const Default: Story = {
     label: '책 (4)',
     children: DUMMY_BOOKS.map((book, i) => (
       <BookCard
+        id={`book-${i}`}
         key={i}
         author={book.author}
         count={book.count}
