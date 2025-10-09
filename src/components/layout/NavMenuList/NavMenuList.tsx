@@ -3,5 +3,5 @@ interface Props {
 }
 
 export const NavMenuList = ({ children }: Props) => {
-  return <div className="flex flex-col gap-1 pb-2">{children}</div>;
+  return <ul className="flex flex-col gap-1 pb-2">{children}</ul>;
 };

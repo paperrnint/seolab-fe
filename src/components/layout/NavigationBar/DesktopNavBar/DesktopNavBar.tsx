@@ -19,7 +19,7 @@ export const DesktopNavBar = () => {
   }
 
   return (
-    <nav className="h-dvh bg-bg-panel w-12 border-r border-r-border p-2 flex flex-col justify-between z-20">
+    <div className="h-dvh bg-bg-panel w-12 border-r border-r-border p-2 flex flex-col justify-between z-20">
       <div>
         <div className="mb-4">
           <TooltipContainer text="메뉴 열기" showTooltip>
@@ -33,6 +33,6 @@ export const DesktopNavBar = () => {
           <UserProfileMenu isFull={false} />
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
