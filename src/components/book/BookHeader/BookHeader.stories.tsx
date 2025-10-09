@@ -65,5 +65,7 @@ export const Default: Story = {
     thumbnail: thumbnailMap.basic,
     isFavorite: false,
     isReading: true,
+    showQuotePage: false,
+    toggleQuotePage: () => console.log('toggle quote page'),
   },
 };
