@@ -66,6 +66,10 @@ body {
   font-family: Gowun Dodum, Arial, Helvetica, sans-serif;
 }
 
+* {
+  list-style: none;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
