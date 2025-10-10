@@ -73,7 +73,7 @@ describe('LoginPage - MSW 통합 테스트', () => {
     await userEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith('/');
+      expect(mockPush).toHaveBeenCalledWith('/home');
     });
   });
 
