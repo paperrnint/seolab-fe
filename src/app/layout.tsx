@@ -18,8 +18,14 @@ const gowunDodum = Gowun_Dodum({
 export const metadata: Metadata = {
   title: '도토리서랍',
   description: '오늘 읽은 그 책, 다시 꺼내볼 수 있게 기록해요.',
-};
 
+  verification: {
+    google: '_xcG5AVmYYfVWAq1JwC02kz3SsnE9h81XyF_bdNq3-k',
+    other: {
+      'naver-site-verification': '84153e1c17deb742f1825533ec67e2c6de204c0c',
+    },
+  },
+};
 export default function RootLayout({
   children,
 }: Readonly<{
