@@ -12,25 +12,25 @@ export default function LandingPage() {
     {
       icon: <LuBook className="w-6 h-6" />,
       title: '다양한 책 지원',
-      description: '지금 읽고 있는 책을 검색하고 바로 기록해요',
+      description: '지금 읽고 있는 책이 무엇이든, 검색하고 바로 기록해요',
       image: '/landing/feature-books.webp',
     },
     {
       icon: <LuPen className="w-6 h-6" />,
-      title: '문장 기록하기',
-      description: '책 속 인상 깊은 문장을 간편하게 저장할 수 있어요',
+      title: '문장 기록',
+      description: '책을 읽으며 문장 기록을 쉽게 저장할 수 있어요',
       image: '/landing/feature-input.webp',
     },
     {
       icon: <LuBookOpen className="w-6 h-6" />,
-      title: '언제든 다시 꺼내보기',
-      description: '책을 읽으며 와닿은 문장들을 다시 꺼내보세요',
+      title: '오늘의 문장을 언제든',
+      description: '읽은지 오래된 책도 기록을 꺼내보며 다시 기억할 수 있어요',
       image: '/landing/feature-reading.webp',
     },
     {
       icon: <LuHeart className="w-6 h-6" />,
-      title: '감동을 간직하세요',
-      description: '즐겨찾기로 좋아하는 책과 문장을 빠르게 찾아요',
+      title: '즐겨찾기',
+      description: '좋아하는 책과 문장을 즐겨찾기 하고 빠르게 찾아보세요',
       image: '/landing/feature-fav.webp',
     },
   ];
@@ -89,7 +89,7 @@ export default function LandingPage() {
       <footer className="p-6 pt-10 text-subtle">
         <div className="max-w-6xl mx-auto">
           <h3 className="font-bold py-2">도토리서랍</h3>
-          <p className="mb-6">소중한 문장을 간직하는 공간</p>
+          <p className="mb-6">책 속 문장을 간직하는 공간</p>
           <p className="mt-8 text-sm opacity-75">© 2025 도토리서랍. All rights reserved.</p>
         </div>
       </footer>
