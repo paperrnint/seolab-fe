@@ -7,6 +7,8 @@ import { Hero } from '@/components/landing/Hero/Hero';
 import { LandingNavigation } from '@/components/landing/Navigation/Navigation';
 import { Step } from '@/components/landing/Step/Step';
 
+export const dynamic = 'force-static';
+
 export default function LandingPage() {
   const features = [
     {
