@@ -26,7 +26,7 @@ export const InternalGradient = ({ children, gradientSize = 48, directions, bg =
   };
 
   return (
-    <div className="relative overflow-hidden h-full">
+    <div className="relative overflow-hidden h-full w-full">
       {children}
       {directions.map((direction) => (
         <div
