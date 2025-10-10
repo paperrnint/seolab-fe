@@ -3,18 +3,48 @@ import { NextRequest, NextResponse } from 'next/server';
 import { fetchData } from './lib/fetch/fetchData';
 import { RefreshResponse } from './types/api/auth';
 
-const publicPaths = ['/login', '/join'];
+const publicPaths = ['/login', '/join', '/landing'];
 
 export const middleware = async (request: NextRequest) => {
   const refreshToken = request.cookies.get('refreshToken')?.value;
   const pathname = request.nextUrl.pathname;
   const isPublicPath = publicPaths.some((path) => pathname.startsWith(path));
 
-  // 인증이 필요한 페이지에 접근하면
+  // 루트 경로(/) 처리
+  if (pathname === '/') {
+    if (!refreshToken) {
+      // 비로그인 → /landing
+      console.log('✅ 루트 접근 (비로그인) → /landing으로 이동');
+      return NextResponse.redirect(new URL('/landing', request.url));
+    }
+
+    // refreshToken 유효성 검사
+    try {
+      await fetchData<RefreshResponse>('/api/auth/refresh', {
+        method: 'POST',
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+        credentials: 'include',
+      });
+
+      // 유효한 토큰 → /home으로
+      console.log('✅ 루트 접근 (로그인) → /home으로 이동');
+      return NextResponse.redirect(new URL('/home', request.url));
+    } catch (err) {
+      console.error('❌ 루트 접근 (토큰 만료) → /landing으로 이동', err);
+      // 토큰 만료 → /landing
+      const landingResponse = NextResponse.redirect(new URL('/landing', request.url));
+      landingResponse.cookies.delete('refreshToken');
+      return landingResponse;
+    }
+  }
+
+  // 인증이 필요한 페이지에 접근
   if (!isPublicPath) {
     // refreshToken 이 없으면 로그인 페이지로 이동
     if (!refreshToken) {
-      console.log('❌ (인증 필요한 페이지) refresh token 없음 → 로그인으로 이동');
+      console.log('❌ (인증 필요) refresh token 없음 → /login으로 이동');
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
@@ -39,17 +69,16 @@ export const middleware = async (request: NextRequest) => {
         },
       });
     } catch (err) {
-      console.error('❌ (인증 필요한 페이지) token refresh 실패 → 로그인으로 이동', err);
+      console.error('❌ (인증 필요) token refresh 실패 → /login으로 이동', err);
 
-      // 유효하지 않으면 /login 으로 리다이렉트
       const loginResponse = NextResponse.redirect(new URL('/login', request.url));
       loginResponse.cookies.delete('refreshToken');
       return loginResponse;
     }
   }
 
-  // 공개 경로에 이미 인증된 사용자가 접근하는 경우
-  if (isPublicPath && refreshToken) {
+  // /login, /join에 로그인된 사용자가 접근
+  if (isPublicPath && pathname !== '/landing' && refreshToken) {
     try {
       await fetchData<RefreshResponse>('/api/auth/refresh', {
         method: 'POST',
@@ -59,12 +88,10 @@ export const middleware = async (request: NextRequest) => {
         credentials: 'include',
       });
 
-      // 유효한 토큰이 있으면 홈으로 리다이렉트
-      console.log('❌ (public 페이지) 인증된 사용자 → 홈으로 이동');
-      return NextResponse.redirect(new URL('/', request.url));
+      console.log('✅ (login/join) 인증된 사용자 → /home으로 이동');
+      return NextResponse.redirect(new URL('/home', request.url));
     } catch (err) {
-      console.error('❌ (public 페이지) 유효하지 않은 토큰 → 그대로', err);
-      // 없으면 refreshToken 삭제 후 요청 전달
+      console.error('❌ (login/join) 유효하지 않은 토큰 → refreshToken 삭제', err);
       const response = NextResponse.next();
       response.cookies.delete('refreshToken');
       return response;
@@ -75,5 +102,16 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/', '/login', '/join', '/search', '/favorite', '/archive', '/setting', '/book/:path*'],
+  matcher: [
+    '/',
+    '/login',
+    '/join',
+    '/landing',
+    '/home',
+    '/search',
+    '/favorite',
+    '/archive',
+    '/setting',
+    '/book/:path*',
+  ],
 };
