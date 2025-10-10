@@ -16,7 +16,7 @@ const gowunDodum = Gowun_Dodum({
 });
 
 export const metadata: Metadata = {
-  title: '서랍',
+  title: '도토리서랍',
   description: '오늘 읽은 그 책, 다시 꺼내볼 수 있게 기록해요.',
 };
 
