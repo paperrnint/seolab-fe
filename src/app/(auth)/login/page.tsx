@@ -37,7 +37,7 @@ export default function LoginPage() {
   const onSubmit = async (formData: LoginFormData) => {
     const result = await login(formData);
     if (result.success) {
-      router.push('/');
+      router.push('/home');
     } else {
       showError('login', result.error.status, () => {
         formReset();
