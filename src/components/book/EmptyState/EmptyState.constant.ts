@@ -9,6 +9,6 @@ export const emptyConfig = {
     primaryText: '즐겨찾는 책이 없네요 👀',
     secondaryText: '마음에 드는 책을 즐겨찾기 해보세요',
     buttonText: '홈으로',
-    redirectPath: '/',
+    redirectPath: '/home',
   },
 } as const;

@@ -31,7 +31,7 @@ export const useBookDelete = (bookId: string) => {
     const success = await deleteBook();
     closeModal();
     if (success) {
-      router.replace('/');
+      router.replace('/home');
     }
   };
 

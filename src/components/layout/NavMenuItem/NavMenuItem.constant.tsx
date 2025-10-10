@@ -12,7 +12,7 @@ export const tabs: Record<Tab, TabConfig> = {
   home: {
     icon: <FaHouse />,
     label: '홈',
-    href: '/',
+    href: '/home',
   },
   favorite: {
     icon: <FaBookmark />,
