@@ -16,9 +16,9 @@ export const Hero = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
-            책에서 발견한
+            책에서 만난
             <br />
-            <span className="text-emp">소중한 문장</span>을<br />
+            <span className="text-emp">나만의 문장</span>을<br />
             기록하세요
           </h1>
         </motion.div>
